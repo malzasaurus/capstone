@@ -9,9 +9,10 @@ module.exports = function(db) {
         cookieEnabled: {
             type: Sequelize.BOOLEAN
         },
-        plugins: {
-            type: Sequelize.STRING
-        },
+        // would like to include extensions array (i.e. ad blockers)
+        // plugins: {
+        //     type: Sequelize.STRING
+        // },
         doNotTrack: {
             type: Sequelize.INTEGER
         },
