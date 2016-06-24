@@ -29,6 +29,9 @@ module.exports = function(db) {
         },
         protocol: {
             type: Sequelize.STRING
+        },
+        comments: {
+            type: Sequelize.TEXT
         }
     });
 };
