@@ -8,5 +8,6 @@ var Bug = require('./models/bug')(db);
 var AppAccess = require('./models/appAccess')(db);
 
 Application.hasMany(Bug, {as: "Bugs"});
+Bug.belongsTo(Application);
 User.belongsToMany(Application, {through: AppAccess});
 Application.belongsToMany(User, {through: AppAccess});
