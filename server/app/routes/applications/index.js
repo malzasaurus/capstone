@@ -8,22 +8,22 @@ var User = require('../../../db').model('user');
 var AppAccess = require('../../../db').model('appAccess');
 
 //get all applications
-router.get('/', function(req, res, next) {
-	Application.findAll()
-	.then(function(allApplications) {
-		res.json(allApplications)
-	})
-	.catch(next)
-})
+// router.get('/', function(req, res, next) {
+// 	Application.findAll()
+// 	.then(function(allApplications) {
+// 		res.json(allApplications)
+// 	})
+// 	.catch(next)
+// })
 
 //get all applications by userId
 router.get('/', function(req, res, next) {
 		//check is user is logged in. if so use req.userID
-	if(!req.session.userId){
-		res.sendStatus(400);
-		return;
-	} else {
-		User.findById(req.session.userId)
+	// if(!req.session.userId){
+	// 	res.sendStatus(400);
+	// 	return;
+	// } else {
+		User.findById(1)
 		.then(function(foundUser){
 			return foundUser.getApplications()
 		})
@@ -31,7 +31,7 @@ router.get('/', function(req, res, next) {
 			res.json(allApplications)
 		})
 		.catch(next)
-	}
+	// }
 })
 
 //get one application
@@ -56,20 +56,38 @@ router.get('/:id/bugs', function(req, res, next) {
 	.catch(next)
 })
 
+//get one bug detail for application
+router.get('/:id/bugs/:bugId', function(req, res, next) {
+	Bug.findById(req.params.bugId)
+	.then(function(foundBug) {
+		res.json(foundBug)
+	})
+	.catch(next)
+})
+
+//app updates one bug details
+router.put('/:id/bugs/:bugId', function(req, res, next) {
+	Bug.findById(req.params.bugId)
+	.then(function(foundBug) {
+		return foundBug.update(req.body)
+	})
+	.then(function(updatedBug) {
+		res.json(updatedBug)
+	})
+	.catch(next)
+})
 //add new application
 router.post('/', function(req, res, next) {
 	var application;
-	Application.create(req.body)
-	.then(function(newApplicationCreated) {
-		application = newApplicationCreated
-		//set the user as admin in assoc. table
-		return User.findById(req.session.userId)
-		.then(function(foundUser){
-			return application.addUser(foundUser,  { appAccess: "admin" })
-		})
-		.then(function(newApplicationCreated){
-			res.status(201).send(newApplicationCreated)	
-		})
+	var user = 1;
+	//THIS USER ID NEEDS TO COME FROM SESSION!!!
+	//console.log("user", req.user.id)
+	Promise.all([Application.create(req.body), User.findById(user)])
+	.then(function(values){
+		return values[0].addUser(values[1], { accessLevel: "admin" })
+	})
+	.then(function(newApplicationCreated){
+		res.status(201).send(newApplicationCreated)	
 	})
 	.catch(next)
 })
@@ -86,17 +104,6 @@ router.put('/:id', function(req, res, next) {
 	.catch(next)
 })
 
-//app updates one bug
-router.put('/:applicationId/:bugId', function(req, res, next) {
-	Bug.findById(req.params.bugId)
-	.then(function(foundBug) {
-		return foundBug.update(req.body)
-	})
-	.then(function(updatedBug) {
-		res.json(updatedBug)
-	})
-	.catch(next)
-})
 
 //delete an application
 router.delete('/:id', function(req, res, next) {

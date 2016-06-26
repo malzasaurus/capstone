@@ -34,7 +34,7 @@ router.post('/', function(req, res, next) {
 		}
 	})
 	.then(function(foundApplication){
-		foundApplication.createBug(req.body)
+		return foundApplication.createBug(req.body)
 	})
 	.then(function(newBugCreated){
 		res.status(201).send(newBugCreated)
@@ -43,16 +43,16 @@ router.post('/', function(req, res, next) {
 })
 
 //update a bug
-router.put('/:id', function(req, res, next) {
-	Bug.findById(req.params.id)
-	.then(function(foundBug) {
-		return foundBug.update(req.body)
-	})
-	.then(function(updatedBug) {
-		res.json(updatedBug)
-	})
-	.catch(next)
-})
+// router.put('/:id', function(req, res, next) {
+// 	Bug.findById(req.params.id)
+// 	.then(function(foundBug) {
+// 		return foundBug.update(req.body)
+// 	})
+// 	.then(function(updatedBug) {
+// 		res.json(updatedBug)
+// 	})
+// 	.catch(next)
+// })
 
 //delete a bug
 router.delete('/:id', function(req, res, next) {

@@ -10,6 +10,15 @@ module.exports = function(db) {
             type: Sequelize.STRING,
             allowNull: false
         },
+        status: {
+            type: Sequelize.STRING,
+            validate: {
+                isIn: [
+                    ["open", "closed"]
+                ]
+            },
+            defaultValue: "open"
+        },
         cookieEnabled: {
             type: Sequelize.BOOLEAN
         },

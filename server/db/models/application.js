@@ -15,8 +15,24 @@ module.exports = function(db) {
             allowNull: false
         },
         appId: {
-            type: Sequelize.STRING,
-            allowNull: false
+            type: Sequelize.STRING
+        }
+    },{
+        hooks: {
+            afterCreate: function (application) {
+                var guid = createGuid();
+                return application.updateAttributes({
+                    appId: guid
+                })
+            }
         }
     });
 };
+
+
+function createGuid(){
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
+    });
+}
