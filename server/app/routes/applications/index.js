@@ -82,7 +82,9 @@ router.post('/', function(req, res, next) {
 	var user = 1;
 	//THIS USER ID NEEDS TO COME FROM SESSION!!!
 	//console.log("user", req.user.id)
-	Promise.all([Application.create(req.body), User.findById(user)])
+	var createApp = Application.create(req.body);
+	var findUser = User.findById(user);
+	Promise.all([createApp, findUser])
 	.then(function(values){
 		return values[0].addUser(values[1], { accessLevel: "admin" })
 	})
