@@ -20,7 +20,7 @@ name in the environment files.
 var chalk = require('chalk');
 var db = require('./server/db');
 var User = db.model('user');
-var Company = db.model('company');
+var Application = db.model('application');
 var Bug = db.model('bug');
 var Promise = require('sequelize').Promise;
 
@@ -45,36 +45,40 @@ var seedUsers = function () {
 
 };
 
-var seedCompanies = function () {
+var seedApplications = function () {
 
-    var companies = [
+    var applications = [
         {
-            name: 'Company A',
-            hostName: 'docs.sequelize.com'
+            name: 'App A',
+            hostName: 'docs.sequelize.com',
+            appId: '124sxq'
         },
         {
-            name: 'Company B',
-            hostName: 'google.com'
+            name: 'App B',
+            hostName: 'google.com',
+            appId: '1248wqt'
         }
     ];
 
-    var creatingCompanies = companies.map(function (companyObj) {
-        return Company.create(companyObj);
+    var creatingApplications = applications.map(function (applicationObj) {
+        return Application.create(applicationObj);
     });
 
-    return Promise.all(creatingCompanies);
+    return Promise.all(creatingApplications);
 
 };
 
 var seedBugs = function () {
 
     var bugs = [
-        {
+        {   
+            appId: '124sxq',
             doNotTrack: 1,
             protocol: 'http:',
             hostName: 'google.com'
         },
         {
+            appId: '1248wqt',
             doNotTrack: 1,
             protocol: 'https',
             platform: 'MacIntel'
@@ -94,7 +98,7 @@ db.sync({ force: true })
         return seedUsers();
     })
     .then(function() {
-        return seedCompanies();
+        return seedApplications();
     })
     .then(function() {
         return seedBugs();

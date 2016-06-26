@@ -6,6 +6,10 @@ var Sequelize = require('sequelize');
 module.exports = function(db) {
 
     return db.define('bug', {
+        appId: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
         cookieEnabled: {
             type: Sequelize.BOOLEAN
         },
