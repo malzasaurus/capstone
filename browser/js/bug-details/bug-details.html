@@ -1,0 +1,78 @@
+<div id="detail-page">
+    <div class="main-info">
+        <h2>Application {{ bugDetails.appId }}</h2>
+        <hr>
+        <h3>Bug #{{ bugDetails.id }}</h3>
+    </div>
+    <div id="details">
+        <div id="screenshot-section" class="section">
+            <!-- screenshot of reported page -->
+            <h3>Report Screenshot</h3>
+            <img src="http://www.horniman.info/DKNSARC/SD04/IMAGES/D4P1570C.JPG">
+        </div>
+        <!-- comments -->
+        <div id="commentary-section" class="section">
+            <h3>Report Information</h3>
+            <div id="comments">
+                <h4>Comments</h4>
+                <!-- 	reporter's comments -->
+                <div id="report-comments" class="text">
+                    <h5>Reporter</h5>
+                    <p>{{ bugDetails.comments }}</p>
+                </div>
+                <!-- 	developer's comments -->
+                <div id="developer-comments" class="text">
+                    <h5>Developer</h5>
+                    <p></p>
+                </div>
+            </div>
+            <div id="developer-assignment">
+                <div id="bug-priority">
+                    <h5>Priority</h5>
+                    <select name="priority">
+                        <option value="high">High</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div id="assignment">
+                    <h5>Assignment</h5>
+                    <select name="assignment">
+                        <option value="dev1">Dev 1</option>
+                        <option value="dev2">Dev 2</option>
+                    </select>
+                </div>
+                <div id="status">
+                    <h5>Status</h5>
+                    <select name="status">
+                        <option value="open">open</option>
+                        <option value="closed">closed</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!-- report stats -->
+        <div id="stats-section" class="section">
+            <h3>Report Statistics</h3>
+            <div id="report-stats">
+                <h5>Browser:</h5>
+                <p>{{ bugDetails.browser }}</p>
+                <h5>Browser Version:</h5>
+                <p>{{ bugDetails.browserVer }}</p>
+                <h5>Do Not Track:</h5>
+                <p>{{ bugDetails.doNotTrack }}</p>
+                <h5>Cookie Enabled:</h5>
+                <p>{{ bugDetails.cookieEnabled}}</p>
+                <h5>App Version:</h5>
+                <p>{{ bugDetails.appVersion }}</p>
+                <h5>Platform:</h5>
+                <p>{{ bugDetails.platform }}</p>
+                <h5>Host Name:</h5>
+                <p>{{ bugDetails.hostName }}</p>
+                <h5>Path Name:</h5>
+                <p>{{ bugDetails.pathName }}</p>
+                <h5>Protocol:</h5>
+                <p>{{ bugDetails.protocol }}</p>
+            </div>
+        </div>
+    </div>
+</div>
