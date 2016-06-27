@@ -19,6 +19,12 @@ module.exports = function(db) {
             },
             defaultValue: "open"
         },
+        browser: {
+            type: Sequelize.STRING
+        },
+        browserVer: {
+            type: Sequelize.STRING
+        },
         cookieEnabled: {
             type: Sequelize.BOOLEAN
         },
