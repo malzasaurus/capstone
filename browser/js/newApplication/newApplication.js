@@ -1,6 +1,6 @@
 app.config(function ($stateProvider) {
     $stateProvider.state('newApplication', {
-        url: '/newApplication',
+        url: '/new_application',
         templateUrl: 'js/newApplication/newApplication.html',
         controller: 'NewAppCtrl'
     });
@@ -16,12 +16,6 @@ app.controller('NewAppCtrl', function ($scope, $state, AppFactory) {
         .catch(function () {
             $scope.error = 'Oops, try again';
         });
-
-        // $scope.error = null;
-        // AuthService.login(signupInfo).then(function () {
-        //     $state.go('home');
-        // }).catch(function () {
-        //     $scope.error = 'Oops, try again';
-        // });
     };
 });
+
