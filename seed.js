@@ -20,6 +20,8 @@ name in the environment files.
 var chalk = require('chalk');
 var db = require('./server/db');
 var User = db.model('user');
+var Application = db.model('application');
+var Bug = db.model('bug');
 var Promise = require('sequelize').Promise;
 
 var seedUsers = function () {
@@ -43,9 +45,63 @@ var seedUsers = function () {
 
 };
 
+var seedApplications = function () {
+
+    var applications = [
+        {
+            name: 'App A',
+            hostName: 'docs.sequelize.com',
+            appId: '124sxq'
+        },
+        {
+            name: 'App B',
+            hostName: 'google.com',
+            appId: '1248wqt'
+        }
+    ];
+
+    var creatingApplications = applications.map(function (applicationObj) {
+        return Application.create(applicationObj);
+    });
+
+    return Promise.all(creatingApplications);
+
+};
+
+var seedBugs = function () {
+
+    var bugs = [
+        {   
+            appId: '124sxq',
+            doNotTrack: 1,
+            protocol: 'http:',
+            hostName: 'google.com'
+        },
+        {
+            appId: '1248wqt',
+            doNotTrack: 1,
+            protocol: 'https',
+            platform: 'MacIntel'
+        }
+    ];
+
+    var creatingBugs = bugs.map(function (bugObj) {
+        return Bug.create(bugObj);
+    });
+
+    return Promise.all(creatingBugs);
+
+};
+
 db.sync({ force: true })
     .then(function () {
         return seedUsers();
+    })
+    .then(function() {
+        return seedApplications();
+    })
+    .then(function() {
+        return seedBugs();
     })
     .then(function () {
         console.log(chalk.green('Seed successful!'));
