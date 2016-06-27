@@ -65,7 +65,7 @@ module.exports = function(db) {
         protocol: {
             type: Sequelize.STRING
         },
-        comments: {
+        formComments: {
             type: Sequelize.TEXT
         }
     });
