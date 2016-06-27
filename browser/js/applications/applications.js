@@ -1,5 +1,5 @@
 app.config(function ($stateProvider) {
-    $stateProvider.state('applications', {
+    $stateProvider.state('indvApp', {
         url: '/applications/:appID',
         templateUrl: 'js/applications/applications.html',
         controller: 'AppCtrl', 
