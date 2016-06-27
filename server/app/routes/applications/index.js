@@ -32,6 +32,7 @@ router.get('/', function(req, res, next) {
 
 //get one application
 router.get('/:id', function(req, res, next) {
+	console.log('i am in the routes')
 	Application.findById(req.params.id)
 	.then(function(foundApplication) {
 		res.json(foundApplication)
@@ -41,12 +42,14 @@ router.get('/:id', function(req, res, next) {
 
 //get bugs for one application
 router.get('/:id/bugs', function(req, res, next) {
+	console.log('i am in the bugs route');
 	Bug.findAll({
 		where: {
 			applicationId: req.params.id
 		}
 	})
 	.then(function(foundBugs) {
+		console.log('the found bugs look like this: ', foundBugs)
 		res.json(foundBugs)
 	})
 	.catch(next)

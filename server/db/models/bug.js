@@ -14,10 +14,25 @@ module.exports = function(db) {
             type: Sequelize.STRING,
             validate: {
                 isIn: [
-                    ["open", "closed"]
+                    ["new", "in-progress", "resolved"]
                 ]
             },
-            defaultValue: "open"
+            defaultValue: "new"
+        },
+        priority: {
+            type: Sequelize.STRING,
+            validate: {
+                isIn: [
+                    ["blocker", "critical", "major", "minor", "trivial"]
+                ]
+            }
+        },
+        assignment: {
+            type: Sequelize.STRING,
+            defaultValue: "unassigned"
+        },
+        devComments: {
+            type: Sequelize.TEXT
         },
         browser: {
             type: Sequelize.STRING
@@ -50,7 +65,7 @@ module.exports = function(db) {
         protocol: {
             type: Sequelize.STRING
         },
-        comments: {
+        formComments: {
             type: Sequelize.TEXT
         }
     });
