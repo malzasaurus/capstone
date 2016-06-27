@@ -56,4 +56,19 @@ module.exports = function (app, db) {
 
     });
 
+    app.post('/signup', function(req, res, next) {
+       User.create(req.body)
+           .then(function(user) {
+               req.logIn(user, function(loginErr) {
+                   if (loginErr) return next(loginErr);
+                   // We respond with a response object that has user with _id and email.
+                   res.redirect('/application').send({
+                       user: user.sanitize()
+                   });
+                })   
+            })
+           .catch(next);
+       passport.authenticate('local', authCb)(req, res, next);
+   })
+
 };

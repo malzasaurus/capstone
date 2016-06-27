@@ -5,12 +5,12 @@ var Sequelize = require('sequelize');
 
 module.exports = function(db) {
 
-    return db.define('company', {
-        name: {
+    return db.define('invitedUser', {
+        email: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        hostName: {
+        appId: {
             type: Sequelize.STRING,
             allowNull: false
         },
