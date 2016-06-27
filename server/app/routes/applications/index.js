@@ -18,12 +18,8 @@ var AppAccess = require('../../../db').model('appAccess');
 
 //get all applications by userId
 router.get('/', function(req, res, next) {
-		//check is user is logged in. if so use req.userID
-	// if(!req.session.userId){
-	// 	res.sendStatus(400);
-	// 	return;
-	// } else {
-		User.findById(1)
+		var id = req.user.id
+		User.findById(id)
 		.then(function(foundUser){
 			return foundUser.getApplications()
 		})
@@ -78,12 +74,12 @@ router.put('/:id/bugs/:bugId', function(req, res, next) {
 })
 //add new application
 router.post('/', function(req, res, next) {
-	var application;
-	var user = 1;
+	//var application;
+	var id = req.user.id
 	//THIS USER ID NEEDS TO COME FROM SESSION!!!
 	//console.log("user", req.user.id)
 	var createApp = Application.create(req.body);
-	var findUser = User.findById(user);
+	var findUser = User.findById(id);
 	Promise.all([createApp, findUser])
 	.then(function(values){
 		return values[0].addUser(values[1], { accessLevel: "admin" })
@@ -92,6 +88,27 @@ router.post('/', function(req, res, next) {
 		res.status(201).send(newApplicationCreated)	
 	})
 	.catch(next)
+})
+
+//add a new user to application
+router.post('/:id/users', function(req, res, next) {
+	var userEmail = req.body.email;
+	var level = req.body.accessLevel;
+	
+	var findApp = Application.findById(req.params.id);
+	var findUser = User.findOne({
+		where:{
+			email: userEmail
+		}
+	});
+	Promise.all([findApp, findUser])
+	.then(function(values){
+		return values[0].addUser(values[1], { accessLevel: level })
+	})
+	.then(function(newUserAdded){
+		res.status(201).send(newUserAdded)	
+	})
+	.catch(next)	
 })
 
 //update an application

@@ -50,7 +50,7 @@ router.post('/', function(req, res, next) {
 // 	})
 // 	.then(function(updatedBug) {
 // 		res.json(updatedBug)
-// 	})
+// 	})s
 // 	.catch(next)
 // })
 
