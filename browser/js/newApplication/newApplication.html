@@ -1,0 +1,16 @@
+<form id="application-form" name="applicationForm" ng-submit="applicationForm.$valid && sendApplication(application)">
+
+    <alert type="danger" ng-show="error">
+        {{ error }}
+    </alert>
+
+    <div class="form-group">
+        <label for="name">Application Name</label>
+        <input type="text" ng-model="application.name" class="form-control" id="name" placeholder="Enter App Name">
+    </div>
+    <div class="form-group">
+        <label for="hostName">hostName</label>
+        <input type="hostName" ng-model="application.hostName" class="form-control" id="hostName" placeholder="hostName without leading www.">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
