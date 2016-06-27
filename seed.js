@@ -73,14 +73,182 @@ var seedBugs = function () {
     var bugs = [
         {   
             appId: '124sxq',
+            status: 'new',
             doNotTrack: 1,
             protocol: 'http:',
+            userComments: 'the app looks funny',
+            assignment: 'Nicole',
+            applicationId: '124sxq',
             hostName: 'google.com'
         },
         {
-            appId: '1248wqt',
+            appId: '124sxq',
+            status: 'in progress',
             doNotTrack: 1,
             protocol: 'https',
+            userComments: 'why does not the button work',
+            assignment: 'Nicole',
+            applicationId: '124sxq',
+            platform: 'MacIntel'
+        },
+                {
+            appId: '124sxq',
+            doNotTrack: 1,
+            status: 'new',
+            protocol: 'https',
+            userComments: 'your page is broken',
+            assignment: 'Nicole',   
+            applicationId: '124sxq',         
+            platform: 'MacIntel'
+        },
+                {
+            appId: '124sxq',
+            status: 'in progress',
+            doNotTrack: 1,
+            protocol: 'https',
+            userComments: 'i am frustrated',
+            assignment: 'Nicole',   
+            applicationId: '124sxq',         
+            platform: 'MacIntel'
+        },
+                {
+            appId: '124sxq',
+            status: 'in progress',
+            doNotTrack: 1,
+            protocol: 'https',
+            userComments: 'the image is not loaded',
+            assignment: 'Danielle',  
+            applicationId: '124sxq',          
+            platform: 'MacIntel'
+        },
+                {
+            appId: '124sxq',
+            status: 'in progress',
+            doNotTrack: 1,
+            protocol: 'https',
+            userComments: 'this app is awesome',
+            assignment: 'Danielle', 
+            applicationId: '124sxq',           
+            platform: 'MacIntel'
+        },
+                {
+            appId: '124sxq',
+            status: 'resolved',
+            doNotTrack: 1,
+            protocol: 'https',
+            userComments: 'the logo is not showing up',
+            assignment: 'Danielle',
+            applicationId: '124sxq',
+            platform: 'MacIntel'
+        },
+                {
+            appId: '124sxq',
+            doNotTrack: 1,
+            status: 'new',
+            protocol: 'https',
+            userComments: 'the link is not working',
+            assignment: 'Danielle', 
+            applicationId: '124sxq',           
+            platform: 'MacIntel'
+        },
+                {
+            appId: '124sxq',
+            status: 'resolved',
+            doNotTrack: 1,
+            protocol: 'https',
+            userComments: 'i cannot submit something',
+            assignment: 'Ashley',  
+            applicationId: '124sxq',          
+            platform: 'MacIntel'
+        },
+                {
+            appId: '124sxq',
+            status: 'resolved',
+            doNotTrack: 1,
+            protocol: 'https',
+            userComments: 'comment 5',
+            assignment: 'Ashley',  
+            applicationId: '124sxq',          
+            platform: 'MacIntel'
+        },
+                {
+            appId: '1248wqt',
+            status: 'resolved',
+            doNotTrack: 1,
+            protocol: 'https',
+            userComments: 'comment 6',
+            assignment: 'Ashley',  
+            applicationId: '1248wqt',          
+            platform: 'MacIntel'
+        },
+                {
+            appId: '1248wqt',
+            doNotTrack: 1,
+            status: 'new',
+            protocol: 'https',
+            userComments: 'comment 7',
+            assignment: 'Ashley',      
+            applicationId: '1248wqt',      
+            platform: 'MacIntel'
+        },
+                {
+            appId: '1248wqt',
+            status: 'resolved',
+            doNotTrack: 1,
+            protocol: 'https',
+            userComments: 'comment 8',
+            assignment: 'Ashley',   
+            applicationId: '1248wqt',         
+            platform: 'MacIntel'
+        },
+                {
+            appId: '1248wqt',
+            status: 'in progress',
+            doNotTrack: 1,
+            protocol: 'https',
+            userComments: 'comment 9',
+            assignment: '',     
+            applicationId: '1248wqt',       
+            platform: 'MacIntel'
+        },
+                {
+            appId: '1248wqt',
+            status: 'in progress',
+            doNotTrack: 1,
+            protocol: 'https',
+            userComments: 'comment 10',
+            assignment: '',     
+            applicationId: '1248wqt',       
+            platform: 'MacIntel'
+        },
+                {
+            appId: '1248wqt',
+            doNotTrack: 1,
+            status: 'new',
+            protocol: 'https',
+            userComments: 'comment 11',
+            assignment: 'unassigned',  
+            applicationId: '1248wqt',          
+            platform: 'MacIntel'
+        },
+                {
+            appId: '1248wqt',
+            status: 'in progress',
+            doNotTrack: 1,
+            protocol: 'https',
+            userComments: 'comment 12',
+            assignment: 'unassigned', 
+            applicationId: '1248wqt',           
+            platform: 'MacIntel'
+        },
+                {
+            appId: '1248wqt',
+            doNotTrack: 1,
+            status: 'new',
+            protocol: 'https',
+            userComments: 'comment 13',
+            assignment: 'unassigned',  
+            applicationId: '1248wqt',          
             platform: 'MacIntel'
         }
     ];
