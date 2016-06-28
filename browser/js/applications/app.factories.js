@@ -6,6 +6,13 @@ app.factory('AppFactory', function($http){
 				return bugs.data;
 			});
 		},
+		fetchAllApps: function(){
+			return $http.get('api/applications')
+			.then(function(apps){
+				console.log('this is what my apps look like: ', apps.data)
+				return apps.data;
+			});
+		},
 		createApp : function(app){
     		return $http.post('/api/applications', app);
 		}	
