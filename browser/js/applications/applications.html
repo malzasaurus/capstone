@@ -1,3 +1,7 @@
 <section id="applications">
+	<select ng-model='appSelection'>
+		<option ng-repeat="app in allApps" value={{app.id}}>{{app.name}}</option>
+
+	</select>
 	<bug-list bugList='bugList'></bug-list>
 </section>
