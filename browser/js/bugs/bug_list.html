@@ -1,4 +1,4 @@
-<div>
+<div id='bug-sidebar'>
 	<h5>Current Bugs</h5>
 	<h6>Status</h6>
 	<select ng-model='filterVal'>
@@ -6,7 +6,9 @@
 		<option value='in-progress'>In Progress</option>
 		<option value='resolved'>Resolved</option>
 	</select>
-	<bug-detail ng-repeat="bug in bugList | filter: bug.status =filterVal"></bug-detail>
+	<div id='bug-list'>
+		<bug-detail ng-repeat="bug in bugList | filter: bug.status =filterVal"></bug-detail>	
+	</div>
 </div>
 
 <!-- need to add ability to show all after filter applied -->

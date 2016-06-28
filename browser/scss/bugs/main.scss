@@ -1,0 +1,26 @@
+#bug-sidebar {
+	border: 1px solid black;
+	border-radius: 5px;
+	width: 250px;
+	padding: 2px;
+	margin: 5px;
+	#bug-list {
+		display: flex;
+		padding: 5px;
+		flex-direction: column;
+		justify-content: space-between;
+		align-content: space-between;
+		.bug-detail {
+			margin: 2px;
+			border: 1px solid black;
+			border-radius: 5px;
+			padding: 2px;
+			display: flex;
+			flex-wrap: nowrap;
+			flex-direction: column;
+			justify-content: flex-start;
+			height: 100px;
+		}
+	}
+}
+
