@@ -1,6 +1,12 @@
-<div ui-sref='bug-details({id: bug.id})'>
-	<h6>Bug # {{bug.id}}</h6>
-	<h6>{{bug.formComments}}</h6>
-	<h6>{{bug.assignment}}</h6>
-	<h6>{{bug.status}}</h6>
+<div class='bug-detail' ui-sref='bug-details({id: bug.id})'>
+	<div>
+		<h5>Bug # {{bug.id}}</h5>		
+	</div>
+	<div>
+		<p>{{bug.formComments}}</p>		
+	</div>
+	<div>
+		<p>{{bug.assignment}}</p>
+		<p>{{bug.status}}</p>		
+	</div>
 </div>
