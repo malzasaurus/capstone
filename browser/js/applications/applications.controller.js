@@ -1,9 +1,6 @@
-app.controller('AppCtrl', function($scope, allBugs){
-	// $scope.appid = 1;  
+app.controller('AppCtrl', function($scope, allBugs, allApps){
 	$scope.bugList = allBugs;
-
-	//this should populate dynamically using an http request
-
+	$scope.allApps = allApps;
 });
 
 app.controller('AllAppsCtrl', function($scope, allApps){

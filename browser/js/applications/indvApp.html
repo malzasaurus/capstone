@@ -1,7 +1,7 @@
-<section id="applications">
+<section id="application">
 	<select ng-model='appSelection'>
 		<option ng-repeat="app in allApps" value={{app.id}}>{{app.name}}</option>
 	</select>
-
-	<bug-list bugList='bugList'></bug-list>
+	<div>{{bugList}}</div>
 </section>
+<bug-list bugList='bugList'></bug-list>
