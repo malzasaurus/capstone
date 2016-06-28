@@ -1,7 +1,19 @@
+<section id="home">
 
+<div>
 	<h4>List of Current Applications</h4>
-		<div ui-sref='indvApp({appID: app.id})' ng-repeat='app in allApps'>
-			<p>Name: {{app.name}}</p>
-			<p>Host Name: {{app.hostName}}</p>
-			<p>Number of Unresolved Bugs</p>
-		</div>
+	<div ui-sref='indvApp({appID: app.id})' ng-repeat='app in allApps'>
+		<p>Name: {{app.name}}</p>
+		<p>Host Name: {{app.hostName}}</p>
+		<p>App Id: {{app.appId}}</p>
+		<p>Number of Unresolved Bugs</p>
+	</div>
+
+	<div class="box" ng-show="allApps.length === 0">
+	 	<p>You have no applications.</p>
+	 	<a ui-sref="newApplication">
+		Create your first application.
+	 	</a>
+	 </div>
+</div>
+</section>
