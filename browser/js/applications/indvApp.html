@@ -1,4 +1,6 @@
 <section id="application">
+	<!-- <div ng-model='appSelection' ng-repeat="app in allApps" value={{app.id}}>{{app.name}}
+	</div> -->
 	<select ng-model='appSelection'>
 		<option ng-repeat="app in allApps" value={{app.id}}>{{app.name}}</option>
 	</select>
