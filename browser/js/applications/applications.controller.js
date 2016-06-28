@@ -1,5 +1,5 @@
 app.controller('AppCtrl', function($scope, allBugs){
-	$scope.appid = 1;  
+	// $scope.appid = 1;  
 	$scope.bugList = allBugs;
 
 	//this should populate dynamically using an http request
