@@ -22,6 +22,7 @@ var db = require('./server/db');
 var User = db.model('user');
 var Application = db.model('application');
 var Bug = db.model('bug');
+var AppAccess = db.model('appAccess');
 var Promise = require('sequelize').Promise;
 
 var seedUsers = function () {
@@ -57,6 +58,11 @@ var seedApplications = function () {
             name: 'App B',
             hostName: 'google.com',
             appId: '1248wqt'
+        },
+        {
+            name: 'App C',
+            hostName: 'amazon.com',
+            appId: '1248tqt'
         }
     ];
 
@@ -222,23 +228,23 @@ var seedBugs = function () {
             platform: 'MacIntel'
         },
                 {
-            appId: '1248wqt',
+            appId: '1248tqt',
             doNotTrack: 1,
             status: 'new',
             protocol: 'https',
             formComments: 'comment 11',
             assignment: 'unassigned',  
-            applicationId: 2,          
+            applicationId: 3,          
             platform: 'MacIntel'
         },
                 {
-            appId: '1248wqt',
+            appId: '1248tqt',
             status: 'in-progress',
             doNotTrack: 1,
             protocol: 'https',
             formComments: 'comment 12',
             assignment: 'unassigned', 
-            applicationId: 2,           
+            applicationId: 3,           
             platform: 'MacIntel'
         },
                 {
@@ -248,7 +254,7 @@ var seedBugs = function () {
             protocol: 'https',
             formComments: 'comment 13',
             assignment: 'unassigned',  
-            applicationId: 2,          
+            applicationId: 3,          
             platform: 'MacIntel'
         }
     ];
@@ -261,6 +267,37 @@ var seedBugs = function () {
 
 };
 
+var seedAppsUsers = function(){
+    appsAndUsers = [
+        {
+            accessLevel: 'admin',
+            userId: 1,
+            applicationId: 1
+        },
+              {
+            accessLevel: 'admin',
+            userId: 1,
+            applicationId: 2
+        },
+              {
+            accessLevel: 'admin',
+            userId: 2,
+            applicationId: 2
+        },
+              {
+            accessLevel: 'admin',
+            userId: 2,
+            applicationId: 3
+        },
+    ];
+        var creatingAppUsers = appsAndUsers.map(function (appsUsersObj) {
+        return AppAccess.create(appsUsersObj);
+    });
+
+    return Promise.all(creatingAppUsers);
+
+};
+
 db.sync({ force: true })
     .then(function () {
         return seedUsers();
@@ -270,6 +307,9 @@ db.sync({ force: true })
     })
     .then(function() {
         return seedBugs();
+    })
+    .then(function() {
+        return seedAppsUsers();
     })
     .then(function () {
         console.log(chalk.green('Seed successful!'));
