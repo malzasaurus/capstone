@@ -16,7 +16,7 @@ app.controller('SignupCtrl', function ($scope, $state, SignupFactory, AuthServic
         .then(function(){
             AuthService.login(signupInfo)
             .then(function () {
-            $state.go('home')
+            $state.go('allApps')
              })
         })
         .catch(function () {
