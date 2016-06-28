@@ -7,7 +7,10 @@ app.config(function ($stateProvider) {
         	allBugs: function(AppFactory, $stateParams){
         		var appID = $stateParams.appID;
 				return AppFactory.fetchAllBugs(appID);
-        	}
+        	},
+            allApps: function(AppFactory){
+                return AppFactory.fetchAllApps();
+            }
         }
     });
     $stateProvider.state('allApps', {

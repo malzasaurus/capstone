@@ -11,7 +11,7 @@ app.controller('NewAppCtrl', function ($scope, $state, AppFactory) {
     $scope.sendApplication = function (appInfo) {
         AppFactory.createApp(appInfo)
         .then(function(){
-            $state.go('home')
+            $state.go('allApps')
         })
         .catch(function () {
             $scope.error = 'Oops, try again';
