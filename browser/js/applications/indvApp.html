@@ -1,7 +1,10 @@
 <section id="application">
+	<h4>{{appData.name}}</h4>
 	<select ng-model='appSelection'>
 		<option ng-repeat="app in allApps" value={{app.id}}>{{app.name}}</option>
 	</select>
 	<div>{{bugList}}</div>
 </section>
 <bug-list bugList='bugList'></bug-list>
+
+<button ui-sref='appUsers({appID: appData.id})'>User Management</button>
