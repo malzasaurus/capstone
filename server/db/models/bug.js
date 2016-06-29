@@ -48,7 +48,7 @@ module.exports = function(db) {
         //     type: Sequelize.STRING
         // },
         doNotTrack: {
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         },
         appVersion: {
             type: Sequelize.STRING
@@ -62,10 +62,16 @@ module.exports = function(db) {
         pathName: {
             type: Sequelize.STRING
         },
+        href: {
+            type: Sequelize.STRING
+        },
         protocol: {
             type: Sequelize.STRING
         },
         formComments: {
+            type: Sequelize.TEXT
+        },
+        img_val: {
             type: Sequelize.TEXT
         }
     });
