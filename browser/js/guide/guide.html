@@ -1,0 +1,87 @@
+<h3>
+    Implementation Guide:
+</h3>
+
+<p>When creating a new app please follow the instructions below:</p>
+<ol>
+	<li><p>NPM install the derpModule by inputting the following command in your terminal:</p>
+		<ul>
+			<li><p>npm install derpModule</p></li>
+		</ul>
+	</li>
+
+	<li><p>Insert the code below into your index.html where you would like the reporter button to appear.  This code can also be found in the directives.html file in the derpModule.</p>
+		<ul><li><p>
+			<pre>
+&lt;button id="myBtn"&gt;Report a Bug&lt;/button&gt;
+&lt;div id="myModal" class='modal'&gt;
+    &lt;div class="modal-content"&gt;
+        &lt;div class="modal-header"&gt;
+            &lt;span class="close"&gt;×&lt;/span&gt;
+            &lt;h2&gt;Report a Bug&lt;/h2&gt;
+        &lt;/div&gt;
+        &lt;div class="modal-body"&gt;
+            &lt;form action="OUR PATH HERE" method="post"&gt;
+                &lt;input type="text" name="formComments"&gt;
+                &lt;input type="hidden" name="name" id="cookieEnabled" value="" readonly="readonly"&gt;
+                &lt;input type="hidden" name="doNotTrack" id="doNotTrack" value="" readonly="readonly"&gt;
+                &lt;input type="hidden" name="appVersion" id="appVersion" value="" readonly="readonly"&gt;
+                &lt;input type="hidden" name="platform" id="platform" value="" readonly="readonly"&gt;
+                &lt;input type="hidden" name="hostName" id="hostName" value="" readonly="readonly"&gt;
+                &lt;input type="hidden" name="pathName" id="pathName" value="" readonly="readonly"&gt;
+                &lt;input type="hidden" name="href" id="href" value="" readonly="readonly"&gt;
+                &lt;input type="hidden" name="protocol" id="protocol" value="" readonly="readonly"&gt;
+                &lt;input type="hidden" name="browser" id="browser" value="" readonly="readonly"&gt;
+                &lt;input type="hidden" name="browserVer" id="browserVer" value="" readonly="readonly"&gt;
+                &lt;input type="hidden" name="appId" id="appId" value="ENTER YOUR APP ID HERE" readonly="readonly"&gt;
+                &lt;input type="hidden" name="img_val" id="img_val" value="" /&gt;
+                &lt;button&gt;Submit&lt;/button&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+			</pre>
+		</p></li></ul>
+	</li>
+	<li><p>Insert your appId into form where "enter your app id here" is noted</p>
+		<ul><li>
+			<p>Your appID is:  XXXXXX</p>
+		</li></ul>
+	</li>
+	<li><p>Include the following script tags in your index.html file:</p></li>
+		<ul>
+			<li>
+				<p>
+					&lt;script src="/derpModule/index.js" defer></script&gt;
+				</p>
+			</li>
+			<li>
+				<p>
+					&lt;script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script&gt;
+				</p>
+			</li>
+			<li>
+				<p>
+				     &lt;script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script&gt;
+				</p>
+			</li>
+			<li>
+				<p>
+					 &lt;script type="text/javascript" src="derpModule/js/html2canvas.js"></script&gt;
+				</p>
+			</li>
+			<li>
+				<p>
+					&lt;script type="text/javascript" src="derpModule/js/jquery.plugin.html2canvas.js"></script&gt;
+				</p>
+			</li>
+		</ul>
+</ol>
+
+
+
+
+
+   
+    
+
