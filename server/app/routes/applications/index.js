@@ -158,13 +158,27 @@ router.post('/:id/users', function(req, res, next){
 	.catch(next);	
 });
 
-//update user info
+//updating the access leve for a particular app for one user
 router.put('/:id/users', function(req, res, next){
 	console.log('in the user post route');
-	console.log('the user obj is: ', req.body);
-	console.log('the app id is: ', req.params.id)
-//what do we want to allow admins to edit?
+	console.log('the app id is: ', req.params.id);
+	var userID = req.body.id;
+	var updatedLevel = req.body.appAccess.accessLevel;
+	console.log('the user id is: ', userID);
+	console.log('the user access is: ', updatedLevel);
+	var findApp = Application.findById(req.params.id);
+	var findUser = User.findById(userID);	
+	Promise.all([findApp, findUser])
+	.then(function(foundData){
+		var foundApp =foundData[0];
+		var foundUser = foundData[1];
+		foundApp.addUser(foundUser, {accessLevel: updatedLevel})
+		.then(function(response){
+			res.status(201).send(response);
+		});
+	});
 });
+
 
 //remove user from a particular applicaiton
 router.delete('/:appID/users/:userID', function(req, res, next){

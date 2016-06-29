@@ -2,6 +2,11 @@ app.controller('AppCtrl', function($scope, allBugs, allApps, appData){
 	$scope.bugList = allBugs;
 	$scope.allApps = allApps;
 	$scope.appData = appData;
+	$scope.currentApp = function(app){
+		// console.log('the app i am checking is: ', app);
+		// console.log('the current app is: ', $scope.appData)
+		return app.id===$scope.appData.id;
+	};
 });
 
 app.controller('AllAppsCtrl', function($scope, allApps){
@@ -18,8 +23,10 @@ app.controller('UsersCtrl', function($scope, allUsers, appData, AppFactory){
 		});
 	};
 	$scope.updateUser = function(userObj){
-		console.log('this is the user i am updating: ', userObj);
-		AppFactory.updateUser(appData.id, userObj);
+		AppFactory.updateUser(appData.id, userObj)
+		.then(function(response){
+			response.status===201 ? $scope.updateStatus = true : $scope.updateStatus = false
+		});
 	};
 	$scope.removeUser = function(userObj){
 		var userIndex = $scope.allUsers.indexOf(userObj);

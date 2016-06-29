@@ -1,15 +1,15 @@
 <div id="detail-page">
     <div class="main-info">
-        <h2>Application {{ bugDetails.appId }}</h2>
-        <hr>
         <h3>Bug #{{ bugDetails.id }}</h3>
     </div>
-    <div id="details">
-        <div id="screenshot-section" class="section">
+
+    <div id="screenshot-section" class="image-section">
             <!-- screenshot of reported page -->
-            <h3>Report Screenshot</h3>
-            <img src="http://www.horniman.info/DKNSARC/SD04/IMAGES/D4P1570C.JPG">
-        </div>
+   
+        <img height="300" width="500" data-ng-src="{{bugDetails.img_val}}"/>
+    </div>
+    <div id="details">
+        
         <!-- comments -->
         <div id="commentary-section" class="section">
             <h3>Report Information</h3>
@@ -18,7 +18,7 @@
                 <!-- 	reporter's comments -->
                 <div id="report-comments" class="text">
                     <h5>Reporter</h5>
-                    <p>{{ bugDetails.comments }}</p>
+                    <p>{{ bugDetails.formComments }}</p>
                 </div>
                 <!-- 	developer's comments -->
                 <div id="developer-comments" class="text">
@@ -29,25 +29,17 @@
             <div id="developer-assignment">
                 <div id="bug-priority">
                     <h5>Priority</h5>
-                    <select name="priority">
-                        <option value="high">High</option>
-                        <option value="low">Low</option>
-                    </select>
+                    <select name="priority" id="priority"  ng-options="priority.name for priority in priorities" ng-model="selectedPriority"></select>
                 </div>
                 <div id="assignment">
                     <h5>Assignment</h5>
-                    <select name="assignment">
-                        <option value="dev1">Dev 1</option>
-                        <option value="dev2">Dev 2</option>
-                    </select>
+                    <select name="assignment" id="assignment"  ng-options="assignment.email for assignment in assignments" ng-model="selectedAssignment"></select>
                 </div>
                 <div id="status">
                     <h5>Status</h5>
-                    <select name="status">
-                        <option value="open">open</option>
-                        <option value="closed">closed</option>
-                    </select>
+                    <select name="status" id="status"  ng-options="status.name for status in statuses" ng-model="selectedStatus"></select>
                 </div>
+                <button type="submit" ng-click="update(selectedPriority.name, selectedAssignment.email, selectedStatus.name)">Update</button>
             </div>
         </div>
         <!-- report stats -->
@@ -70,8 +62,16 @@
                 <p>{{ bugDetails.hostName }}</p>
                 <h5>Path Name:</h5>
                 <p>{{ bugDetails.pathName }}</p>
+                <h5>Href:</h5>
+                <p>{{ bugDetails.href }}</p>
                 <h5>Protocol:</h5>
                 <p>{{ bugDetails.protocol }}</p>
+                <h5>Priority:</h5>
+                <p>{{ bugDetails.priority }}</p>
+                <h5>Status:</h5>
+                <p>{{ bugDetails.status }}</p>
+                <h5>Assignment:</h5>
+                <p>{{ bugDetails.assignment }}</p>
             </div>
         </div>
     </div>
