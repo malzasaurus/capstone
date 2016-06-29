@@ -39,6 +39,7 @@
                     <h5>Status</h5>
                     <select name="status" id="status"  ng-options="status.name for status in statuses" ng-model="selectedStatus"></select>
                 </div>
+                <button type="submit" ng-click="update(selectedPriority.name, selectedAssignment.email, selectedStatus.name)">Update</button>
             </div>
         </div>
         <!-- report stats -->
@@ -65,6 +66,12 @@
                 <p>{{ bugDetails.href }}</p>
                 <h5>Protocol:</h5>
                 <p>{{ bugDetails.protocol }}</p>
+                <h5>Priority:</h5>
+                <p>{{ bugDetails.priority }}</p>
+                <h5>Status:</h5>
+                <p>{{ bugDetails.status }}</p>
+                <h5>Assignment:</h5>
+                <p>{{ bugDetails.assignment }}</p>
             </div>
         </div>
     </div>

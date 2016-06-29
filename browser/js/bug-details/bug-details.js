@@ -9,31 +9,54 @@ app.config(function($stateProvider) {
                 var bugId = $stateParams.bugId;
                 return DetailsFactory.getDetails(appId, bugId);
             },
-            // allUsers : function(AppFactory, $stateParams) {
-            //     return AppFactory.fetchAllUsers();
-            // }
+            // updateBugInfo: function(DetailsFactory, $stateParams) {
+            //     var appId = $stateParams.appId;
+            //     var bugId = $stateParams.bugId;
+            //     return DetailsFactory.updateBug(appId, bugId, updates);
+            // },
+            allUsers : function(AppFactory, $stateParams) {
+                var appId = $stateParams.appId;
+                return AppFactory.fetchAllUsers(appId);
+            }
         }
     })
 })
 
-app.factory('DetailsFactory', function($http) {
-    var DetailsFactory = {}
-
-    DetailsFactory.getDetails = function(appId, bugId) {
-        return $http.get('/api/applications/'+ appId + '/bugs/' + bugId)
+app.factory('DetailsFactory', function($http, $stateParams) {
+    return {
+        getDetails: function(appId, bugId) {
+            return $http.get('/api/applications/'+ appId + '/bugs/' + bugId)
             .then(function(response) {
                 return response.data
             })
+        },       
+        updateBug: function(appId, bugId, updates) {
+            var appId = $stateParams.appId;
+            var bugId = $stateParams.bugId;
+            return $http.put('/api/applications/'+ appId + '/bugs/' + bugId, updates)
+            .then(function(response) {
+                return response.data
+            })
+        }
     }
-
-    return DetailsFactory
 })
 
-app.controller('DetailsCtrl', function($scope, bugDetails) {
+app.controller('DetailsCtrl', function($scope, bugDetails, allUsers, DetailsFactory) {
 
     $scope.bugDetails = bugDetails;
     $scope.priorities = [{name: "blocker"}, {name: "critical"}, {name: "major"}, {name: "minor"}, {name: "trivial"}]
     $scope.statuses = [{name: "new"}, {name: "in-progress"}, {name: "resolved"}]
-    // $scope.assignments = allUsers;
+    $scope.assignments = allUsers;
+    $scope.update = function(selectedPriority, selectedAssignment, selectedStatus){ 
+        var updates = {
+            priority: selectedPriority,
+            assignment: selectedAssignment,
+            status: selectedStatus
+        }
+        DetailsFactory.updateBug(null, null, updates)
+        .then(function(updatedBug){
+            window.location.reload();
+        })
+    }
 
 })
