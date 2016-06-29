@@ -1,0 +1,41 @@
+<h4>{{appData.name}}</h4>
+<div>
+	<table>
+		<tr>
+			<th>User Name</th>
+			<th>User Email</th>
+			<th>Access Level</th>
+			<th></th>
+			<th></th>
+		</tr>
+		<tr ng-repeat='user in allUsers'>
+			<td>{{user.name}}</td>
+			<td>{{user.email}}</td>
+			<td>
+				<select ng-model='user.accessLevel'>
+					<option value='admin'>Admin</option>
+					<option value='contributor'>Contributor</option>
+				</select>
+			</td>
+			<td>
+				<button class="btn btn-default btn-xs" ng-click="updateUser(user)" title='update user access'>
+           			 <span class="glyphicon glyphicon-edit"></span>
+        		</button>
+        	</td>
+        	<td>
+        		<button class="btn btn-default btn-xs" ng-click="removeUser(user)" title='remove user data'>
+           			 <span class="glyphicon glyphicon-trash"></span>
+        		</button>
+			</td>
+		</tr>
+	</table>	
+</div>
+<div>
+	<input type="email" name="email" ng-model='newUser.email' required>
+	<select ng-model='newUser.accessLevel' required>
+		<option value='admin'>Admin</option>
+		<option value='contributor'>Contributor</option>
+	</select>
+	<button ng-click='invite(newUser)'>Invite New User</button>
+	<p ng-show='inviteStatus'>User successfully notified of invite</p>
+</div>

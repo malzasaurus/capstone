@@ -9,10 +9,16 @@
 		<p>Number of Unresolved Bugs</p>
 	</div>
 
+	<div>
+		<a ui-sref="newApplication" ng-hide="allApps.length === 0">
+		Add a new application
+	 	</a>
+	 </div>
+
 	<div class="box" ng-show="allApps.length === 0">
 	 	<p>You have no applications.</p>
 	 	<a ui-sref="newApplication">
-		Create your first application.
+		Create your first application
 	 	</a>
 	 </div>
 </div>

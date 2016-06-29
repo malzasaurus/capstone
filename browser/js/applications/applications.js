@@ -10,6 +10,23 @@ app.config(function ($stateProvider) {
         	},
             allApps: function(AppFactory){
                 return AppFactory.fetchAllApps();
+            },
+            appData: function(AppFactory, $stateParams){
+                return AppFactory.fetchCurrentApp($stateParams.appID);
+            }
+        }
+    });
+    $stateProvider.state('appUsers', {
+        url: '/applications/:appID/users',
+        templateUrl: 'js/users/users.html',
+        controller: 'UsersCtrl',
+        resolve: {
+            allUsers: function(AppFactory, $stateParams){
+                var appID = $stateParams.appID;
+                return AppFactory.fetchAllUsers(appID);
+            },
+            appData: function(AppFactory, $stateParams){
+                return AppFactory.fetchCurrentApp($stateParams.appID);
             }
         }
     });
@@ -25,3 +42,5 @@ app.config(function ($stateProvider) {
     });
 });
 
+
+//can we eliminate these repetitive methods between states?

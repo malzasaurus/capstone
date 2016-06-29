@@ -14,5 +14,13 @@ module.exports = function(db) {
             type: Sequelize.STRING,
             allowNull: false
         },
+        accessLevel: {
+            type: Sequelize.STRING,
+            validate: {
+                isIn: [
+                    ["admin", "contributor"]
+                ]
+            }
+        }
     });
 };
