@@ -18,8 +18,10 @@ app.controller('UsersCtrl', function($scope, allUsers, appData, AppFactory){
 		});
 	};
 	$scope.updateUser = function(userObj){
-		console.log('this is the user i am updating: ', userObj);
-		AppFactory.updateUser(appData.id, userObj);
+		AppFactory.updateUser(appData.id, userObj)
+		.then(function(response){
+			response.status===201 ? $scope.updateStatus = true : $scope.updateStatus = false
+		});
 	};
 	$scope.removeUser = function(userObj){
 		var userIndex = $scope.allUsers.indexOf(userObj);

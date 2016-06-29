@@ -32,7 +32,6 @@ app.factory('AppFactory', function($http){
 			return $http.put('/api/applications/'+appID+'/users', userObj);
 		},
 		removeUser: function(appID, userID){
-			console.log('the user id in the factory is: ', userID);
 			return $http.delete('/api/applications/'+appID+'/users/'+userID);
 		},
 		createApp : function(app){

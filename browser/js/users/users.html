@@ -1,4 +1,5 @@
 <h4>{{appData.name}}</h4>
+<h6>{{appData.appId}}</h6>
 <div>
 	<table>
 		<tr>
@@ -12,13 +13,13 @@
 			<td>{{user.name}}</td>
 			<td>{{user.email}}</td>
 			<td>
-				<select ng-model='user.accessLevel'>
+        		<select ng-model='user.appAccess.accessLevel'>
 					<option value='admin'>Admin</option>
 					<option value='contributor'>Contributor</option>
 				</select>
 			</td>
 			<td>
-				<button class="btn btn-default btn-xs" ng-click="updateUser(user)" title='update user access'>
+				<button class="btn btn-default btn-xs" ng-click="updateUser(user)" title='save updated user access'>
            			 <span class="glyphicon glyphicon-edit"></span>
         		</button>
         	</td>
@@ -28,7 +29,8 @@
         		</button>
 			</td>
 		</tr>
-	</table>	
+	</table>
+	<p ng-show='updateStatus'>User access successfully updated</p>	
 </div>
 <div>
 	<input type="email" name="email" ng-model='newUser.email' required>
