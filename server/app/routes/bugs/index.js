@@ -37,7 +37,7 @@ router.post('/', function(req, res, next) {
 		return foundApplication.createBug(req.body)
 	})
 	.then(function(newBugCreated){
-		res.status(201).send(newBugCreated)
+		res.redirect(newBugCreated.href)
 	})
 	.catch(next)
 })
