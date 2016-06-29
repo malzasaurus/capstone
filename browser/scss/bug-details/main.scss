@@ -1,31 +1,39 @@
 #detail-page {
     width: 90%;
     margin: 0 auto;
-    hr {
-    	border-color: black;
-    }
 }
 
+.image-section {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+
+    img{
+    width: 50%;
+    display: block;
+    margin: 0 auto;  
+    }
+}
+   
 #details {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    .section {
-        width: 30%;
-        border: 2px solid black;
+    
+
+     .section {
+        width: 50%;
         padding: 20px;
+        display: inline;
+        float: right;
         p {
-            border: 1px solid black;
             text-align: center;
         }
     }
-    img {
-        width: 100%;
-    }
+    
     h3,
     h4 {
         text-align: center;
-        border: 1px solid black;
     }
     #developer-assignment {
         display: flex;
