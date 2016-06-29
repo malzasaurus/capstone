@@ -2,6 +2,11 @@ app.controller('AppCtrl', function($scope, allBugs, allApps, appData){
 	$scope.bugList = allBugs;
 	$scope.allApps = allApps;
 	$scope.appData = appData;
+	$scope.currentApp = function(app){
+		// console.log('the app i am checking is: ', app);
+		// console.log('the current app is: ', $scope.appData)
+		return app.id===$scope.appData.id;
+	};
 });
 
 app.controller('AllAppsCtrl', function($scope, allApps){
