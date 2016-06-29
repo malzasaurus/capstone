@@ -13,6 +13,28 @@ app.factory('AppFactory', function($http){
 				return apps.data;
 			});
 		},
+		fetchAllUsers: function(appID){
+			return $http.get('api/applications/' + appID + '/users')
+			.then(function(users){
+				return users.data;
+			});
+		},
+		fetchCurrentApp: function(appID){
+			return $http.get('api/applications/' + appID)
+			.then(function(appData){
+				return appData.data;
+			});
+		},
+		inviteUser: function(appID, userObj){
+			return $http.post('/api/applications/'+appID+'/users', userObj);
+		},
+		updateUser: function(appID, userObj){
+			return $http.put('/api/applications/'+appID+'/users', userObj);
+		},
+		removeUser: function(appID, userID){
+			console.log('the user id in the factory is: ', userID);
+			return $http.delete('/api/applications/'+appID+'/users/'+userID);
+		},
 		createApp : function(app){
     		return $http.post('/api/applications', app);
 		}	
