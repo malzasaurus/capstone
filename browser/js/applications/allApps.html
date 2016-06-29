@@ -2,14 +2,18 @@
 
 <div>
 	<h4>List of Current Applications</h4>
-	<div ui-sref='indvApp({appID: app.id})' ng-repeat='app in allApps'>
-		<p>Name: {{app.name}}</p>
-		<p>Host Name: {{app.hostName}}</p>
-		<p>ID: {{app.id}}</p>
-		<p>App Id: {{app.appId}}</p>
-		<p>Number of Unresolved Bugs</p>
-	</div>
+	<div class="panel panel-primary" ui-sref='indvApp({appID: app.id})' ng-repeat='app in allApps'>
+		<div class="panel-heading">
+			<p class="panel-title">Name: {{app.name}}</p>
+		</div>
+		<div class="panel-body">
+			<p>Host Name: {{app.hostName}}</p>
+			<p>ID: {{app.id}}</p>
+			<p>App Id: {{app.appId}}</p>
+			<p>Number of Unresolved Bugs</p>	
+		</div>
 
+	</div>
 	<div>
 		<a ui-sref="newApplication" ng-hide="allApps.length === 0">
 		Add a new application
