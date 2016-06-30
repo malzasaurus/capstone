@@ -29,6 +29,38 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 return arr;
             }
 
+            function filterBugs(obj) {
+                if (obj.status !== "resolved") {
+                    return true
+                } else {
+                    return false;
+                }
+            }
+            var filteredBugList = bugsData.filter(filterBugs)
+
+            //get buglist array of individual bug arrays with status and count
+            function getStatusCounts(filteredBugList) {
+                var statusCount = {};
+                for (var i = 0; i < filteredBugList.length; i++) {
+                    if (!statusCount[filteredBugList[i].status]) {
+                        statusCount[filteredBugList[i].status] = 1;
+                    } else {
+                        statusCount[filteredBugList[i].status]++;   
+                    }
+                }
+
+                var finalArray = [];
+                for (var key in statusCount) {
+                    if (statusCount.hasOwnProperty(key)) {
+                        var tempArray = [key, statusCount[key]];
+                        finalArray.push(tempArray)
+                    }
+                }
+                return finalArray;
+            }
+
+            $log.warn("getStatusCounts is: ", getStatusCounts(filteredBugList));
+
             $log.warn("getPersonWorking is: ", getPersonWorking(bugsData));
 
             var assignmentCategories = Object.keys(getPersonWorking(bugsData));
@@ -100,6 +132,30 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 series: [{
                     type: 'pie',
                     data: getPersonWorking(bugsData)
+                }]
+            });
+
+            //pie-chart for bug status
+            $('#pie-bug-stats').highcharts({
+                title: {
+                    text: 'Bug Status'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    data: getStatusCounts(filteredBugList)
                 }]
             });
         })
