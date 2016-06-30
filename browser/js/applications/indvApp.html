@@ -1,21 +1,17 @@
 <section id="application">
-	<ul class="nav nav-tabs">
-  		<li ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})'>{{app.name}}</a></li>
-	</ul>
-	
-	<h4>{{appData.name}}</h4>
-
-	<!-- <div ng-model='appSelection' ng-repeat="app in allApps" value={{app.id}}>{{app.name}}
+    <ul class="nav nav-tabs">
+        <li ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})'>{{app.name}}</a></li>
+    </ul>
+    <h4>{{appData.name}}</h4>
+    <!-- <div ng-model='appSelection' ng-repeat="app in allApps" value={{app.id}}>{{app.name}}
 	</div> -->
-
-<!-- 	<select ng-model='appSelection'>
+    <!-- 	<select ng-model='appSelection'>
 		<option ng-repeat="app in allApps" value={{app.id}}>{{app.name}}</option>
 	</select> -->
-
-
-
-	<div>{{bugList}}</div>
+    <div id="line-chart"></div>
+    <div id="bar-chart"></div>
+    <div id="pie-chart"></div>
+    <!-- <div>{{bugList}}</div> -->
 </section>
 <bug-list bugList='bugList'></bug-list>
-
 <button ui-sref='appUsers({appID: appData.id})'>User Management</button>
