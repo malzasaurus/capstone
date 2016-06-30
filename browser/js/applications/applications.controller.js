@@ -8,10 +8,10 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
 
     AppFactory.fetchAllBugs(appData.id)
         .then(function(bugsData) {
-            function filterBugs(obj){
-                if(obj.status !== "resolved"){
+            function filterBugs(obj) {
+                if (obj.status !== "resolved") {
                     return true
-                } else{
+                } else {
                     return false;
                 }
             }
@@ -36,7 +36,6 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 }
                 return arr;
             }
-            var statusCategories = Object.keys(getPriorityBreakdown(filteredBugList));
 
             function getPathBreakdown(filteredBugList) {
                 var pathObj = {};
@@ -57,9 +56,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 }
                 return arr;
             }
-            var pathCategories = Object.keys(getPathBreakdown(filteredBugList));
-
-
+          
             function getPersonWorking(bugsData) {
                 var assignmentName = {};
                 for (var i = 0; i < bugsData.length; i++) {
@@ -96,6 +93,27 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
             $log.warn("assignmentCount is: ", assignmentCount(bugsData));
             $log.warn("assignmentCount type: ", typeof assignmentCount(bugsData)[1]);
 
+            //get buglist array of individual bug arrays with status and count
+            function getStatusCounts(filteredBugList) {
+                var statusCount = {};
+                for (var i = 0; i < filteredBugList.length; i++) {
+                    if (!statusCount[filteredBugList[i].status]) {
+                        statusCount[filteredBugList[i].status] = 1;
+                    } else {
+                        statusCount[filteredBugList[i].status]++;
+                    }
+                }
+
+                var finalArray = [];
+                for (var key in statusCount) {
+                    if (statusCount.hasOwnProperty(key)) {
+                        var tempArray = [key, statusCount[key]];
+                        finalArray.push(tempArray)
+                    }
+                }
+                return finalArray;
+            }
+
             $('#line-chart').highcharts({
                 title: {
                     text: 'Line Chart'
@@ -127,7 +145,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
 
             $('#pie-chart').highcharts({
                 title: {
-                    text: 'Pie Chart'
+                    text: 'Assignment Breakdown'
                 },
                 plotOptions: {
                     pie: {
@@ -141,12 +159,6 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                             }
                         }
                     }
-                },
-                yAxis: {
-                    labels: {
-                        enabled: true
-                    },
-                    categories: assignmentCategories
                 },
                 series: [{
                     type: 'pie',
@@ -171,21 +183,41 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                         }
                     }
                 },
-                yAxis: {
-                    labels: {
-                        enabled: true
-                    },
-                    categories: statusCategories
-                },
                 series: [{
                     type: 'pie',
                     data: getPriorityBreakdown(filteredBugList)
                 }]
             });
 
+
             $('#path-pie-chart').highcharts({
                 title: {
                     text: 'Path Breakdown'
+                 },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    data: getPathBreakdown(filteredBugList)
+                  }]
+            });
+
+            //pie-chart for bug status
+            $('#pie-bug-stats').highcharts({
+                title: {
+                    text: 'Bug Status'
+
                 },
                 plotOptions: {
                     pie: {
@@ -200,15 +232,9 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                         }
                     }
                 },
-                yAxis: {
-                    labels: {
-                        enabled: true
-                    },
-                    categories: pathCategories
-                },
                 series: [{
                     type: 'pie',
-                    data: getPathBreakdown(filteredBugList)
+                    data: getStatusCounts(filteredBugList)
                 }]
             });
         })
