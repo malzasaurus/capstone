@@ -27,6 +27,14 @@ module.exports = function(db) {
                 ]
             }
         },
+         difficulty: {
+            type: Sequelize.INTEGER,
+            validate: {
+                isIn: [
+                    [1, 2, 3, 4, 5]
+                ]
+            }
+        },
         assignment: {
             type: Sequelize.STRING,
             defaultValue: "unassigned"
