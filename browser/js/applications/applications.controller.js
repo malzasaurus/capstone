@@ -56,7 +56,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 }
                 return arr;
             }
-          
+
             function getPersonWorking(bugsData) {
                 var assignmentName = {};
                 for (var i = 0; i < bugsData.length; i++) {
@@ -113,6 +113,40 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 }
                 return finalArray;
             }
+
+            //get array of assignments and filter out 'unassigned'
+            function getAssignmentList(filteredBugList) {
+                var assignmentList = [];
+                for (var i = 0; i < filteredBugList.length; i++) {
+                    if ((assignmentList.indexOf(filteredBugList[i].assignment) < 0) && (filteredBugList[i].assignment !== 'unassigned')) {
+                        assignmentList.push(filteredBugList[i].assignment)
+                    }
+                }
+                return assignmentList;
+            }
+            // console.log("filtered bug listing,", filteredBugList)
+            // console.log("Assignment List", getAssignmentList(filteredBugList))
+
+            //get difficulty weight per person
+            function dataPerPerson(filteredBugList, difficulty) {
+                var assignmentList = getAssignmentList(filteredBugList);
+                var difficultyArray = [];
+                for (var i = 0; i < assignmentList.length; i++) {
+                    var diffCount = 0;
+                    for (var j = 0; j < filteredBugList.length; j++) {
+                        if ((assignmentList[i] === filteredBugList[j].assignment) && (filteredBugList[j].difficulty === difficulty)) {
+                            diffCount++
+                        }
+                    }
+                    var diffWeight = diffCount * difficulty
+                    difficultyArray.push(diffWeight)
+                }
+                return difficultyArray
+            }
+            // console.log(sumPerPerson(filteredBugList))
+
+            console.log("diff arrays", dataPerPerson(filteredBugList, 1))
+
 
             $('#line-chart').highcharts({
                 title: {
@@ -193,7 +227,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
             $('#path-pie-chart').highcharts({
                 title: {
                     text: 'Path Breakdown'
-                 },
+                },
                 plotOptions: {
                     pie: {
                         allowPointSelect: true,
@@ -210,7 +244,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 series: [{
                     type: 'pie',
                     data: getPathBreakdown(filteredBugList)
-                  }]
+                }]
             });
 
             //pie-chart for bug status
@@ -237,6 +271,80 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                     data: getStatusCounts(filteredBugList)
                 }]
             });
+
+            //stacked bar/column for workload
+            $('#workload-chart').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Assignment & Difficulty'
+                },
+                xAxis: {
+                    title: {
+                        text: 'Developer Assigned'
+                    },
+                    categories: getAssignmentList(filteredBugList)
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Difficulty Weight'
+                    },
+                    stackLabels: {
+                        enabled: true,
+                        style: {
+                            fontWeight: 'bold',
+                            color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                        }
+                    }
+                },
+                legend: {
+                    align: 'right',
+                    x: -30,
+                    verticalAlign: 'top',
+                    y: 25,
+                    floating: true,
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+                    borderColor: '#CCC',
+                    borderWidth: 1,
+                    shadow: false
+                },
+                tooltip: {
+                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+                    shared: true
+                },
+                plotOptions: {
+                    column: {
+                        //stacking percent at the moment, can be set to normal
+                        stacking: 'percent',
+                        dataLabels: {
+                            enabled: false,
+                            color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                            style: {
+                                textShadow: '0 0 3px black'
+                            }
+                        }
+                    }
+                },
+                // colors: ['#27DBC3', '#DB273F', '#99DB27', '#6927DB', '#F2D218'],
+                series: [{
+                    name: 'Difficulty 1',
+                    data: dataPerPerson(filteredBugList, 1)
+                }, {
+                    name: 'Difficulty 2',
+                    data: dataPerPerson(filteredBugList, 2)
+                }, {
+                    name: 'Difficulty 3',
+                    data: dataPerPerson(filteredBugList, 3)
+                }, {
+                    name: 'Difficulty 4',
+                    data: dataPerPerson(filteredBugList, 4)
+                }, {
+                    name: 'Difficulty 5',
+                    data: dataPerPerson(filteredBugList, 5)
+                }]
+            })
         })
         .catch(function(err) {
             console.error(err);
