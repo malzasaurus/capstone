@@ -38,6 +38,28 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
             }
             var statusCategories = Object.keys(getPriorityBreakdown(filteredBugList));
 
+            function getPathBreakdown(filteredBugList) {
+                var pathObj = {};
+                for (var i = 0; i < filteredBugList.length; i++) {
+                    if (!pathObj[filteredBugList[i].pathName]) {
+                        pathObj[filteredBugList[i].pathName] = 1;
+                    } else {
+                        pathObj[filteredBugList[i].pathName]++;
+                    }
+                }
+
+                var arr = [];
+                for (var key in pathObj) {
+                    if (pathObj.hasOwnProperty(key)) {
+                        var tempArray = [key, pathObj[key]];
+                        arr.push(tempArray);
+                    }
+                }
+                return arr;
+            }
+            var pathCategories = Object.keys(getPathBreakdown(filteredBugList));
+
+
             function getPersonWorking(bugsData) {
                 var assignmentName = {};
                 for (var i = 0; i < bugsData.length; i++) {
@@ -158,6 +180,35 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 series: [{
                     type: 'pie',
                     data: getPriorityBreakdown(filteredBugList)
+                }]
+            });
+
+            $('#path-pie-chart').highcharts({
+                title: {
+                    text: 'Path Breakdown'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                yAxis: {
+                    labels: {
+                        enabled: true
+                    },
+                    categories: pathCategories
+                },
+                series: [{
+                    type: 'pie',
+                    data: getPathBreakdown(filteredBugList)
                 }]
             });
         })
