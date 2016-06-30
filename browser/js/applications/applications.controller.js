@@ -8,6 +8,35 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
 
     AppFactory.fetchAllBugs(appData.id)
         .then(function(bugsData) {
+            function filterBugs(obj){
+                if(obj.status !== "resolved"){
+                    return true
+                } else{
+                    return false;
+                }
+            }
+            var filteredBugList = bugsData.filter(filterBugs)
+
+            function getPriorityBreakdown(filteredBugList) {
+                var priorityObj = {};
+                for (var i = 0; i < filteredBugList.length; i++) {
+                    if (!priorityObj[filteredBugList[i].priority]) {
+                        priorityObj[filteredBugList[i].priority] = 1;
+                    } else {
+                        priorityObj[filteredBugList[i].priority]++;
+                    }
+                }
+
+                var arr = [];
+                for (var key in priorityObj) {
+                    if (priorityObj.hasOwnProperty(key)) {
+                        var tempArray = [key, priorityObj[key]];
+                        arr.push(tempArray);
+                    }
+                }
+                return arr;
+            }
+            var statusCategories = Object.keys(getPriorityBreakdown(filteredBugList));
 
             function getPersonWorking(bugsData) {
                 var assignmentName = {};
@@ -100,6 +129,35 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 series: [{
                     type: 'pie',
                     data: getPersonWorking(bugsData)
+                }]
+            });
+
+            $('#priority-pie-chart').highcharts({
+                title: {
+                    text: 'Priority Breakdown'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                yAxis: {
+                    labels: {
+                        enabled: true
+                    },
+                    categories: statusCategories
+                },
+                series: [{
+                    type: 'pie',
+                    data: getPriorityBreakdown(filteredBugList)
                 }]
             });
         })
