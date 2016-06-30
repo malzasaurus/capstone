@@ -8,6 +8,59 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
 
     AppFactory.fetchAllBugs(appData.id)
         .then(function(bugsData) {
+
+            console.log('this the bugs data: ', bugsData);
+//area chart functions
+//2016-06-29 13:09:14.53-04
+            function getReportedBugDate(bugsData, interval) {
+                var intervalSlice = 13;
+                var intervalStr = ':00';
+                if(interval === 'day'){
+                    intervalSlice = 10;
+                    intervalStr = '';
+                }
+                var assignmentName = {};
+                for (var i = 0; i < bugsData.length; i++) {
+                    if (!assignmentName[bugsData[i].createdAt.slice(0,intervalSlice)+intervalStr]) {
+                        assignmentName[bugsData[i].createdAt.slice(0,intervalSlice)+intervalStr] = 1;
+                    } else {
+                        assignmentName[bugsData[i].createdAt.slice(0,intervalSlice)+intervalStr]++;
+                    }
+                }
+                console.log('our date obj is: ', assignmentName);
+                var arr = [];
+                for (var key in assignmentName) {
+                    if (assignmentName.hasOwnProperty(key)) {
+                        var tempArray = [new Date(key)*1, assignmentName[key]];
+                        arr.push(tempArray);
+                    }
+                }
+                
+                 function Comparator(a, b) {
+                   if (a[0] < b[0]) return -1;
+                   if (a[0] > b[0]) return 1;
+                   return 0;
+                 }
+
+                 arr = arr.sort(Comparator);
+                 return arr;
+
+            }
+
+            $log.warn("getReportedBugDate is: ", getReportedBugDate(bugsData));
+            var dateCategories = Object.keys(getReportedBugDate(bugsData));
+            console.log('the first date categories are :', dateCategories);
+            function formattedCategories(dateCategories){
+                return dateCategories.forEach(function(elem){
+                    return elem.slice(0,10);
+                });
+            }
+            console.log('the date categories are: ', formattedCategories(dateCategories))
+
+///end of area chart functions
+
+
+
             function filterBugs(obj) {
                 if (obj.status !== "resolved") {
                     return true
@@ -82,16 +135,16 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
             var assignmentCategories = Object.keys(getPersonWorking(bugsData));
             $log.warn("assignmentCategories is type: ", Array.isArray(assignmentCategories));
 
-            var assignmentCount = function(bugsData) {
-                var countArray = [];
-                for (var key in getPersonWorking(bugsData)) {
-                    countArray.push(getPersonWorking(bugsData)[key]);
-                }
-                return countArray;
-            };
+            // var assignmentCount = function(bugsData) {
+            //     var countArray = [];
+            //     for (var key in getPersonWorking(bugsData)) {
+            //         countArray.push(getPersonWorking(bugsData)[key]);
+            //     }
+            //     return countArray;
+            // };
 
-            $log.warn("assignmentCount is: ", assignmentCount(bugsData));
-            $log.warn("assignmentCount type: ", typeof assignmentCount(bugsData)[1]);
+            // $log.warn("assignmentCount is: ", assignmentCount(bugsData));
+            // $log.warn("assignmentCount type: ", typeof assignmentCount(bugsData)[1]);
 
             //get buglist array of individual bug arrays with status and count
             function getStatusCounts(filteredBugList) {
@@ -166,6 +219,49 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 }]
             });
 
+            $('#spline-chart-time').highcharts({
+                chart: {
+                    type: 'spline'
+                },
+                title: {
+                    text: 'Bugs per Day'
+                },
+                xAxis: {
+                    type: 'datetime',
+                    dateTimeLabelFormats: { // don't display the dummy year
+                        month: '%e. %b',
+                        day:"%A, %b %e, %Y"
+                    },
+                    title: {
+                        text: 'Date'
+                    },
+                    min: new Date() - 1000 * 60 * 60 * 24 * 8
+                },
+                yAxis: {
+                    title: {
+                        text: 'Number of Bugs'
+                    },
+                    min: 0
+                },
+                tooltip: {
+                    pointFormat: '{point.y} reported'
+                },
+                plotOptions: {
+                    spline: {
+                        marker: {
+                            enabled: true
+                                                    }
+                    }
+                },
+
+                series: [{
+                    name: 'Bug Tracker',
+                    data: getReportedBugDate(bugsData, 'day')
+                }]
+
+
+
+            }); //end of area chart
             $('#priority-pie-chart').highcharts({
                 title: {
                     text: 'Priority Breakdown'
