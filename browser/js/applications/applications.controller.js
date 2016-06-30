@@ -8,10 +8,10 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
 
     AppFactory.fetchAllBugs(appData.id)
         .then(function(bugsData) {
-            function filterBugs(obj){
-                if(obj.status !== "resolved"){
+            function filterBugs(obj) {
+                if (obj.status !== "resolved") {
                     return true
-                } else{
+                } else {
                     return false;
                 }
             }
@@ -73,6 +73,27 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
 
             $log.warn("assignmentCount is: ", assignmentCount(bugsData));
             $log.warn("assignmentCount type: ", typeof assignmentCount(bugsData)[1]);
+
+            //get buglist array of individual bug arrays with status and count
+            function getStatusCounts(filteredBugList) {
+                var statusCount = {};
+                for (var i = 0; i < filteredBugList.length; i++) {
+                    if (!statusCount[filteredBugList[i].status]) {
+                        statusCount[filteredBugList[i].status] = 1;
+                    } else {
+                        statusCount[filteredBugList[i].status]++;
+                    }
+                }
+
+                var finalArray = [];
+                for (var key in statusCount) {
+                    if (statusCount.hasOwnProperty(key)) {
+                        var tempArray = [key, statusCount[key]];
+                        finalArray.push(tempArray)
+                    }
+                }
+                return finalArray;
+            }
 
             $('#line-chart').highcharts({
                 title: {
@@ -158,6 +179,30 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 series: [{
                     type: 'pie',
                     data: getPriorityBreakdown(filteredBugList)
+                }]
+            });
+
+            //pie-chart for bug status
+            $('#pie-bug-stats').highcharts({
+                title: {
+                    text: 'Bug Status'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    data: getStatusCounts(filteredBugList)
                 }]
             });
         })
