@@ -140,7 +140,7 @@ router.post('/:id/users', function(req, res, next){
 		var foundApp =foundData[0];
 		var foundUser = foundData[1];
 		if(foundUser){ //if found setApplications to the appID
-			foundUser.setApplications([foundApp])
+			foundApp.addUser(foundUser, {accessLevel: level})
 			.then(function(updatedUser){
 				res.status(201).send(updatedUser); //check status code
 			});
