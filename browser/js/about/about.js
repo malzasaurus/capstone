@@ -11,73 +11,128 @@ app.config(function($stateProvider) {
 
 app.controller('AboutController', function($scope, $log, $http, $routeParams, $location, FullstackPics, AboutFactory) {
 
-    // Images of beautiful Fullstack people.
-    $scope.images = _.shuffle(FullstackPics);
-
-    // $scope.appId = $location.path().split("/").unshift();
-    $scope.appId = 2;
-    $scope.dataSource = 'http://localhost:1337/api/applications/' + $scope.appId + '/bugs';
-
-
     AboutFactory.requestData()
         .then(function(bugsData) {
-    
+
+            function getPersonWorking(bugsData) {
+                var assignmentName = {};
+                $log.info('bugsData you know', bugsData);
+                for (var i = 0; i < bugsData.length; i++) {
+                    if (!assignmentName[bugsData[i].assignment]) {
+                        assignmentName[bugsData[i].assignment] = 1;
+                    } else {
+                        assignmentName[bugsData[i].assignment]++;
+                    }
+                }
+                return assignmentName;
+            }
+
+            $log.warn("getPersonWorking is: ", getPersonWorking(bugsData));
+
+            var assignmentCategories = Object.keys(getPersonWorking(bugsData));
+            $log.warn("assignmentCategories is type: ", Array.isArray(assignmentCategories));
+
+            var assignmentCount = function(bugsData) {
+                var countArray = [];
+                for (var key in getPersonWorking(bugsData)) {
+                    countArray.push(getPersonWorking(bugsData)[key]);
+                }
+                return countArray;
+            };
+
+            $log.warn("assignmentCount is: ", assignmentCount(bugsData));
+            $log.warn("assignmentCount type: ", typeof assignmentCount(bugsData)[1]);
+
+
+
             $('#line-chart').highcharts({
-                  title: {
+                title: {
                     text: 'Line Chart'
                 },
                 xAxis: {
                     categories: []
                 },
                 series: [{
-                    data: bugsData.map(function(obj){
-                        console.log("obj.id looks like: ", obj.id);
+                    data: bugsData.map(function(obj) {
+                        // console.log("obj.id looks like: ", obj.id);
                         return obj.id;
-                    })                        
+                    })
                 }]
             });
 
-              $('#bar-chart').highcharts({
-                  title: {
+            $('#bar-chart').highcharts({
+                title: {
                     text: 'Bar Chart'
                 },
                 xAxis: {
-                    categories: ['Apples', 'Bananas', 'Oranges']
+                    categories: ['Nichole', 'Danielle', 'Ashley', 'Mallory']
                 },
                 series: [{
                     type: 'bar',
-                    data: bugsData.map(function(obj){
-                        console.log("obj.id looks like: ", obj.id);
+                    data: bugsData.map(function(obj) {
+                        // console.log("obj.id looks like: ", obj.id);
                         return obj.id;
                     })
-                    //[1, 2, 3]
-                        
+
+
                 }]
             });
 
-                 $('#pie-chart').highcharts({
-                  title: {
+            $('#pie-chart').highcharts({
+                title: {
                     text: 'Pie Chart'
                 },
-                xAxis: {
-                    categories: ['Apples', 'Bananas', 'Oranges']
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                yAxis: {
+                    labels: {
+                        enabled: true
+                    },
+                    categories: assignmentCategories
                 },
                 series: [{
                     type: 'pie',
-                    data: bugsData.map(function(obj){
-                        console.log("obj.id looks like: ", obj.id);
-                        return obj.id;
-                    })                        
+                    data: [
+                        ['Firefox', 45],
+                        ['IE', 26.8],
+                        ['Safari', 8.5],
+                        ['Opera', 6.2],
+                        ['Others', 0.7]
+                    ],
+                    //data: assignmentCount(bugsData)
+                    // data: [
+                    //     {
+                    //         name: weGotTheNames(),
+                    //         y: weGotTheNamesValues()
+                    //     }, {
+                    //         name: "Danielle", 
+                    //         y: 4                          
+                    //     },
+                    //     { 
+                    //         name: "Ashley", 
+                    //         y: 2 
+                    //     }
+                    // ]
                 }]
             });
-           
         })
         .catch(function(err) {
             console.error(err);
         });
 
-});
 
+});
 // app.directive('chartData', function() {
 //     return {
 //         restrict: 'E',
