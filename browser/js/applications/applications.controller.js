@@ -8,6 +8,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
 
     AppFactory.fetchAllBugs(appData.id)
         .then(function(bugsData) {
+
             console.log('this the bugs data: ', bugsData);
 //area chart functions
 //2016-06-29 13:09:14.53-04
@@ -60,6 +61,55 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
 
 
 
+            function filterBugs(obj) {
+                if (obj.status !== "resolved") {
+                    return true
+                } else {
+                    return false;
+                }
+            }
+            var filteredBugList = bugsData.filter(filterBugs)
+
+            function getPriorityBreakdown(filteredBugList) {
+                var priorityObj = {};
+                for (var i = 0; i < filteredBugList.length; i++) {
+                    if (!priorityObj[filteredBugList[i].priority]) {
+                        priorityObj[filteredBugList[i].priority] = 1;
+                    } else {
+                        priorityObj[filteredBugList[i].priority]++;
+                    }
+                }
+
+                var arr = [];
+                for (var key in priorityObj) {
+                    if (priorityObj.hasOwnProperty(key)) {
+                        var tempArray = [key, priorityObj[key]];
+                        arr.push(tempArray);
+                    }
+                }
+                return arr;
+            }
+
+            function getPathBreakdown(filteredBugList) {
+                var pathObj = {};
+                for (var i = 0; i < filteredBugList.length; i++) {
+                    if (!pathObj[filteredBugList[i].pathName]) {
+                        pathObj[filteredBugList[i].pathName] = 1;
+                    } else {
+                        pathObj[filteredBugList[i].pathName]++;
+                    }
+                }
+
+                var arr = [];
+                for (var key in pathObj) {
+                    if (pathObj.hasOwnProperty(key)) {
+                        var tempArray = [key, pathObj[key]];
+                        arr.push(tempArray);
+                    }
+                }
+                return arr;
+            }
+          
             function getPersonWorking(bugsData) {
                 var assignmentName = {};
                 for (var i = 0; i < bugsData.length; i++) {
@@ -96,6 +146,27 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
             // $log.warn("assignmentCount is: ", assignmentCount(bugsData));
             // $log.warn("assignmentCount type: ", typeof assignmentCount(bugsData)[1]);
 
+            //get buglist array of individual bug arrays with status and count
+            function getStatusCounts(filteredBugList) {
+                var statusCount = {};
+                for (var i = 0; i < filteredBugList.length; i++) {
+                    if (!statusCount[filteredBugList[i].status]) {
+                        statusCount[filteredBugList[i].status] = 1;
+                    } else {
+                        statusCount[filteredBugList[i].status]++;
+                    }
+                }
+
+                var finalArray = [];
+                for (var key in statusCount) {
+                    if (statusCount.hasOwnProperty(key)) {
+                        var tempArray = [key, statusCount[key]];
+                        finalArray.push(tempArray)
+                    }
+                }
+                return finalArray;
+            }
+
             $('#line-chart').highcharts({
                 title: {
                     text: 'Line Chart'
@@ -127,7 +198,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
 
             $('#pie-chart').highcharts({
                 title: {
-                    text: 'Pie Chart'
+                    text: 'Assignment Breakdown'
                 },
                 plotOptions: {
                     pie: {
@@ -141,12 +212,6 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                             }
                         }
                     }
-                },
-                yAxis: {
-                    labels: {
-                        enabled: true
-                    },
-                    categories: assignmentCategories
                 },
                 series: [{
                     type: 'pie',
@@ -185,14 +250,89 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                     spline: {
                         marker: {
                             enabled: true
-                        }
+                                                    }
                     }
                 },
+
                 series: [{
                     name: 'Bug Tracker',
                     data: getReportedBugDate(bugsData, 'day')
                 }]
+
+
+
             }); //end of area chart
+            $('#priority-pie-chart').highcharts({
+                title: {
+                    text: 'Priority Breakdown'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    data: getPriorityBreakdown(filteredBugList)
+                }]
+            });
+
+
+            $('#path-pie-chart').highcharts({
+                title: {
+                    text: 'Path Breakdown'
+                 },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    data: getPathBreakdown(filteredBugList)
+                  }]
+            });
+
+            //pie-chart for bug status
+            $('#pie-bug-stats').highcharts({
+                title: {
+                    text: 'Bug Status'
+
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    data: getStatusCounts(filteredBugList)
+                }]
+            });
         })
         .catch(function(err) {
             console.error(err);
