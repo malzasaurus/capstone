@@ -48,12 +48,13 @@ app.controller('DetailsCtrl', function($scope, bugDetails, allUsers, DetailsFact
     $scope.statuses = [{name: "new"}, {name: "in-progress"}, {name: "resolved"}]
     $scope.assignments = allUsers;
     $scope.difficulties = [{name: 1}, {name: 2}, {name: 3}, {name: 4}, {name: 5}]
-    $scope.update = function(selectedPriority, selectedAssignment, selectedStatus, selectedDifficulty){ 
+    $scope.update = function(selectedPriority, selectedAssignment, selectedStatus, selectedDifficulty, devComments){ 
         var updates = {
             priority: selectedPriority,
             assignment: selectedAssignment,
             status: selectedStatus,
-            difficulty: selectedDifficulty
+            difficulty: selectedDifficulty,
+            devComments: devComments
         }
         DetailsFactory.updateBug(null, null, updates)
         .then(function(updatedBug){

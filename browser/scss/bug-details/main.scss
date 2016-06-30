@@ -14,29 +14,14 @@
     margin: 0 auto;  
     }
 }
-   
-#details {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    
 
-     .section {
-        width: 50%;
-        padding: 20px;
-        display: inline;
-        float: right;
-        p {
-            text-align: center;
-        }
-    }
-    
-    h3,
-    h4 {
+.section {
+    width: 50%;
+    padding: 20px;
+    display: inline;
+    float: right;
+    p {
         text-align: center;
     }
-    #developer-assignment {
-        display: flex;
-        justify-content: space-between;
-    }
 }
+

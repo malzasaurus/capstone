@@ -8,23 +8,15 @@
    
         <img height="300" width="500" data-ng-src="{{bugDetails.img_val}}"/>
     </div>
-    <div id="details">
-        
+    <div class="section">
         <!-- comments -->
-        <div id="commentary-section" class="section">
+        <div id="commentary-section">
             <h3>Report Information</h3>
             <div id="comments">
-                <h4>Comments</h4>
-                <!-- 	reporter's comments -->
-                <div id="report-comments" class="text">
-                    <h5>Reporter</h5>
-                    <p>{{ bugDetails.formComments }}</p>
-                </div>
-                <!-- 	developer's comments -->
-                <div id="developer-comments" class="text">
-                    <h5>Developer</h5>
-                    <p></p>
-                </div>
+                <h5>Developer Comments</h5>
+                <textarea rows="4" cols="50" name="devComments" ng-model="devComments"></textarea>
+                <!-- <input type="text" name="devComments" ng-model="devComments"> -->
+            </div>
             </div>
             <div id="developer-assignment">
                 <div id="bug-priority">
@@ -43,13 +35,17 @@
                     <h5>Difficulty</h5>
                     <select name="difficulty" id="difficulty"  ng-options="difficulty.name for difficulty in difficulties" ng-model="selectedDifficulty"></select>
                 </div>
-                <button type="submit" ng-click="update(selectedPriority.name, selectedAssignment.email, selectedStatus.name, selectedDifficulty.name)">Update</button>
+                <button type="submit" ng-click="update(selectedPriority.name, selectedAssignment.email, selectedStatus.name, selectedDifficulty.name, devComments)">Update</button>
             </div>
         </div>
         <!-- report stats -->
-        <div id="stats-section" class="section">
+        <div class="section">
             <h3>Report Statistics</h3>
             <div id="report-stats">
+                <h5>Reporter Comments</h5>
+                <p>{{ bugDetails.formComments }}</p>
+                <h5>Developer Comments</h5>
+                <p>{{ bugDetails.devComments }}</p>
                 <h5>Browser:</h5>
                 <p>{{ bugDetails.browser }}</p>
                 <h5>Browser Version:</h5>
