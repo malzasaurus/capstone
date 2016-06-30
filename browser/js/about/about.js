@@ -33,7 +33,7 @@ app.controller('AboutController', function($scope, $log, $http, $routeParams, $l
                         arr.push(tempArray);
                     }
                 }
-                //console.log("arrrrrrrr you gonna work? ",arr);
+                //console.log("arrrrrrrr you gonna work? ", arr);
                 return arr;
                 
             }
