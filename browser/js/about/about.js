@@ -16,7 +16,6 @@ app.controller('AboutController', function($scope, $log, $http, $routeParams, $l
 
             function getPersonWorking(bugsData) {
                 var assignmentName = {};
-                $log.info('bugsData you know', bugsData);
                 for (var i = 0; i < bugsData.length; i++) {
                     if (!assignmentName[bugsData[i].assignment]) {
                         assignmentName[bugsData[i].assignment] = 1;
@@ -24,7 +23,19 @@ app.controller('AboutController', function($scope, $log, $http, $routeParams, $l
                         assignmentName[bugsData[i].assignment]++;
                     }
                 }
-                return assignmentName;
+                //return assignmentName;
+
+                
+                var arr = [];
+                for (var key in assignmentName) {
+                    if (assignmentName.hasOwnProperty(key)) {
+                        var tempArray = [key, assignmentName[key]];
+                        arr.push(tempArray);
+                    }
+                }
+                //console.log("arrrrrrrr you gonna work? ",arr);
+                return arr;
+                
             }
 
             $log.warn("getPersonWorking is: ", getPersonWorking(bugsData));
@@ -103,13 +114,15 @@ app.controller('AboutController', function($scope, $log, $http, $routeParams, $l
                 },
                 series: [{
                     type: 'pie',
-                    data: [
-                        ['Firefox', 45],
-                        ['IE', 26.8],
-                        ['Safari', 8.5],
-                        ['Opera', 6.2],
-                        ['Others', 0.7]
-                    ],
+                    data: getPersonWorking(bugsData)
+                    //[
+
+                        // ['Firefox', 45],
+                        // ['IE', 26.8],
+                        // ['Safari', 8.5],
+                        // ['Opera', 6.2],
+                        // ['Others', 0.7]
+                    //],
                     //data: assignmentCount(bugsData)
                     // data: [
                     //     {
