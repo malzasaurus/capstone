@@ -39,7 +39,11 @@
                     <h5>Status</h5>
                     <select name="status" id="status"  ng-options="status.name for status in statuses" ng-model="selectedStatus"></select>
                 </div>
-                <button type="submit" ng-click="update(selectedPriority.name, selectedAssignment.email, selectedStatus.name)">Update</button>
+                 <div id="difficulty">
+                    <h5>Difficulty</h5>
+                    <select name="difficulty" id="difficulty"  ng-options="difficulty.name for difficulty in difficulties" ng-model="selectedDifficulty"></select>
+                </div>
+                <button type="submit" ng-click="update(selectedPriority.name, selectedAssignment.email, selectedStatus.name, selectedDifficulty.name)">Update</button>
             </div>
         </div>
         <!-- report stats -->
@@ -72,6 +76,8 @@
                 <p>{{ bugDetails.status }}</p>
                 <h5>Assignment:</h5>
                 <p>{{ bugDetails.assignment }}</p>
+                <h5>Difficulty Level:</h5>
+                <p>{{ bugDetails.difficulty }}</p>
             </div>
         </div>
     </div>
