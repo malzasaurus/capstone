@@ -167,6 +167,28 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 }
                 return finalArray;
             }
+            console.log('the get status counts looks like this: ', getStatusCounts(filteredBugList));
+            //[['in-progress', 4],['resolved', 4],['new', 4]]
+            // function getStatusCounts(filteredBugList) {
+            //     var statusCount = {};
+            //     for (var i = 0; i < filteredBugList.length; i++) {
+            //         if (!statusCount[filteredBugList[i].status]) {
+            //             statusCount[filteredBugList[i].status] = 1;
+            //         } else {
+            //             statusCount[filteredBugList[i].status]++;
+            //         }
+            //     }
+
+            //     var finalArray = [];
+            //     for (var key in statusCount) {
+            //         if (statusCount.hasOwnProperty(key)) {
+            //             var tempArray = [key, statusCount[key]];
+            //             finalArray.push(tempArray)
+            //         }
+            //     }
+            //     return finalArray;
+            // }
+
 
             //get array of assignments and filter out 'unassigned'
             function getAssignmentList(filteredBugList) {
@@ -198,9 +220,31 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 return difficultyArray
             }
             // console.log(sumPerPerson(filteredBugList))
-
-            console.log("diff arrays", dataPerPerson(filteredBugList, 1))
-
+            function bugAgeCategories(listOfBugs, priorityLvl) {
+                var ageArray = [0, 0, 0, 0];
+                var currentTime = new Date() * 1;
+                var oneDay = 1000 * 60 * 60 * 24;
+                for (var i = 0; i < listOfBugs.length; i++) { //loop through each bug in listOfBugs
+                    if (listOfBugs[i].priority === priorityLvl) { //if the priority property ====  priorityLvl
+                        var createdTime = new Date(listOfBugs[i].createdAt) * 1;
+                        var age = currentTime - createdTime;
+                        //categorize age and push to appropirate index in ageArray
+                        if (age <= oneDay * 2) {
+                            ageArray[0]++;
+                        }
+                        if (age > oneDay * 2 && age <= oneDay * 5) {
+                            ageArray[1]++;
+                        }
+                        if (age > oneDay * 5 && age <= oneDay * 10) {
+                            ageArray[2]++;
+                        }
+                        if (age > oneDay * 10) {
+                            ageArray[3]++;
+                        }
+                    }
+                }
+                return ageArray;
+            }
 
             $('#line-chart').highcharts({
                 chart: {
@@ -460,7 +504,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 plotOptions: {
                     column: {
                         //stacking percent at the moment, can be set to normal
-                        stacking: 'percent',
+                        stacking: 'normal',
                         dataLabels: {
                             enabled: false,
                             color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
@@ -487,7 +531,93 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                     name: 'Difficulty 5',
                     data: dataPerPerson(filteredBugList, 5)
                 }]
-            })
+            });
+
+            $('#col-chart-age').highcharts({
+                chart: {
+                    type: 'column',
+                    spacingTop: 15,
+                    marginTop: 90
+                },
+                title: {
+                    text: 'Age of Bugs',
+                },
+                xAxis: {
+                    title: {
+                        text: 'Age of Bug',
+                        style: {
+                            fontWeight: 'bold',
+                            fontSize: '15px'
+                        }
+                    },
+                    categories: ['< 2 Days', '2-5 Days', '6-10 Days', '> 10 Days'],
+                    labels: {
+                        style: {
+                            fontSize: '13px'
+                        }
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Number of Bugs',
+                        style: {
+                            fontWeight: 'bold',
+                            fontSize: '15px'
+                        }
+                    },
+                    stackLabels: {
+                        enabled: true,
+                        style: {
+                            fontWeight: 'bold',
+                            color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                        }
+                    }
+                },
+                legend: {
+                    align: 'right',
+                    x: -30,
+                    verticalAlign: 'top',
+                    y: 25,
+                    floating: true,
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+                    borderColor: '#CCC',
+                    borderWidth: 1,
+                    shadow: false
+                },
+                tooltip: {
+                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+                    shared: true
+                },
+                plotOptions: {
+                    column: {
+                        stacking: 'normal',
+                        dataLabels: {
+                            enabled: false,
+                            color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                            style: {
+                                textShadow: '0 0 3px black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Blocker',
+                    data: bugAgeCategories(filteredBugList, 'blocker')
+                }, {
+                    name: 'Critical',
+                    data: bugAgeCategories(filteredBugList, 'critical')
+                }, {
+                    name: 'Major',
+                    data: bugAgeCategories(filteredBugList, 'major')
+                }, {
+                    name: 'Minor',
+                    data: bugAgeCategories(filteredBugList, 'minor')
+                }, {
+                    name: 'Trivial',
+                    data: bugAgeCategories(filteredBugList, 'trivial')
+                }]
+            });
         })
         .catch(function(err) {
             console.error(err);
