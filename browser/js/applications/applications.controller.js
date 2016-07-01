@@ -498,9 +498,10 @@ app.controller('AllAppsCtrl', function($scope, allApps) {
     $scope.allApps = allApps;
 });
 
-app.controller('UsersCtrl', function($scope, allUsers, appData, AppFactory) {
+app.controller('UsersCtrl', function($scope, allUsers, appData, AppFactory, allApps) {
     $scope.allUsers = allUsers;
     $scope.appData = appData;
+    $scope.allApps = allApps;
     $scope.invite = function(userObj) {
         AppFactory.inviteUser(appData.id, userObj)
             .then(function(response) {

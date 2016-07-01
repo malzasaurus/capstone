@@ -27,6 +27,9 @@ app.config(function ($stateProvider) {
             },
             appData: function(AppFactory, $stateParams){
                 return AppFactory.fetchCurrentApp($stateParams.appID);
+            },
+             allApps: function(AppFactory){
+                return AppFactory.fetchAllApps();
             }
         }
     });
