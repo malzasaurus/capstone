@@ -1,4 +1,26 @@
 #application-form {
   width: 60%;
   margin: 0 auto;
+  border: 1px solid black;
+  padding: 3%;
+  h4 {
+  	font-weight: bold;
+  	text-align: center;
+  }
+  .form-group {
+  	border: 1px solid black;
+  	padding: 3%;
+  	label {
+  		font-weight: bold;
+  		color: black;
+  	}
+  }
+  .button {
+  	text-align: center;
+  	margin-top: 1%;
+  }
+  button {
+  	border: 1px solid black;
+  	border-radius: 5px;
+  }
 }

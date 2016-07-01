@@ -1,8 +1,7 @@
-navbar {
-
+nav {
   display: block;
   background: white;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid black !important;
   box-shadow: 1px 1px 14px -3px black;
 
   .container {
@@ -26,11 +25,10 @@ navbar {
     cursor: pointer;
     transition: color 0.2s;
     &.active {
-      color: darken(#f31214, 10%);
+      color: darken(#838785, 30%);
     }
     &:hover {
-      background: none;
-      color: #f31214;
+      color: #838785 !important;
     }
     &:focus {
       background: none;

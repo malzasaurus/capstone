@@ -2,11 +2,10 @@
     <div class="main-info">
         <h3>Bug #{{ bugDetails.id }}</h3>
     </div>
-
+    <bug-list bugList='bugList'></bug-list>
     <div id="screenshot-section" class="image-section">
-            <!-- screenshot of reported page -->
-   
-        <img height="300" width="500" data-ng-src="{{bugDetails.img_val}}"/>
+        <!-- screenshot of reported page -->
+        <img height="300" width="500" data-ng-src="{{bugDetails.img_val}}" />
     </div>
     <div class="section">
         <!-- comments -->
@@ -17,64 +16,64 @@
                 <textarea rows="4" cols="50" name="devComments" ng-model="devComments"></textarea>
                 <!-- <input type="text" name="devComments" ng-model="devComments"> -->
             </div>
-            </div>
-            <div id="developer-assignment">
-                <div id="bug-priority">
-                    <h5>Priority</h5>
-                    <select name="priority" id="priority"  ng-options="priority.name for priority in priorities" ng-model="selectedPriority"></select>
-                </div>
-                <div id="assignment">
-                    <h5>Assignment</h5>
-                    <select name="assignment" id="assignment"  ng-options="assignment.email for assignment in assignments" ng-model="selectedAssignment"></select>
-                </div>
-                <div id="status">
-                    <h5>Status</h5>
-                    <select name="status" id="status"  ng-options="status.name for status in statuses" ng-model="selectedStatus"></select>
-                </div>
-                 <div id="difficulty">
-                    <h5>Difficulty</h5>
-                    <select name="difficulty" id="difficulty"  ng-options="difficulty.name for difficulty in difficulties" ng-model="selectedDifficulty"></select>
-                </div>
-                <button type="submit" ng-click="update(selectedPriority.name, selectedAssignment.email, selectedStatus.name, selectedDifficulty.name, devComments)">Update</button>
-            </div>
         </div>
-        <!-- report stats -->
-        <div class="section">
-            <h3>Report Statistics</h3>
-            <div id="report-stats">
-                <h5>Reporter Comments</h5>
-                <p>{{ bugDetails.formComments }}</p>
-                <h5>Developer Comments</h5>
-                <p>{{ bugDetails.devComments }}</p>
-                <h5>Browser:</h5>
-                <p>{{ bugDetails.browser }}</p>
-                <h5>Browser Version:</h5>
-                <p>{{ bugDetails.browserVer }}</p>
-                <h5>Do Not Track:</h5>
-                <p>{{ bugDetails.doNotTrack }}</p>
-                <h5>Cookie Enabled:</h5>
-                <p>{{ bugDetails.cookieEnabled}}</p>
-                <h5>App Version:</h5>
-                <p>{{ bugDetails.appVersion }}</p>
-                <h5>Platform:</h5>
-                <p>{{ bugDetails.platform }}</p>
-                <h5>Host Name:</h5>
-                <p>{{ bugDetails.hostName }}</p>
-                <h5>Path Name:</h5>
-                <p>{{ bugDetails.pathName }}</p>
-                <h5>Href:</h5>
-                <p>{{ bugDetails.href }}</p>
-                <h5>Protocol:</h5>
-                <p>{{ bugDetails.protocol }}</p>
-                <h5>Priority:</h5>
-                <p>{{ bugDetails.priority }}</p>
-                <h5>Status:</h5>
-                <p>{{ bugDetails.status }}</p>
-                <h5>Assignment:</h5>
-                <p>{{ bugDetails.assignment }}</p>
-                <h5>Difficulty Level:</h5>
-                <p>{{ bugDetails.difficulty }}</p>
+        <div id="developer-assignment">
+            <div id="bug-priority">
+                <h5>Priority</h5>
+                <select name="priority" id="priority" ng-options="priority.name for priority in priorities" ng-model="selectedPriority"></select>
             </div>
+            <div id="assignment">
+                <h5>Assignment</h5>
+                <select name="assignment" id="assignment" ng-options="assignment.email for assignment in assignments" ng-model="selectedAssignment"></select>
+            </div>
+            <div id="status">
+                <h5>Status</h5>
+                <select name="status" id="status" ng-options="status.name for status in statuses" ng-model="selectedStatus"></select>
+            </div>
+            <div id="difficulty">
+                <h5>Difficulty</h5>
+                <select name="difficulty" id="difficulty" ng-options="difficulty.name for difficulty in difficulties" ng-model="selectedDifficulty"></select>
+            </div>
+            <button type="submit" ng-click="update(selectedPriority.name, selectedAssignment.email, selectedStatus.name, selectedDifficulty.name, devComments)">Update</button>
         </div>
     </div>
+    <!-- report stats -->
+    <div class="section">
+        <h3>Report Statistics</h3>
+        <div id="report-stats">
+            <h5>Reporter Comments</h5>
+            <p>{{ bugDetails.formComments }}</p>
+            <h5>Developer Comments</h5>
+            <p>{{ bugDetails.devComments }}</p>
+            <h5>Browser:</h5>
+            <p>{{ bugDetails.browser }}</p>
+            <h5>Browser Version:</h5>
+            <p>{{ bugDetails.browserVer }}</p>
+            <h5>Do Not Track:</h5>
+            <p>{{ bugDetails.doNotTrack }}</p>
+            <h5>Cookie Enabled:</h5>
+            <p>{{ bugDetails.cookieEnabled}}</p>
+            <h5>App Version:</h5>
+            <p>{{ bugDetails.appVersion }}</p>
+            <h5>Platform:</h5>
+            <p>{{ bugDetails.platform }}</p>
+            <h5>Host Name:</h5>
+            <p>{{ bugDetails.hostName }}</p>
+            <h5>Path Name:</h5>
+            <p>{{ bugDetails.pathName }}</p>
+            <h5>Href:</h5>
+            <p>{{ bugDetails.href }}</p>
+            <h5>Protocol:</h5>
+            <p>{{ bugDetails.protocol }}</p>
+            <h5>Priority:</h5>
+            <p>{{ bugDetails.priority }}</p>
+            <h5>Status:</h5>
+            <p>{{ bugDetails.status }}</p>
+            <h5>Assignment:</h5>
+            <p>{{ bugDetails.assignment }}</p>
+            <h5>Difficulty Level:</h5>
+            <p>{{ bugDetails.difficulty }}</p>
+        </div>
+    </div>
+</div>
 </div>

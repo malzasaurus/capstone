@@ -4,22 +4,28 @@
 	width: 250px;
 	padding: 2px;
 	margin: 5px;
-	#bug-list {
+	h4 {
+		text-align: center;
+		font-weight: bold;
+	}
+	#select-status {
 		display: flex;
-		padding: 5px;
-		flex-direction: column;
-		justify-content: space-between;
-		align-content: space-between;
+		flex-direction: row;
+		padding-bottom: 3%;
+		h5, select {
+			margin: 0 auto;
+		}
+	}
+	#bug-list {
 		.bug-detail {
-			margin: 2px;
 			border: 1px solid black;
-			border-radius: 5px;
-			padding: 2px;
-			display: flex;
-			flex-wrap: nowrap;
-			flex-direction: column;
-			justify-content: flex-start;
-			height: 100px;
+			text-align: center;
+			h5 {
+				font-weight: bold;
+			}
+		}
+		.bug-detail:hover {
+			background-color: #C6F5DF;
 		}
 	}
 }

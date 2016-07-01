@@ -10,54 +10,55 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
         .then(function(bugsData) {
 
             console.log('this the bugs data: ', bugsData);
-//area chart functions
-//2016-06-29 13:09:14.53-04
+            //area chart functions
+            //2016-06-29 13:09:14.53-04
             function getReportedBugDate(bugsData, interval) {
                 var intervalSlice = 13;
                 var intervalStr = ':00';
-                if(interval === 'day'){
+                if (interval === 'day') {
                     intervalSlice = 10;
                     intervalStr = '';
                 }
                 var assignmentName = {};
                 for (var i = 0; i < bugsData.length; i++) {
-                    if (!assignmentName[bugsData[i].createdAt.slice(0,intervalSlice)+intervalStr]) {
-                        assignmentName[bugsData[i].createdAt.slice(0,intervalSlice)+intervalStr] = 1;
+                    if (!assignmentName[bugsData[i].createdAt.slice(0, intervalSlice) + intervalStr]) {
+                        assignmentName[bugsData[i].createdAt.slice(0, intervalSlice) + intervalStr] = 1;
                     } else {
-                        assignmentName[bugsData[i].createdAt.slice(0,intervalSlice)+intervalStr]++;
+                        assignmentName[bugsData[i].createdAt.slice(0, intervalSlice) + intervalStr]++;
                     }
                 }
                 console.log('our date obj is: ', assignmentName);
                 var arr = [];
                 for (var key in assignmentName) {
                     if (assignmentName.hasOwnProperty(key)) {
-                        var tempArray = [new Date(key)*1, assignmentName[key]];
+                        var tempArray = [new Date(key) * 1, assignmentName[key]];
                         arr.push(tempArray);
                     }
                 }
-                
-                 function Comparator(a, b) {
-                   if (a[0] < b[0]) return -1;
-                   if (a[0] > b[0]) return 1;
-                   return 0;
-                 }
 
-                 arr = arr.sort(Comparator);
-                 return arr;
+                function Comparator(a, b) {
+                    if (a[0] < b[0]) return -1;
+                    if (a[0] > b[0]) return 1;
+                    return 0;
+                }
+
+                arr = arr.sort(Comparator);
+                return arr;
 
             }
 
             $log.warn("getReportedBugDate is: ", getReportedBugDate(bugsData));
             var dateCategories = Object.keys(getReportedBugDate(bugsData));
             console.log('the first date categories are :', dateCategories);
-            function formattedCategories(dateCategories){
-                return dateCategories.forEach(function(elem){
-                    return elem.slice(0,10);
+
+            function formattedCategories(dateCategories) {
+                return dateCategories.forEach(function(elem) {
+                    return elem.slice(0, 10);
                 });
             }
             console.log('the date categories are: ', formattedCategories(dateCategories))
 
-///end of area chart functions
+            ///end of area chart functions
 
 
 
@@ -202,6 +203,9 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
 
 
             $('#line-chart').highcharts({
+                chart: {
+                    type: 'line'
+                },
                 title: {
                     text: 'Line Chart'
                 },
@@ -216,6 +220,9 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
             });
 
             $('#bar-chart').highcharts({
+                chart: {
+                    type: 'bar'
+                },
                 title: {
                     text: 'Bar Chart'
                 },
@@ -231,6 +238,9 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
             });
 
             $('#pie-chart').highcharts({
+                chart: {
+                    type: 'pie'
+                },
                 title: {
                     text: 'Assignment Breakdown'
                 },
@@ -264,16 +274,31 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                     type: 'datetime',
                     dateTimeLabelFormats: { // don't display the dummy year
                         month: '%e. %b',
-                        day:"%A, %b %e, %Y"
+                        day: "%A, %b %e, %Y"
+                    },
+                    labels: {
+                        rotation: -45,
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
                     },
                     title: {
-                        text: 'Date'
+                        text: 'Date',
+                        style: {
+                            fontWeight: 'bold',
+                            fontSize: '15px'
+                        }
                     },
                     min: new Date() - 1000 * 60 * 60 * 24 * 8
                 },
                 yAxis: {
                     title: {
-                        text: 'Number of Bugs'
+                        text: 'Number of Bugs',
+                        style: {
+                            fontWeight: 'bold',
+                            fontSize: '15px'
+                        }
                     },
                     min: 0
                 },
@@ -284,10 +309,9 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                     spline: {
                         marker: {
                             enabled: true
-                                                    }
+                        }
                     }
                 },
-
                 series: [{
                     name: 'Bug Tracker',
                     data: getReportedBugDate(bugsData, 'day')
@@ -297,6 +321,9 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
 
             }); //end of area chart
             $('#priority-pie-chart').highcharts({
+                chart: {
+                    type: 'pie'
+                },
                 title: {
                     text: 'Priority Breakdown'
                 },
@@ -321,6 +348,9 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
 
 
             $('#path-pie-chart').highcharts({
+                chart: {
+                    type: 'pie'
+                },
                 title: {
                     text: 'Path Breakdown'
                 },
@@ -345,9 +375,11 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
 
             //pie-chart for bug status
             $('#pie-bug-stats').highcharts({
+                chart: {
+                    type: 'pie'
+                },
                 title: {
                     text: 'Bug Status'
-
                 },
                 plotOptions: {
                     pie: {
@@ -371,21 +403,36 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
             //stacked bar/column for workload
             $('#workload-chart').highcharts({
                 chart: {
-                    type: 'column'
+                    type: 'column',
+                    spacingTop: 15,
+                    marginTop: 90
                 },
                 title: {
-                    text: 'Assignment & Difficulty'
+                    text: 'Assignment & Difficulty',
                 },
                 xAxis: {
                     title: {
-                        text: 'Developer Assigned'
+                        text: 'Developer Assigned',
+                        style: {
+                            fontWeight: 'bold',
+                            fontSize: '15px'
+                        }
                     },
-                    categories: getAssignmentList(filteredBugList)
+                    categories: getAssignmentList(filteredBugList),
+                    labels: {
+                        style: {
+                            fontSize: '13px'
+                        }
+                    }
                 },
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Difficulty Weight'
+                        text: 'Difficulty Weight',
+                        style: {
+                            fontWeight: 'bold',
+                            fontSize: '15px'
+                        }
                     },
                     stackLabels: {
                         enabled: true,
