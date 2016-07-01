@@ -1,4 +1,10 @@
 <div class='bug-detail' ui-sref='bug-details({appId: bug.applicationId, bugId: bug.id})'>
+    <h5>Bug # {{bug.id}}</h5>
+    <p>{{bug.formComments}}</p>
+    <p><strong>Developer: </strong>{{bug.assignment}}</p>
+    <p><strong>Status: </strong>{{bug.status}}</p>
+</div>
+<!-- <div class='bug-detail' ui-sref='bug-details({appId: bug.applicationId, bugId: bug.id})'>
 	<div>
 		<h5>Bug # {{bug.id}}</h5>		
 	</div>
@@ -9,4 +15,4 @@
 		<p>{{bug.assignment}}</p>
 		<p>{{bug.status}}</p>		
 	</div>
-</div>
+</div> -->

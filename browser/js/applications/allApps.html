@@ -1,30 +1,29 @@
 <section id="home">
-
-<div>
-	<h4>List of Current Applications</h4>
-	<div class="panel panel-primary" ui-sref='indvApp({appID: app.id})' ng-repeat='app in allApps'>
-		<div class="panel-heading">
-			<p class="panel-title">Name: {{app.name}}</p>
-		</div>
-		<div class="panel-body">
-			<p>Host Name: {{app.hostName}}</p>
-			<p>ID: {{app.id}}</p>
-			<p>App Id: {{app.appId}}</p>
-			<p>Number of Unresolved Bugs</p>	
-		</div>
-
-	</div>
-	<div>
-		<a ui-sref="newApplication" ng-hide="allApps.length === 0">
+    <div>
+        <h4>List of Current Applications</h4>
+        <div id="application-list">
+            <div class="panel panel-primary" ui-sref='indvApp({appID: app.id})' ng-repeat='app in allApps'>
+                <div class="panel-heading">
+                    <p class="panel-title">Name: {{app.name}}</p>
+                </div>
+                <div class="panel-body">
+                    <p><strong>Host Name: </strong> {{app.hostName}}</p>
+                    <p><strong>ID: </strong>{{app.id}}</p>
+                    <p><strong>App Id: </strong>{{app.appId}}</p>
+                    <p>Number of Unresolved Bugs</p>
+                </div>
+            </div>
+        </div>
+        <div class="create-new-app">
+            <a ui-sref="newApplication" ng-hide="allApps.length === 0">
 		+Add a new application
 	 	</a>
-	 </div>
-
-	<div class="box" ng-show="allApps.length === 0">
-	 	<p>You have no applications.</p>
-	 	<a ui-sref="newApplication">
+        </div>
+        <div class="box" ng-show="allApps.length === 0">
+            <p>You have no applications.</p>
+            <a ui-sref="newApplication">
 		Create your first application
 	 	</a>
-	 </div>
-</div>
+        </div>
+    </div>
 </section>

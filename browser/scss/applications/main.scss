@@ -1,15 +1,40 @@
 #home {
-    margin: auto;
+    margin: -3% auto 0 auto;
     width: 75%;
     padding: 10px;
-  .box {
-  	text-align: center;
-  	margin: auto;
-    width: 50%;
-    border: 3px solid #D0D0D0;
-    padding: 10px;
-  }
+    h4 {
+        font-weight: bold;
+        text-align: center;
+    }
+    #application-list {
+        display: flex;
+    }
+    .panel {
+        margin: 0 2%;
+        text-align: center;
+    }
+    .panel:hover {
+        background-color: #CCE0D7;
+    }
+    .panel-heading {
+        color: white;
+    }
+    .create-new-app {
+        margin: 2% auto;
+        border: 2px solid black;
+        border-radius: 5px;
+        width: 20%;
+        text-align: center;
+        a:hover {
+            text-decoration: none;
+            background-color: #ADEDCF;
+        }
+    }
+    .box {
+        text-align: center;
+        margin: auto;
+        width: 50%;
+        border: 3px solid #D0D0D0;
+        padding: 10px;
+    }
 }
-
-
-
