@@ -9,6 +9,9 @@ app.config(function($stateProvider) {
                 var bugId = $stateParams.bugId;
                 return DetailsFactory.getDetails(appId, bugId);
             },
+             allApps: function(AppFactory){
+                return AppFactory.fetchAllApps();
+            },
             // updateBugInfo: function(DetailsFactory, $stateParams) {
             //     var appId = $stateParams.appId;
             //     var bugId = $stateParams.bugId;
@@ -21,6 +24,10 @@ app.config(function($stateProvider) {
             allBugs: function(AppFactory, $stateParams) {
                 var appID = $stateParams.appId;
                 return AppFactory.fetchAllBugs(appID);
+            },
+            appData: function(AppFactory, $stateParams){
+                var appID = $stateParams.appId;
+                return AppFactory.fetchCurrentApp(appID);
             }
         }
     })
@@ -45,8 +52,10 @@ app.factory('DetailsFactory', function($http, $stateParams) {
     }
 })
 
-app.controller('DetailsCtrl', function($scope, bugDetails, allUsers, DetailsFactory, allBugs) {
+app.controller('DetailsCtrl', function($scope, bugDetails, allUsers, DetailsFactory, allBugs, allApps, appData) {
+    $scope.allApps = allApps;
     $scope.bugList = allBugs;
+    $scope.appData = appData;
     $scope.bugDetails = bugDetails;
     $scope.priorities = [{ name: "blocker" }, { name: "critical" }, { name: "major" }, { name: "minor" }, { name: "trivial" }]
     $scope.statuses = [{ name: "new" }, { name: "in-progress" }, { name: "resolved" }]
