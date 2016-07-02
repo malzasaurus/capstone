@@ -22,8 +22,15 @@ app.factory('AppFactory', function($http) {
         fetchCurrentApp: function(appID) {
             return $http.get('api/applications/' + appID)
                 .then(function(appData) {
+                    console.log('the current app data is: ', appData);
                     return appData.data;
                 });
+        },
+        fetchUserData: function(appID){
+             return $http.get('/api/applications/' + appID + '/user')
+             .then(function(user){
+                return user.data;
+             });
         },
         inviteUser: function(appID, userObj) {
             return $http.post('/api/applications/' + appID + '/users', userObj);

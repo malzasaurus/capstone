@@ -1,23 +1,17 @@
-app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppFactory, $rootScope) {
+app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppFactory, userData) {
     $scope.bugList = allBugs;
     $scope.allApps = allApps;
     $scope.appData = appData;
+    $scope.userData = userData;
     $scope.currentAdmin = function(){
-        console.log('user???? ', $rootScope.user);
-        console.log('the rootscope is: ', $rootScope);
-
+        return $scope.userData[0].appAccess.accessLevel === 'admin';
     };
-    $scope.currentAdmin();
     $scope.currentApp = function(app) {
         return app.id === $scope.appData.id;
     };
-
     AppFactory.fetchAllBugs(appData.id)
         .then(function(bugsData) {
-
             console.log('this the bugs data: ', bugsData);
-            //area chart functions
-            //2016-06-29 13:09:14.53-04
             function getReportedBugDate(bugsData, interval) {
                 var intervalSlice = 13;
                 var intervalStr = ':00';
