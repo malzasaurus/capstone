@@ -1,27 +1,40 @@
+$body-color: #eee;
+body {
+  background-color: $body-color;
+}
+
 #detail-page {
-    width: 90%;
-    margin: 0 auto;
+  margin: 0 auto;
+  width: 90%;
 }
 
 .image-section {
-    width: 100%;
-    display: block;
-    margin: 0 auto;
-
-    img{
-    width: 50%;
-    display: block;
-    margin: 0 auto;  
-    }
+  display: block;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .section {
-    width: 50%;
-    padding: 20px;
-    display: inline;
-    float: right;
-    p {
-        text-align: center;
-    }
+  display: inline;
+  float: right;
+  padding: 20px;
+  width: 100%;
+  p {
+    text-align: center;
+  }
 }
 
+.reported-bug-screenshot {
+  border: 0;
+  max-width: 100%;
+}
+
+.card {
+  h4 {
+    text-align: center;
+  }
+  a {
+    margin: 0 auto;
+    width: 100%;
+  }
+}
