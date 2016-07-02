@@ -106,14 +106,6 @@ textarea {
   }
 }
 
-#bug-list {
-  .bug-detail {
-    &::after {
-      content: "–––––––––––––––––––––––";
-    }
-  }
-}
-
 #commentary-section {
   h3 {
     padding-top: 2%;
