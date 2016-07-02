@@ -1,48 +1,67 @@
-<ul class="nav nav-tabs">
-        <li ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})'>{{app.name}}</a></li>
-</ul>
-<h4>{{appData.name}}</h4>
-<h6>{{appData.appId}}</h6>
-<div>
-	<div class="panel-heading">
-		<table class="table">
-			<tr>
-				<th>User Name</th>
-				<th>User Email</th>
-				<th>Access Level</th>
-				<th></th>
-				<th></th>
-			</tr>
-			<tr ng-repeat='user in allUsers'>
-				<td>{{user.name}}</td>
-				<td>{{user.email}}</td>
-				<td>
-	        		<select ng-model='user.appAccess.accessLevel'>
-						<option value='admin'>Admin</option>
-						<option value='contributor'>Contributor</option>
-					</select>
-				</td>
-				<td>
-					<button class="btn btn-default btn-xs" ng-click="updateUser(user)" title='save updated user access'>
-	           			 <span class="glyphicon glyphicon-edit"></span>
-	        		</button>
-	        	</td>
-	        	<td>
-	        		<button class="btn btn-default btn-xs" ng-click="removeUser(user)" title='remove user data'>
-	           			 <span class="glyphicon glyphicon-trash"></span>
-	        		</button>
-				</td>
-			</tr>
-		</table>
-	</div>
-	<p ng-show='updateStatus'>User access successfully updated</p>	
-</div>
-<div>
-	<input type="email" name="email" ng-model='newUser.email' required>
-	<select ng-model='newUser.accessLevel' required>
-		<option value='admin'>Admin</option>
-		<option value='contributor'>Contributor</option>
-	</select>
-	<button ng-click='invite(newUser)'>Invite New User</button>
-	<p ng-show='inviteStatus'>User successfully notified of invite</p>
+<div id="user-management">
+    <div id="current-users">
+        <ul class="nav nav-tabs">
+            <li ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})'>{{app.name}}</a></li>
+        </ul>
+        <h4>App Name: {{appData.name}}</h4>
+        <h6>App Id: {{appData.appId}}</h6>
+        <div>
+            <div class="panel-heading">
+                <table class="table">
+                    <tr class="table-top">
+                        <th>User Name</th>
+                        <th>User Email</th>
+                        <th>Access Level</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr ng-repeat='user in allUsers'>
+                        <td>{{user.name}}</td>
+                        <td>{{user.email}}</td>
+                        <td>
+                            <select ng-model='user.appAccess.accessLevel'>
+                                <option value='admin'>Admin</option>
+                                <option value='contributor'>Contributor</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn btn-default btn-xs" ng-click="updateUser(user)" title='save updated user access'>
+                                <i class="material-icons">create</i>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-default btn-xs" ng-click="removeUser(user)" title='remove user data'>
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="success-alert" ng-show='updateStatus'>
+                <p>User access successfully updated!</p>
+            </div>
+        </div>
+    </div>
+    <div id="add-user">
+        <h4>Add a New User</h4>
+        <div class="form-group">
+            <input class="form-control" type="text" name="email" ng-model='newUser.email' required>
+            <span class="form-highlight"></span>
+            <span class="form-bar"></span>
+            <label for="email" class="control-label">Email</label>
+        </div>
+        <div class="user-type">
+            <select ng-model='newUser.accessLevel' required>User Type
+                <option value="">User Type</option>
+                <option value='admin'>Admin</option>
+                <option value='contributor'>Contributor</option>
+            </select>
+        </div>
+        <div class="button">
+            <button ng-click='invite(newUser)' class="btn">Invite New User</button>
+        </div>
+        <div class="success-alert" ng-show='inviteStatus'>
+            <p class="success-message">User successfully notified of invite!</p>
+        </div>
+    </div>
 </div>

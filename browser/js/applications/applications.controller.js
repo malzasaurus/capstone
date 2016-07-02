@@ -628,9 +628,9 @@ app.controller('AllAppsCtrl', function($scope, allApps, AppFactory) {
     $scope.allApps = allApps;
     $scope.appId;
     console.log($scope.appId)
-    // $scope.currentApp = function(appId) {
-    //     console.log(appId)
-    //     return app.id
+        // $scope.currentApp = function(appId) {
+        //     console.log(appId)
+        //     return app.id
 
     //     // AppFactory.fetchAllBugs(app.id)
     //      // console.log(AppFactory.fetchAllBugs(app.id))
@@ -640,9 +640,9 @@ app.controller('AllAppsCtrl', function($scope, allApps, AppFactory) {
     // // })
     // };
 
-  
-   
-   
+
+
+
 });
 
 app.controller('UsersCtrl', function($scope, allUsers, appData, AppFactory, allApps) {
