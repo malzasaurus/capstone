@@ -1,4 +1,106 @@
 #login-form {
-  width: 60%;
-  margin: 0 auto;
+    width: 60%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 3%;
+    h4 {
+        color: #009688;
+        text-align: center;
+        a {
+        	text-align: center;
+        }
+    }
+    .account {
+    	color: black;
+    }
+    .button {
+        text-align: center;
+        margin: 0 auto;
+        button {
+            color: #009688;
+        }
+    }
+    input:focus {
+        outline: none;
+    }
+    label {
+        font-size: 18px;
+        font-weight: normal;
+        position: absolute;
+        pointer-events: none;
+        left: 5px;
+        top: -5px;
+        transition: 0.2s ease all;
+    }
+    input:focus ~ label,
+    input:valid ~ label {
+        top: -30px;
+        font-size: 14px;
+        color: #009688;
+    }
+    .form-bar {
+        position: relative;
+        display: block;
+        width: 50%;
+        margin: 0 auto;
+    }
+    .form-bar:before,
+    .form-bar:after {
+        content: '';
+        height: 2px;
+        width: 0;
+        bottom: 8px;
+        position: absolute;
+        background: #009688;
+        transition: 0.2s ease all;
+    }
+    .form-bar:before {
+        left: 50%;
+    }
+    .form-bar:after {
+        right: 50%;
+    }
+    input:focus ~ .form-bar:before,
+    input:focus ~ .form-bar:after {
+        width: 100%;
+    }
+    .form-highlight {
+        position: absolute;
+        height: 60%;
+        width: 100px;
+        top: 15%;
+        left: 0;
+        pointer-events: none;
+        opacity: 0.5;
+    }
+    input:focus ~ .form-highlight {
+        animation: inputHighlighter 0.3s ease;
+    }
+    @-webkit-keyframes inputHighlighter {
+        from {
+            background: #5264AE;
+        }
+        to {
+            width: 0;
+            background: transparent;
+        }
+    }
+    @-moz-keyframes inputHighlighter {
+        from {
+            background: #5264AE;
+        }
+        to {
+            width: 0;
+            background: transparent;
+        }
+    }
+    @keyframes inputHighlighter {
+        from {
+            background: #5264AE;
+        }
+        to {
+            width: 0;
+            background: transparent;
+        }
+    }
 }
