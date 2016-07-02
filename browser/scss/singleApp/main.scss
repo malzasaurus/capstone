@@ -3,14 +3,12 @@
     float: right;
     margin-bottom: 20px;
     li {
-        margin-right: 1%;
-        border: 1px solid black;
-    }
-    li:hover {
-        background-color: #A6AAAB;
-    }
-    li.active {
-        background-color: darken(#A6AAAB, 20%);
+        &:hover {
+            background-color: #80cbc4;
+        }
+        &.active {
+            background-color: #4db6ac;
+        }
     }
     h4 {
         font-weight: bold;
