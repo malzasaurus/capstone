@@ -1,32 +1,33 @@
 #bug-sidebar {
-	border: 1px solid black;
-	border-radius: 5px;
-	width: 250px;
-	padding: 2px;
-	margin: 5px;
-	h4 {
-		text-align: center;
-		font-weight: bold;
-	}
-	#select-status {
-		display: flex;
-		flex-direction: row;
-		padding-bottom: 3%;
-		h5, select {
-			margin: 0 auto;
-		}
-	}
-	#bug-list {
-		.bug-detail {
-			border: 1px solid black;
-			text-align: center;
-			h5 {
-				font-weight: bold;
-			}
-		}
-		.bug-detail:hover {
-			background-color: #C6F5DF;
-		}
-	}
+  width: 250px;
+  padding: 2px;
+  margin: 5px;
+  background-color: white;
+  h4 {
+    text-align: center;
+    font-weight: bold;
+  }
+  #select-status {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 3%;
+    h5,
+    select {
+      margin: 0 auto;
+    }
+  }
+  #bug-list {
+    .bug-detail {
+      text-align: center;
+      h5 {
+        font-weight: bold;
+      }
+    }
+    .bug-detail:hover {
+      background-color: #C6F5DF;
+    }
+    .list-group-item {
+      border-top: 1px solid lightgrey;
+    }
+  }
 }
-
