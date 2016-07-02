@@ -47,30 +47,28 @@
                             <h3>Report Information</h3>
                             <div id="comments">
                                 <h5>Developer Comments</h5>
-                                <form>
-                                    <textarea class="md-textarea" rows="4" cols="50" name="devComments" ng-model="devComments"></textarea>
-                                </form>
+                                <textarea rows="4" cols="50" name="devComments" ng-model="devComments"></textarea>
                                 <!-- <input type="text" name="devComments" ng-model="devComments"> -->
                             </div>
                         </div>
                         <div class="mdl-selectfield" id="developer-assignment">
                             <div id="bug-priority">
                                 <h5>Priority</h5>
-                                <select name="priority" id="priority" ng-options="priority.name for priority in priorities" ng-model="selectedPriority"></select>
+                                <select name="priority" id="priority" ng-options="priority for priority in priorities" ng-model="selectedPriority"></select>
                             </div>
                             <div id="assignment">
                                 <h5>Assignment</h5>
-                                <select name="assignment" id="assignment" ng-options="assignment.email for assignment in assignments" ng-model="selectedAssignment"></select>
+                                <select name="assignment" id="assignment" ng-options="assignment for assignment in assignments" ng-model="selectedAssignment"></select>
                             </div>
                             <div id="status">
                                 <h5>Status</h5>
-                                <select name="status" id="status" ng-options="status.name for status in statuses" ng-model="selectedStatus"></select>
+                                <select name="status" id="status" ng-options="status for status in statuses" ng-model="selectedStatus"></select> 
                             </div>
                             <div id="difficulty">
                                 <h5>Difficulty</h5>
-                                <select name="difficulty" id="difficulty" ng-options="difficulty.name for difficulty in difficulties" ng-model="selectedDifficulty"></select>
+                                <select name="difficulty" id="difficulty" ng-options="difficulty for difficulty in difficulties" ng-model="selectedDifficulty"></select>  
                             </div>
-                            <button class="btn btn-primary" type="submit" ng-click="update(selectedPriority.name, selectedAssignment.email, selectedStatus.name, selectedDifficulty.name, devComments)">Update</button>
+                            <button class="btn btn-primary" type="submit" ng-click="update(selectedPriority, selectedAssignment, selectedStatus, selectedDifficulty, devComments)">Update</button>
                         </div>
                     </div>
                 </div>
