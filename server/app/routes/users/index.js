@@ -43,11 +43,14 @@ router.post('/', function(req, res, next) {
 				var findUser = createdUser;
 				Promise.each(appsInvitedTo, function(singleApp){  //then for each instance found in invite table 
 					var level = singleApp.dataValues.accessLevel;
-					var findApp = Application.findById(singleApp.dataValues.appId); ///fix this??
+					var findApp = Application.findOne({
+						where: {appId: singleApp.dataValues.appId}
+					});
 					Promise.all([findApp, findUser])
 					.then(function(foundData){
 						var foundApp =foundData[0];
 						var foundUser = foundData[1];
+						console.log('the found app is : ', foundApp);
 						foundApp.addUser(foundUser, {accessLevel: level});
 					});					
 				})
