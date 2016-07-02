@@ -14,20 +14,17 @@
         text-align: center;
     }
     .panel:hover {
-        background-color: #CCE0D7;
+        background-color: #b2dfdb;
     }
     .panel-heading {
         color: white;
     }
     .create-new-app {
         margin: 2% auto;
-        border: 2px solid black;
-        border-radius: 5px;
         width: 20%;
         text-align: center;
         a:hover {
-            text-decoration: none;
-            background-color: #ADEDCF;
+            color: #004d40;
         }
     }
     .box {
