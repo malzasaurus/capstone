@@ -1,27 +1,139 @@
+$body-color: #eee;
+$button-text: #fff;
+$color-black: "0,0,0";
+$report-container: #fff;
+$select-background-color: transparent;
+$select-border-color: unquote("rgba(#{$color-black}, 0.12)") !default;
+$select-font-size: 16px;
+$select-color: unquote("rgba(#{$color-black}, 0.26)") !default;
+$select-padding: 4px;
+body {
+  background-color: $body-color;
+}
+
+select {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid $select-border-color;
+  color: $select-color;
+  font-family: inherit;
+  font-size: $select-font-size;
+  padding: $select-padding 0;
+  width: 75%;
+}
+
+.mdl-selectfield {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  position: relative;
+  &:after {
+    border-left: .25em solid transparent;
+    border-right: .25em solid transparent;
+    border-top: .375em solid $select-border-color;
+    content: '';
+    height: 0;
+    padding: 0;
+    pointer-events: none;
+    position: absolute;
+    right: .5em;
+    top: .75em;
+    width: 0;
+  }
+}
+
+textarea {
+  width: 75%;
+}
+
 #detail-page {
-    width: 90%;
-    margin: 0 auto;
+  margin: 0 auto;
+  width: 90%;
 }
 
 .image-section {
-    width: 100%;
-    display: block;
-    margin: 0 auto;
-
-    img{
-    width: 50%;
-    display: block;
-    margin: 0 auto;  
-    }
+  display: block;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .section {
-    width: 50%;
-    padding: 20px;
-    display: inline;
-    float: right;
-    p {
-        text-align: center;
-    }
+  p {
+    text-align: center;
+  }
 }
 
+.reported-bug-screenshot {
+  border: 0;
+  max-width: 100%;
+}
+
+.card {
+  h4 {
+    text-align: center;
+  }
+  a {
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+.btn-primary {
+  background-color: #2bbbad;
+}
+
+.report-info {
+  background-color: $report-container;
+  margin-top: -20px;
+  padding-left: 5%;
+}
+
+.card-block {
+  a {
+    color: $button-text !important;
+    margin-bottom: 3%;
+    // text-align: center;
+    width: 50%;
+  }
+}
+
+.button-holder {
+  text-align: center;
+  width: 100%;
+}
+
+#developer-assignment {
+  button {
+    color: $button-text;
+  }
+}
+
+#bug-list {
+  .bug-detail {
+    &::after {
+      content: "–––––––––––––––––––––––";
+    }
+  }
+}
+
+#commentary-section {
+  h3 {
+    padding-top: 2%;
+  }
+}
+
+.move-button {
+  color: $button-text !important;
+  float: right;
+  margin-right: 4%;
+}
+
+.bug-container {
+  background-color: $report-container;
+  text-align: center;
+}
+
+.report-stats-table {
+  background-color: $report-container;
+  margin-left: 1.45%;
+  margin-top: 2%;
+  width: 72.2%;
+}
