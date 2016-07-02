@@ -5,8 +5,19 @@ var _ = require('lodash');
 var Bug = require('../../../db').model('bug');
 var Application = require('../../../db').model('application');
 var User = require('../../../db').model('user');
-var AppAccess = require('../../../db').model('appAccess');
+// var AppAccess = require('../../../db').model('appAccess');
 var InvitedUser = require('../../../db').model('invitedUser');
+
+var nodemailer = require('nodemailer');
+// var transporter = nodemailer.createTransport('smtps://grasshopperreportergmail.com:grasshopperreporter@smtp.gmail.com');
+var smtpTransport = require('nodemailer-smtp-transport');
+var transporter = nodemailer.createTransport(smtpTransport({
+   service: "Gmail",
+   auth: {
+       user: "grasshopperreporter@gmail.com",
+       pass: "r6z-Pob-YWJ-9PG"
+   }
+}));
 
 //get all applications
 // router.get('/', function(req, res, next) {
@@ -126,6 +137,7 @@ router.get('/:id/users', function(req, res, next){
 // 	.catch(next);	
 // });
 
+//add a new user to application
 router.post('/:id/users', function(req, res, next){
 	var userEmail = req.body.email;
 	var level = req.body.accessLevel;
@@ -151,6 +163,20 @@ router.post('/:id/users', function(req, res, next){
 				accessLevel: level
 			})
 			.then(function(createdUser){
+			var mailOptions = {
+                      from: '"Grasshopper Bug Reporter " <grasshopperreporter@gmail.com>', // sender address
+                      to: userEmail, // list of receivers
+                      subject: 'You have been invited to join an application on Grasshopper Bug Reporter', // Subject line
+                      text: 'Hello! \n\nYou have been invited to join the '+ foundApp.dataValues.name + ' application dashboard as a ' + level + '.  To participate please navigate to the Grasshopper Reporter web app and sign up.'
+                  };
+
+                  // send mail with defined transport object
+                  transporter.sendMail(mailOptions, function(error, info){
+                      if(error){
+                          return console.log(error);
+                      }
+                      console.log('Message sent: ' + info.response);
+                  });                
 				res.status(201).send(createdUser);
 			});
 		}
@@ -158,7 +184,7 @@ router.post('/:id/users', function(req, res, next){
 	.catch(next);	
 });
 
-//updating the access leve for a particular app for one user
+//updating the access level for a particular app for one user
 router.put('/:id/users', function(req, res, next){
 	console.log('in the user post route');
 	console.log('the app id is: ', req.params.id);
