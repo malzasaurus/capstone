@@ -1,21 +1,30 @@
-
-<form id="signup-form" name="signupForm" ng-submit="signupForm.$valid && sendSignup(signup)">
-    <h3>Sign up for an account:</h3>
-    <alert type="danger" ng-show="error">
-        {{ error }}
-    </alert>
-
-    <div class="form-group">
-        <label for="email">Full Name</label>
-        <input type="text" ng-model="signup.name" class="form-control" id="name" placeholder="Enter name">
-    </div>
-    <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="text" ng-model="signup.email" class="form-control" id="email" placeholder="Enter email">
-    </div>
-    <div class="form-group">
-        <label for="signup-password">Password</label>
-        <input type="password" ng-model="signup.password" class="form-control" id="signup-password" placeholder="Password">
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-</form>
+<div id="signup-form">
+    <form class="form-horizontal" name="signupForm" ng-submit="signupForm.$valid && sendSignup(signup)">
+        <h4 class="account">Sign up for an account</h4>
+        <alert type="danger" ng-show="error">
+            {{ error }}
+        </alert>
+        <div class="form-group">
+            <input type="text" ng-model="signup.name" class="form-control" id="name" required>
+            <span class="form-highlight"></span>
+            <span class="form-bar"></span>
+            <label for="email" class="control-label">Full Name</label>
+        </div>
+        <div class="form-group">
+            <input type="text" ng-model="signup.email" class="form-control" id="email" required>
+            <span class="form-highlight"></span>
+            <span class="form-bar"></span>
+            <label for="email" class="control-label">Email address</label>
+        </div>
+        <div class="form-group">
+            <input type="password" ng-model="signup.password" class="form-control" id="signup-password" required>
+            <span class="form-highlight"></span>
+            <span class="form-bar"></span>
+            <label for="signup-password" class="control-label">Password</label>
+        </div>
+        <div class=button>
+            <button type="submit" class="btn">Submit</button>
+        </div>
+    </form>
+    <h4 class="account">Have an Account? <a ui-sref="login">Login</a></h4>
+</div>

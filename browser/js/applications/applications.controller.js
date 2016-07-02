@@ -1,7 +1,13 @@
-app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppFactory) {
+app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppFactory, $rootScope) {
     $scope.bugList = allBugs;
     $scope.allApps = allApps;
     $scope.appData = appData;
+    $scope.currentAdmin = function(){
+        console.log('user???? ', $rootScope.user);
+        console.log('the rootscope is: ', $rootScope);
+
+    };
+    $scope.currentAdmin();
     $scope.currentApp = function(app) {
         return app.id === $scope.appData.id;
     };
@@ -624,8 +630,25 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
         });
 });
 
-app.controller('AllAppsCtrl', function($scope, allApps) {
+app.controller('AllAppsCtrl', function($scope, allApps, AppFactory) {
     $scope.allApps = allApps;
+    $scope.appId;
+    console.log($scope.appId)
+        // $scope.currentApp = function(appId) {
+        //     console.log(appId)
+        //     return app.id
+
+    //     // AppFactory.fetchAllBugs(app.id)
+    //      // console.log(AppFactory.fetchAllBugs(app.id))
+    // //     //  .then(function(foundBugs){
+    // //     // console.log("bugs", foundBugs)
+    // //     // return foundBugs.length
+    // // })
+    // };
+
+
+
+
 });
 
 app.controller('UsersCtrl', function($scope, allUsers, appData, AppFactory, allApps) {

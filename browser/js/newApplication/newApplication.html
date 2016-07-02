@@ -1,17 +1,23 @@
-<form id="application-form" name="applicationForm" ng-submit="applicationForm.$valid && sendApplication(application)">
-    <alert type="danger" ng-show="error">
-        {{ error }}
-    </alert>
-    <h4>Enter Your App Info</h4>
-    <div class="form-group">
-        <label for="name">Application Name</label>
-        <input type="text" ng-model="application.name" class="form-control" id="name" placeholder="Enter App Name">
-    </div>
-    <div class="form-group">
-        <label for="hostName">Host Name</label>
-        <input type="hostName" ng-model="application.hostName" class="form-control" id="hostName" placeholder="hostName without leading www.">
-    </div>
-    <div class=button>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </div>
-</form>
+<div id=application-form>
+    <form class="form-horizontal" name="applicationForm" ng-submit="applicationForm.$valid && sendApplication(application)">
+        <alert type="danger" ng-show="error">
+            {{ error }}
+        </alert>
+        <h4 class="info">Enter Your App Info</h4>
+        <div class="form-group">
+            <input type="text" ng-model="application.name" class="form-control" id="name" required>
+            <span class="form-highlight"></span>
+            <span class="form-bar"></span>
+            <label for="name" class="control-label">Application Name</label>
+        </div>
+        <div class="form-group">
+            <input type="hostName" ng-model="application.hostName" class="form-control" id="hostName" required>
+            <span class="form-highlight"></span>
+            <span class="form-bar"></span>
+            <label for="hostName" class="control-label">Host Name</label>
+        </div>
+        <div class=button>
+            <button type="submit" class="btn">Submit</button>
+        </div>
+    </form>
+</div>

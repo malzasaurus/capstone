@@ -3,7 +3,7 @@
 }
 
 body {
-  background: #fdfdfd;
+  background: #f5f5f5;
 }
 
 @mixin clearfix {
@@ -30,3 +30,4 @@ body {
 @import 'bugs/main';
 @import 'singleApp/main';
 @import 'signup/main';
+@import 'users/main';
