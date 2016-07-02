@@ -57,10 +57,23 @@ app.controller('DetailsCtrl', function($scope, bugDetails, allUsers, DetailsFact
     $scope.bugList = allBugs;
     $scope.appData = appData;
     $scope.bugDetails = bugDetails;
-    $scope.priorities = [{ name: "blocker" }, { name: "critical" }, { name: "major" }, { name: "minor" }, { name: "trivial" }]
-    $scope.statuses = [{ name: "new" }, { name: "in-progress" }, { name: "resolved" }]
-    $scope.assignments = allUsers;
-    $scope.difficulties = [{ name: 1 }, { name: 2 }, { name: 3 }, { name: 4 }, { name: 5 }]
+    $scope.selectedPriority = $scope.bugDetails.priority;
+    console.log(allUsers)
+    var usersArr = []
+    allUsers.forEach(function(el){
+        usersArr.push(el.email)
+    })
+
+    $scope.selectedAssignment = $scope.bugDetails.assignment;
+    $scope.selectedStatus = $scope.bugDetails.status;
+    $scope.selectedDifficulty = $scope.bugDetails.difficulty;
+
+    
+    $scope.priorities = ["blocker", "critical", "major", "minor", "trivial"]
+    $scope.statuses = ["new", "in-progress", "resolved"]
+    $scope.assignments = usersArr;
+    $scope.difficulties = [1, 2, 3, 4, 5]
+
     $scope.update = function(selectedPriority, selectedAssignment, selectedStatus, selectedDifficulty, devComments) {
         var updates = {
             priority: selectedPriority,
