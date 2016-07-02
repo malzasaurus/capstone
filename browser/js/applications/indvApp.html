@@ -1,6 +1,6 @@
 <section id="application">
-    <ul class="nav nav-tabs">
-        <li ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})'>{{app.name}}</a></li>
+    <ul class="nav nav-tabs ">
+        <li ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})' class="active">{{app.name}}</a></li>
         <button ui-sref='appUsers({appID: appData.id})'>User Management</button>
     </ul>
     <h4>{{appData.name}}</h4>
@@ -23,6 +23,7 @@
         <div id="path-pie-chart" class="chart"></div>
         <div id="pie-bug-stats" class="chart"></div>
     </div>
+    <div id="col-chart-age" class="chart"></div>
     <!-- <div>{{bugList}}</div> -->
 </section>
 <bug-list bugList='bugList'></bug-list>

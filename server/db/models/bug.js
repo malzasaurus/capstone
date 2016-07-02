@@ -27,7 +27,7 @@ module.exports = function(db) {
                 ]
             }
         },
-         difficulty: {
+        difficulty: {
             type: Sequelize.INTEGER,
             validate: {
                 isIn: [
