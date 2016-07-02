@@ -28,10 +28,13 @@ app.config(function($stateProvider) {
             appData: function(AppFactory, $stateParams){
                 var appID = $stateParams.appId;
                 return AppFactory.fetchCurrentApp(appID);
+            },
+            userData: function(AppFactory, $stateParams){
+                return AppFactory.fetchUserData($stateParams.appId);
             }
         }
-    })
-})
+    });
+});
 
 app.factory('DetailsFactory', function($http, $stateParams) {
     return {
@@ -52,11 +55,15 @@ app.factory('DetailsFactory', function($http, $stateParams) {
     }
 })
 
-app.controller('DetailsCtrl', function($scope, bugDetails, allUsers, DetailsFactory, allBugs, allApps, appData) {
+app.controller('DetailsCtrl', function($scope, bugDetails, allUsers, DetailsFactory, allBugs, allApps, appData, userData) {
     $scope.allApps = allApps;
     $scope.bugList = allBugs;
     $scope.appData = appData;
     $scope.bugDetails = bugDetails;
+    $scope.userData = userData;
+    $scope.currentAdmin = function(){
+        return $scope.userData[0].appAccess.accessLevel === 'admin';
+    };
     $scope.selectedPriority = $scope.bugDetails.priority;
     console.log(allUsers)
     var usersArr = []

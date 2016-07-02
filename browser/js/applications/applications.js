@@ -13,6 +13,10 @@ app.config(function ($stateProvider) {
             },
             appData: function(AppFactory, $stateParams){
                 return AppFactory.fetchCurrentApp($stateParams.appID);
+            },
+            userData: function(AppFactory, $stateParams){
+                //need accesslevel and id;
+                return AppFactory.fetchUserData($stateParams.appID);
             }
         }
     });

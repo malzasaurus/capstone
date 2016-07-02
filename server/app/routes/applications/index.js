@@ -61,7 +61,7 @@ router.get('/:id/bugs', function(req, res, next) {
 		}
 	})
 	.then(function(foundBugs) {
-		console.log('the found bugs look like this: ', foundBugs);
+		// console.log('the found bugs look like this: ', foundBugs);
 		res.json(foundBugs);
 	})
 	.catch(next);
@@ -105,7 +105,7 @@ router.post('/', function(req, res, next) {
 	.catch(next);
 });
 
-
+//get all users
 router.get('/:id/users', function(req, res, next){
 	Application.findById(req.params.id)
 	.then(function(foundApp){
@@ -184,14 +184,29 @@ router.post('/:id/users', function(req, res, next){
 	.catch(next);	
 });
 
+//getting the access level for a particular app for one user
+router.get('/:id/user', function(req, res, next){
+	var userID = req.user.id;
+	// var findApp = Application.findById(req.params.id);
+	// var findUser = User.findById(userID);	
+	// Promise.all([findApp, findUser])
+	// .then(function(foundData){
+		Application.findById(req.params.id)
+		.then(function(foundApp){
+			foundApp.getUsers({where: {id: userID}})
+			.then(function(response){
+			res.status(201).send(response);
+		});
+		// })
+		// var foundApp =foundData[0];
+		// var foundUser = foundData[1];		
+	});
+});
+
 //updating the access level for a particular app for one user
 router.put('/:id/users', function(req, res, next){
-	console.log('in the user post route');
-	console.log('the app id is: ', req.params.id);
 	var userID = req.body.id;
 	var updatedLevel = req.body.appAccess.accessLevel;
-	console.log('the user id is: ', userID);
-	console.log('the user access is: ', updatedLevel);
 	var findApp = Application.findById(req.params.id);
 	var findUser = User.findById(userID);	
 	Promise.all([findApp, findUser])
