@@ -1,7 +1,13 @@
-app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppFactory) {
+app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppFactory, $rootScope) {
     $scope.bugList = allBugs;
     $scope.allApps = allApps;
     $scope.appData = appData;
+    $scope.currentAdmin = function(){
+        console.log('user???? ', $rootScope.user);
+        console.log('the rootscope is: ', $rootScope);
+
+    };
+    $scope.currentAdmin();
     $scope.currentApp = function(app) {
         return app.id === $scope.appData.id;
     };
