@@ -13,8 +13,10 @@
 #main {
   padding-top: 0px;
   margin: 0 auto;
+  width: 92%;
 }
 
+@import 'home/main';
 @import 'directives/main';
 @import 'applications/main';
 @import 'about/main';

@@ -1,37 +1,60 @@
 #application {
-    width: 75%;
+    width: 100%;
     float: right;
     margin-bottom: 20px;
     li {
-        background-color: #009688;
-        display: inline;
-        a {
-            color: white;
-        }
         &:hover {
             background-color: #80cbc4;
         }
-        &.active {}
-    }
-    h4 {
-        font-weight: bold;
-        margin-left: 10px;
-    }
-    .chart-grouping {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        .chart {
-            width: 50%;
+        &.active {
+            background-color: #4db6ac;
         }
     }
-    .chart {
-        margin: 5px 0;
-    }
-    .btn {
-        display: inline-block;
-        height: 100%;
+    button {
+        border-radius: 5px;
+        background-color: lightgrey;
+        float: right;
+        margin-top: 6px;
         margin-right: 1%;
-        vertical-align: middle;
+    }
+    #appBody {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        h4 {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+    // .chart-grouping {
+    //     display: flex;
+    //     flex-direction: row;
+    //     flex-wrap: wrap;
+    //     .chart {
+    //         width: 50%;
+    //     }
+    // }
+        .chart {
+            margin: 5px 0;
+        }
+        bug-list {
+            width: 24%;
+        }
+
+        .charts-container {
+            width: 75%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            flex-direction: row;
+            .small {
+                flex-grow: 1;
+                width: 45%;
+            }
+            .large {
+                flex-grow: 2;
+                width: 100%;
+            }
+        }
     }
 }

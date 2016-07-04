@@ -10,24 +10,56 @@
         <button ng-show='currentAdmin()' ui-sref='appUsers({appID: appData.id})'>User Management</button>
     </ul> -->
     <h4>{{appData.name}}</h4>
+    <section id="appBody">
+
+
+        <bug-list bugList='bugList'></bug-list>
+
+        <div class='charts-container'>
+            <div id="priority-pie-chart" class="chart small"></div>
+            <div id="pie-chart" class="chart small"></div>
+            <div id="spline-chart-time" class="chart large"></div>
+            <div id="workload-chart" class="chart large"></div>
+            <div id="path-pie-chart" class="chart small"></div>
+            <div id="pie-bug-stats" class="chart small"></div>
+            <div id="col-chart-age" class="chart large"></div>        
+        </div>
+    </section>
+</section>
+        <!-- <div ng-model='appSelection' ng-repeat="app in allApps" value={{app.id}}>{{app.name}}
+        </div> -->
+        <!--    <select ng-model='appSelection'>
+            <option ng-repeat="app in allApps" value={{app.id}}>{{app.name}}</option>
+        </select> -->
+
+        <!--     <div class="chart-grouping"> -->
+<!--     </div> -->
+<!--     <div class="chart-grouping"> -->
+<!--         <div id="bar-chart" class="chart"></div> -->
+<!--         <div id="line-chart" class="chart"></div> -->
+<!--     </div> -->
+<!--     <div class="chart-grouping"> -->
+<!--     </div> -->
+<!--     <div>{{bugList}}</div> -->
+
     <!-- <div ng-model='appSelection' ng-repeat="app in allApps" value={{app.id}}>{{app.name}}
     </div> -->
     <!--    <select ng-model='appSelection'>
         <option ng-repeat="app in allApps" value={{app.id}}>{{app.name}}</option>
     </select> -->
-    <div class="chart-grouping">
+<!--     <div class="chart-grouping">
         <div id="priority-pie-chart" class="chart"></div>
         <div id="pie-chart" class="chart"></div>
     </div>
     <div id="spline-chart-time" class="chart"></div>
-
+    
     <div id="workload-chart" class="chart"></div>
     <div class="chart-grouping">
         <div id="path-pie-chart" class="chart"></div>
         <div id="pie-bug-stats" class="chart"></div>
     </div>
-    <div id="col-chart-age" class="chart"></div>
+    <div id="col-chart-age" class="chart"></div> -->
     <!-- <div>{{bugList}}</div> -->
-</section>
+<!-- </section>
 <bug-list bugList='bugList'></bug-list>
-</div>
+</div> -->
