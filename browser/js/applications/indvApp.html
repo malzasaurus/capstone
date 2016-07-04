@@ -1,8 +1,10 @@
 <section id="application">
-    <ul class="nav nav-tabs ">
-        <li ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})' class="active">{{app.name}}</a></li>
-        <button ng-show='currentAdmin()' ui-sref='appUsers({appID: appData.id})'>User Management</button>
-    </ul>
+    <div class="sub-nav">
+        <ul class="nav nav-pills">
+            <li class="nav-item" ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})'>{{app.name}}</a></li>
+            <button class="btn nav-item" ng-show='currentAdmin()' ui-sref='appUsers({appID: appData.id})'>User Management</button>
+        </ul>
+    </div>
     <h4>{{appData.name}}</h4>
     <!-- <div ng-model='appSelection' ng-repeat="app in allApps" value={{app.id}}>{{app.name}}
     </div> -->

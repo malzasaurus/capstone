@@ -2,10 +2,6 @@
   box-sizing: border-box;
 }
 
-body {
-  background: #f5f5f5;
-}
-
 @mixin clearfix {
   &:after {
     content: "";
@@ -20,6 +16,7 @@ body {
   width: 92%;
 }
 
+@import 'home/main';
 @import 'directives/main';
 @import 'applications/main';
 @import 'about/main';
