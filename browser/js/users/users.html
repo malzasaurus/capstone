@@ -1,8 +1,8 @@
+<ul class="nav nav-tabs">
+    <li ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})'>{{app.name}}</a></li>
+</ul>
 <div id="user-management">
     <div id="current-users">
-        <ul class="nav nav-tabs">
-            <li ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})'>{{app.name}}</a></li>
-        </ul>
         <h4>App Name: {{appData.name}}</h4>
         <h6>App Id: {{appData.appId}}</h6>
         <div>
