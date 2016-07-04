@@ -1,10 +1,14 @@
+
+<ul class="nav nav-tabs ">
+        <li ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})' class="active">{{app.name}}</a></li>
+        <button class="btn btn-primary-outline waves-effect move-button" ng-show='currentAdmin()' ui-sref='appUsers({appID: appData.id})'>User Management</button>
+    </ul>
+<div id="app-page">    
 <section id="application">
-    <div class="sub-nav">
-        <ul class="nav nav-pills">
-            <li class="nav-item" ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})'>{{app.name}}</a></li>
-            <button class="btn nav-item" ng-show='currentAdmin()' ui-sref='appUsers({appID: appData.id})'>User Management</button>
-        </ul>
-    </div>
+    <!-- <ul class="nav nav-tabs ">
+        <li ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})' class="active">{{app.name}}</a></li>
+        <button ng-show='currentAdmin()' ui-sref='appUsers({appID: appData.id})'>User Management</button>
+    </ul> -->
     <h4>{{appData.name}}</h4>
     <!-- <div ng-model='appSelection' ng-repeat="app in allApps" value={{app.id}}>{{app.name}}
     </div> -->
@@ -12,14 +16,11 @@
         <option ng-repeat="app in allApps" value={{app.id}}>{{app.name}}</option>
     </select> -->
     <div class="chart-grouping">
-        <div id="line-chart" class="chart"></div>
+        <div id="priority-pie-chart" class="chart"></div>
         <div id="pie-chart" class="chart"></div>
     </div>
     <div id="spline-chart-time" class="chart"></div>
-    <div class="chart-grouping">
-        <div id="bar-chart" class="chart"></div>
-        <div id="priority-pie-chart" class="chart"></div>
-    </div>
+
     <div id="workload-chart" class="chart"></div>
     <div class="chart-grouping">
         <div id="path-pie-chart" class="chart"></div>
@@ -29,3 +30,4 @@
     <!-- <div>{{bugList}}</div> -->
 </section>
 <bug-list bugList='bugList'></bug-list>
+</div>

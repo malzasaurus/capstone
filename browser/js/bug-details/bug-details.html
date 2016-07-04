@@ -1,12 +1,12 @@
-<div id="detail-page">
-    <div class="row">
-        <div class="col-lg-12">
-            <ul class="nav nav-tabs">
+ <ul class="nav nav-tabs">
                 <li ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})'>{{app.name}}</a></li>
                 <div class="row">
                     <button class="btn btn-primary-outline waves-effect move-button" ng-show='currentAdmin()' ui-sref='appUsers({appID: appData.id})'>User Management</button>
                 </div>
             </ul>
+<div id="detail-page">
+    <div class="row">
+        <div class="col-lg-12">
         </div>
     </div>
     <div>

@@ -1,0 +1,25 @@
+#app-page {
+	padding-top: 50px;
+  	margin: 0 auto 6% auto;
+  	width: 90%;
+}
+
+  .nav > li > a {
+    cursor: pointer;
+    transition: color 0.2s;
+    &.active {
+      color: darken(#838785, 30%);
+    }
+    &:hover {
+      color: #D3D3D3 !important;
+    }
+    &:focus {
+      background: none;
+    }
+  }
+
+.nav-tabs {
+	padding-left: 10px;
+	width: 100%
+}
+
