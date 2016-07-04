@@ -15,10 +15,12 @@ body {
 }
 
 #main {
-  padding-top: 60px;
+  padding-top: 0px;
   margin: 0 auto;
-  width: 92%;
 }
+
+
+
 
 @import 'directives/main';
 @import 'applications/main';
@@ -31,3 +33,4 @@ body {
 @import 'singleApp/main';
 @import 'signup/main';
 @import 'users/main';
+@import 'application/main';
