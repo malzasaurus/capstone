@@ -23,7 +23,8 @@ nav {
         transition: color 0.2s;
         font-size: 16px;
         &.active {
-            color: darken(#838785, 30%);
+            color: darken(#838785, 30%) !important;
+            background-color: transparent;
         }
         &:hover {
             color: #B2DFDB !important;
