@@ -2,7 +2,7 @@
     <div>
         <h4>List of Current Applications</h4>
         <div id="application-list">
-            <div class="panel panel-primary" ui-sref='indvApp({appID: app.id})' ng-repeat='app in allApps' >
+            <div class="panel panel-primary" ui-sref='indvApp({appID: app.id})' ui-sref-opts="{reload: true}" ng-repeat='app in allApps' >
                 <div class="panel-heading">
                     <p class="panel-title">Name: {{app.name}}</p>
                 </div>
