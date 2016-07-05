@@ -3,6 +3,13 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
     $scope.allApps = allApps;
     $scope.appData = appData;
     $scope.userData = userData;
+    $scope.colFilter;
+    $scope.filterChart = function(){
+        $scope.colFilter = $scope.colFilter;
+        filteredDynamicList = dynamicFilter(bugsData, 'status', $scope.colFilter);
+        $scope.$digest();
+        console.log('the filter is: ', $scope.colFilter);
+    };
     $scope.currentAdmin = function(){
         return $scope.userData[0].appAccess.accessLevel === 'admin';
     };
@@ -12,6 +19,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
     AppFactory.fetchAllBugs(appData.id)
         .then(function(bugsData) {
             console.log('this the bugs data: ', bugsData);
+            console.log('is this an array? ', Array.isArray(bugsData))
             function getReportedBugDate(bugsData, interval) {
                 var intervalSlice = 13;
                 var intervalStr = ':00';
@@ -51,14 +59,26 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 });
             }
 
-            function filterBugs(obj) {
-                if (obj.status !== "resolved") {
-                    return true
+            function filterBugs(bugsObj, property, value, not) {
+                var filteredList = [];
+                if(not){
+                    for(var i = 0; i<bugsObj.length; i++){
+                        if (bugsObj[i][property] !== value) {
+                            filteredList.push(bugsObj[i]);
+                        } 
+                    }
                 } else {
-                    return false;
+                    for(var j = 0; j<bugsObj.length; j++){
+                        if (bugsObj[j][property] === value) {
+                            filteredList.push(bugsObj[j]);
+                        } 
+                    }
                 }
+                
+                return filteredList;
             }
-            var filteredBugList = bugsData.filter(filterBugs);
+            var filteredBugList = filterBugs(bugsData, 'assignment', 'Nicole');
+            console.log('the filtered bug list is: ', filteredBugList);
 
             function getPriorityBreakdown(filteredBugList) {
                 var priorityObj = {};
@@ -140,6 +160,26 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 return finalArray;
             }
 ////dynamic charts functionality
+            function dynamicFilter(bugsObj, property, value, not) {
+                var filteredList = [];
+                if(not){
+                    for(var i = 0; i<bugsObj.length; i++){
+                        if (bugsObj[i][property] !== value) {
+                            filteredList.push(bugsObj[i]);
+                        } 
+                    }
+                } else {
+                    for(var j = 0; j<bugsObj.length; j++){
+                        if (bugsObj[j][property] === value) {
+                            filteredList.push(bugsObj[j]);
+                        } 
+                    }
+                }
+                
+                return filteredList;
+            }
+
+            var filteredDynamicList = bugsData;
             var pieChartTitle = 'default pie chart';
             var chartData = [];
 
@@ -162,7 +202,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 return chartData;
             }
             //call pie chart function to populate necessary data
-            console.log('pie chart data looks like: ', dynamicPie('dynamic title', 'browserVer', filteredBugList));
+            console.log('pie chart data looks like: ', dynamicPie('dynamic title', 'browserVer', filteredDynamicList));
             
             var colChartTitle = 'default col chart';
             var xTitle;
@@ -185,8 +225,8 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 }
             }
             //calls dynamic column chart to populate necessary data
-            console.log('column chart data looks like: ', dynamicColumn('dynamic column title', 'priority', filteredBugList));
-
+            console.log('column chart data looks like: ', dynamicColumn('dynamic column title', 'priority', filteredDynamicList));
+//end of dynamic chart data
             //get array of assignments and filter out 'unassigned'
             function getAssignmentList(filteredBugList) {
                 var assignmentList = [];
@@ -197,7 +237,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 }
                 return assignmentList;
             }
-//end of dynamic chart data
+
             //get difficulty weight per person
             function dataPerPerson(filteredBugList, difficulty) {
                 var assignmentList = getAssignmentList(filteredBugList);
