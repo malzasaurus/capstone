@@ -27,7 +27,6 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                         assignmentName[bugsData[i].createdAt.slice(0, intervalSlice) + intervalStr]++;
                     }
                 }
-                console.log('our date obj is: ', assignmentName);
                 var arr = [];
                 for (var key in assignmentName) {
                     if (assignmentName.hasOwnProperty(key)) {
@@ -35,32 +34,22 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                         arr.push(tempArray);
                     }
                 }
-
                 function Comparator(a, b) {
                     if (a[0] < b[0]) return -1;
                     if (a[0] > b[0]) return 1;
                     return 0;
                 }
-
                 arr = arr.sort(Comparator);
                 return arr;
-
             }
 
-            $log.warn("getReportedBugDate is: ", getReportedBugDate(bugsData));
             var dateCategories = Object.keys(getReportedBugDate(bugsData));
-            console.log('the first date categories are :', dateCategories);
 
             function formattedCategories(dateCategories) {
                 return dateCategories.forEach(function(elem) {
                     return elem.slice(0, 10);
                 });
             }
-            console.log('the date categories are: ', formattedCategories(dateCategories))
-
-            ///end of area chart functions
-
-
 
             function filterBugs(obj) {
                 if (obj.status !== "resolved") {
@@ -69,7 +58,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                     return false;
                 }
             }
-            var filteredBugList = bugsData.filter(filterBugs)
+            var filteredBugList = bugsData.filter(filterBugs);
 
             function getPriorityBreakdown(filteredBugList) {
                 var priorityObj = {};
@@ -80,7 +69,6 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                         priorityObj[filteredBugList[i].priority]++;
                     }
                 }
-
                 var arr = [];
                 for (var key in priorityObj) {
                     if (priorityObj.hasOwnProperty(key)) {
@@ -120,7 +108,6 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                         assignmentName[bugsData[i].assignment]++;
                     }
                 }
-
                 var arr = [];
                 for (var key in assignmentName) {
                     if (assignmentName.hasOwnProperty(key)) {
@@ -131,21 +118,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 return arr;
             }
 
-            $log.warn("getPersonWorking is: ", getPersonWorking(bugsData));
-
             var assignmentCategories = Object.keys(getPersonWorking(bugsData));
-            $log.warn("assignmentCategories is type: ", Array.isArray(assignmentCategories));
-
-            // var assignmentCount = function(bugsData) {
-            //     var countArray = [];
-            //     for (var key in getPersonWorking(bugsData)) {
-            //         countArray.push(getPersonWorking(bugsData)[key]);
-            //     }
-            //     return countArray;
-            // };
-
-            // $log.warn("assignmentCount is: ", assignmentCount(bugsData));
-            // $log.warn("assignmentCount type: ", typeof assignmentCount(bugsData)[1]);
 
             //get buglist array of individual bug arrays with status and count
             function getStatusCounts(filteredBugList) {
@@ -157,7 +130,6 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                         statusCount[filteredBugList[i].status]++;
                     }
                 }
-
                 var finalArray = [];
                 for (var key in statusCount) {
                     if (statusCount.hasOwnProperty(key)) {
@@ -167,42 +139,65 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 }
                 return finalArray;
             }
-            console.log('the get status counts looks like this: ', getStatusCounts(filteredBugList));
-            //[['in-progress', 4],['resolved', 4],['new', 4]]
-            // function getStatusCounts(filteredBugList) {
-            //     var statusCount = {};
-            //     for (var i = 0; i < filteredBugList.length; i++) {
-            //         if (!statusCount[filteredBugList[i].status]) {
-            //             statusCount[filteredBugList[i].status] = 1;
-            //         } else {
-            //             statusCount[filteredBugList[i].status]++;
-            //         }
-            //     }
+////dynamic charts functionality
+            var pieChartTitle = 'default pie chart';
+            var chartData = [];
 
-            //     var finalArray = [];
-            //     for (var key in statusCount) {
-            //         if (statusCount.hasOwnProperty(key)) {
-            //             var tempArray = [key, statusCount[key]];
-            //             finalArray.push(tempArray)
-            //         }
-            //     }
-            //     return finalArray;
-            // }
-
+            function dynamicPie(title, property, data){
+                pieChartTitle = title;
+                var propertyCount = {};
+                for (var i = 0; i < data.length; i++) {
+                    if (!propertyCount[data[i][property]]) {
+                        propertyCount[data[i][property]] = 1;
+                    } else {
+                        propertyCount[data[i][property]]++;
+                    }
+                }
+                for (var key in propertyCount) {
+                    if (propertyCount.hasOwnProperty(key)) {
+                        var tempArray = [key, propertyCount[key]];
+                        chartData.push(tempArray);
+                    }
+                }
+                return chartData;
+            }
+            //call pie chart function to populate necessary data
+            console.log('pie chart data looks like: ', dynamicPie('dynamic title', 'browserVer', filteredBugList));
+            
+            var colChartTitle = 'default col chart';
+            var xTitle;
+            var colCategories;
+            var colData = [];
+            function dynamicColumn(title, property, data){
+                colChartTitle = title;
+                xTitle = 'Count of ' + property;
+                var propertyObj = {};
+                for (var i = 0; i < data.length; i++) {
+                    if (!propertyObj[data[i][property]]) {
+                        propertyObj[data[i][property]] = 1;
+                    } else {
+                        propertyObj[data[i][property]]++;
+                    }
+                }
+                colCategories = Object.keys(propertyObj);
+                for(var key in propertyObj){
+                    colData.push(propertyObj[key]);
+                }
+            }
+            //calls dynamic column chart to populate necessary data
+            console.log('column chart data looks like: ', dynamicColumn('dynamic column title', 'priority', filteredBugList));
 
             //get array of assignments and filter out 'unassigned'
             function getAssignmentList(filteredBugList) {
                 var assignmentList = [];
                 for (var i = 0; i < filteredBugList.length; i++) {
                     if ((assignmentList.indexOf(filteredBugList[i].assignment) < 0) && (filteredBugList[i].assignment !== 'unassigned')) {
-                        assignmentList.push(filteredBugList[i].assignment)
+                        assignmentList.push(filteredBugList[i].assignment);
                     }
                 }
                 return assignmentList;
             }
-            // console.log("filtered bug listing,", filteredBugList)
-            // console.log("Assignment List", getAssignmentList(filteredBugList))
-
+//end of dynamic chart data
             //get difficulty weight per person
             function dataPerPerson(filteredBugList, difficulty) {
                 var assignmentList = getAssignmentList(filteredBugList);
@@ -219,7 +214,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 }
                 return difficultyArray
             }
-            // console.log(sumPerPerson(filteredBugList))
+
             function bugAgeCategories(listOfBugs, priorityLvl) {
                 var ageArray = [0, 0, 0, 0];
                 var currentTime = new Date() * 1;
@@ -617,6 +612,71 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                     name: 'Trivial',
                     data: bugAgeCategories(filteredBugList, 'trivial')
                 }]
+            });
+
+            $('#dynamic-col-chart').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: colChartTitle
+                },
+                xAxis: {
+                    categories: colCategories,
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: "Number of Bugs"
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: xTitle,
+                    data: colData
+
+                }]
+
+            });
+
+            $('#dynamic-pie-chart').highcharts({
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: pieChartTitle
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    data: chartData
+                }] 
             });
         })
         .catch(function(err) {
