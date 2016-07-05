@@ -1,8 +1,7 @@
-#application {
-    width: 100%;
-    float: right;
-    margin-bottom: 20px;
-    li {
+li {
+    margin-top: 5px;
+    a {
+        font-size: 16px;
         &:hover {
             background-color: #80cbc4;
         }
@@ -10,6 +9,12 @@
             background-color: #4db6ac;
         }
     }
+}
+
+#application {
+    width: 100%;
+    float: right;
+    margin-bottom: 20px;
     button {
         border-radius: 5px;
         background-color: lightgrey;
@@ -17,30 +22,28 @@
         margin-top: 6px;
         margin-right: 1%;
     }
+    h4 {
+        font-weight: bold;
+        margin-left: 10px;
+    }
     #appBody {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-
-        h4 {
-            font-weight: bold;
-            margin-left: 10px;
-        }
-    // .chart-grouping {
-    //     display: flex;
-    //     flex-direction: row;
-    //     flex-wrap: wrap;
-    //     .chart {
-    //         width: 50%;
-    //     }
-    // }
+        // .chart-grouping {
+        //     display: flex;
+        //     flex-direction: row;
+        //     flex-wrap: wrap;
+        //     .chart {
+        //         width: 50%;
+        //     }
+        // }
         .chart {
-            margin: 5px 0;
+            margin: 5px;
         }
         bug-list {
             width: 24%;
         }
-
         .charts-container {
             width: 75%;
             display: flex;
