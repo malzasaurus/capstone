@@ -9,7 +9,7 @@ app.config(function($stateProvider) {
                 var bugId = $stateParams.bugId;
                 return DetailsFactory.getDetails(appId, bugId);
             },
-             allApps: function(AppFactory){
+            allApps: function(AppFactory) {
                 return AppFactory.fetchAllApps();
             },
             // updateBugInfo: function(DetailsFactory, $stateParams) {
@@ -25,11 +25,11 @@ app.config(function($stateProvider) {
                 var appID = $stateParams.appId;
                 return AppFactory.fetchAllBugs(appID);
             },
-            appData: function(AppFactory, $stateParams){
+            appData: function(AppFactory, $stateParams) {
                 var appID = $stateParams.appId;
                 return AppFactory.fetchCurrentApp(appID);
             },
-            userData: function(AppFactory, $stateParams){
+            userData: function(AppFactory, $stateParams) {
                 return AppFactory.fetchUserData($stateParams.appId);
             }
         }
@@ -41,45 +41,45 @@ app.factory('DetailsFactory', function($http, $stateParams) {
         getDetails: function(appId, bugId) {
             return $http.get('/api/applications/' + appId + '/bugs/' + bugId)
                 .then(function(response) {
-                    return response.data
-                })
+                    return response.data;
+                });
         },
         updateBug: function(appId, bugId, updates) {
             var appId = $stateParams.appId;
             var bugId = $stateParams.bugId;
             return $http.put('/api/applications/' + appId + '/bugs/' + bugId, updates)
                 .then(function(response) {
-                    return response.data
-                })
+                    return response.data;
+                });
         }
-    }
-})
+    };
+});
 
-app.controller('DetailsCtrl', function($scope, bugDetails, allUsers, DetailsFactory, allBugs, allApps, appData, userData) {
+app.controller('DetailsCtrl', function($scope, $log, bugDetails, allUsers, DetailsFactory, allBugs, allApps, appData, userData) {
     $scope.allApps = allApps;
     $scope.bugList = allBugs;
     $scope.appData = appData;
     $scope.bugDetails = bugDetails;
     $scope.userData = userData;
-    $scope.currentAdmin = function(){
+    $scope.currentAdmin = function() {
         return $scope.userData[0].appAccess.accessLevel === 'admin';
     };
     $scope.selectedPriority = $scope.bugDetails.priority;
-    console.log(allUsers)
-    var usersArr = []
-    allUsers.forEach(function(el){
-        usersArr.push(el.email)
-    })
+    console.log(allUsers);
+    var usersArr = [];
+    allUsers.forEach(function(el) {
+        usersArr.push(el.email);
+    });
 
     $scope.selectedAssignment = $scope.bugDetails.assignment;
     $scope.selectedStatus = $scope.bugDetails.status;
     $scope.selectedDifficulty = $scope.bugDetails.difficulty;
 
-    
-    $scope.priorities = ["blocker", "critical", "major", "minor", "trivial"]
-    $scope.statuses = ["new", "in-progress", "resolved"]
+
+    $scope.priorities = ["blocker", "critical", "major", "minor", "trivial"];
+    $scope.statuses = ["new", "in-progress", "resolved"];
     $scope.assignments = usersArr;
-    $scope.difficulties = [1, 2, 3, 4, 5]
+    $scope.difficulties = [1, 2, 3, 4, 5];
 
     $scope.update = function(selectedPriority, selectedAssignment, selectedStatus, selectedDifficulty, devComments) {
         var updates = {
@@ -88,11 +88,20 @@ app.controller('DetailsCtrl', function($scope, bugDetails, allUsers, DetailsFact
             status: selectedStatus,
             difficulty: selectedDifficulty,
             devComments: devComments
-        }
+        };
         DetailsFactory.updateBug(null, null, updates)
             .then(function(updatedBug) {
                 window.location.reload();
-            })
-    }
+            });
+    };
 
-})
+    // function to toggle classes on individual bug report screenshot
+    $scope.class = "reported-bug-screenshot";
+    $scope.enlargeImage = function() {
+        if ($scope.class === "reported-bug-screenshot")
+            $scope.class = "reported-bug-screenshot-expanded";
+        else {
+            $scope.class = "reported-bug-screenshot";
+        }
+    };
+});
