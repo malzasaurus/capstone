@@ -11,18 +11,38 @@
     </ul> -->
     <h4>{{appData.name}}</h4>
     <section id="appBody">
-
-
         <bug-list bugList='bugList'></bug-list>
 
         <div class='charts-container'>
-            <div id="priority-pie-chart" class="chart small"></div>
-            <div id="pie-chart" class="chart small"></div>
-            <div id="spline-chart-time" class="chart large"></div>
-            <div id="workload-chart" class="chart large"></div>
-            <div id="path-pie-chart" class="chart small"></div>
-            <div id="pie-bug-stats" class="chart small"></div>
-            <div id="col-chart-age" class="chart large"></div> 
+        <div class='inner-container'>
+            <div class="row">
+                <div class='col-lg-6'>
+                    <div id="priority-pie-chart" class="chart"></div>
+                </div>
+                <div class='col-lg-6'>
+                    <div id="pie-chart" class="chart"></div> 
+                </div> 
+            </div>
+            </div>
+            <div class='inner-container'>
+                <div id="spline-chart-time" class="chart large"></div>
+            </div>
+            <div class='inner-container'>
+                <div id="workload-chart" class="chart large"></div>
+            </div>
+            <div class='inner-container'>
+                <div class="row">
+                    <div class='col-lg-6'>
+                        <div id="path-pie-chart" class="chart"></div>
+                    </div>
+                    <div class='col-lg-6'>
+                       <div id="pie-bug-stats" class="chart"></div>
+                    </div> 
+                </div>
+            </div>
+            <div class='inner-container'>
+                <div id="col-chart-age" class="chart large"></div>
+            </div> 
             <div id='dynamic-pie-chart' class='chart large'></div>  
 <!--             <div>
                 <select ng-model='colFilter'>

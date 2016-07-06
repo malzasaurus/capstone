@@ -283,7 +283,8 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
 
             $('#line-chart').highcharts({
                 chart: {
-                    type: 'line'
+                    type: 'line',
+                    height: 400
                 },
                 title: {
                     text: 'Line Chart'
@@ -319,12 +320,15 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
             $('#pie-chart').highcharts({
                 chart: {
                     type: 'pie'
+                    // height: 400,
+                    // width: 400
                 },
                 title: {
                     text: 'Assignment Breakdown'
                 },
                 plotOptions: {
                     pie: {
+                        size: 150,
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
@@ -401,13 +405,17 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
             }); //end of area chart
             $('#priority-pie-chart').highcharts({
                 chart: {
-                    type: 'pie'
+                    type: 'pie',
+
+                    // height: 400,
+                    // width: 400
                 },
                 title: {
                     text: 'Priority Breakdown'
                 },
                 plotOptions: {
                     pie: {
+                        size: 150,
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
@@ -435,6 +443,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 },
                 plotOptions: {
                     pie: {
+                        size: 150,
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
@@ -462,6 +471,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 },
                 plotOptions: {
                     pie: {
+                        size: 150,
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
@@ -702,6 +712,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 },
                 plotOptions: {
                     pie: {
+                        size: 150,
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
