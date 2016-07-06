@@ -77,7 +77,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 
                 return filteredList;
             }
-            var filteredBugList = filterBugs(bugsData, 'assignment', 'Nicole');
+            var filteredBugList = filterBugs(bugsData);
             console.log('the filtered bug list is: ', filteredBugList);
 
             function getPriorityBreakdown(filteredBugList) {
