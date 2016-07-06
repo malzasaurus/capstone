@@ -43,17 +43,54 @@
             <div class='inner-container'>
                 <div id="col-chart-age" class="chart large"></div>
             </div> 
-            <div id='dynamic-pie-chart' class='chart large'></div>  
+           <!--  <div id='dynamic-pie-chart' class='chart large'></div>   -->
 <!--             <div>
                 <select ng-model='colFilter'>
+
+            <div id="priority-pie-chart" class="chart small"></div>
+            <div id="pie-chart" class="chart small"></div>
+            <div id="spline-chart-time" class="chart large"></div>
+            <div id="workload-chart" class="chart large"></div>
+            <div id="path-pie-chart" class="chart small"></div>
+            <div id="pie-bug-stats" class="chart small"></div>
+            <div id="col-chart-age" class="chart large"></div> 
+            <button>Create Custom Chart</button>
+            <div id="myModal" class="modal">
+              <div class="modal-content">
+                <span class="close">x</span>
+                <h6>Select your chart type:  </h6>
+                <input type="radio" name="chartType" value="pie" checked> Pie<br>
+                <input type="radio" name="chartType" value="column"> Column<br>
+                <h6>Choose a property to graph:  </h6>
+                <input type="radio" name="property" value="assignment" checked> Assignment<br>
+                <input type="radio" name="property" value="browser"> Browser<br>
+                <input type="radio" name="property" value="browserVer"> Browser Version<br>
+                <input type="radio" name="property" value="cookieEnabled"> Cookie Enabled<br>
+                <input type="radio" name="property" value="difficulty"> Difficulty<br>
+                <input type="radio" name="property" value="doNotTrack"> Do Not Track<br>
+                <input type="radio" name="property" value="hostName"> Host Name<br>
+                <input type="radio" name="property" value="pathName"> Path Name<br>
+                <input type="radio" name="property" value="priority"> Priority<br>
+                <input type="radio" name="property" value="status"> Status<br>
+
+                <h6>Input a title for your chart:  </h6>
+                <input type="text" name="title">
+                <button ng-click>Create Chart</button>
+              </div>
+            </div> -->
+<!--             <button ng-click='createPieChart()'>Turn on Pie Chart</button> -->
+            <!-- <div id='dynamic-pie-chart' class='chart large' ng-show='dynamicPieStatus'></div>   -->
+<!--             <button ng-click='createColChart()'>Turn on Column Chart</button> -->
+<!--             <div ng-show='dynamicColStatus'> -->
+<!--                 <select ng-model='colFilter'>
                     <option value='not resolved'>Not Resolved</option>
                     <option value='in-progress'>In Progress</option>
                     <option value='new'>New</option>
-                    <option value='resolved'>Resolved</option>                                        
+                    <option value='resolved'>Resolved</option>                
                 </select>
-                <button ng-click='filterChart()'>Filter</button>
-                <div id='dynamic-col-chart' class='chart large'></div>                     
-            </div> -->
+                <button ng-click='applyChartFilter()'>Filter</button> -->
+                <!-- <div id='dynamic-col-chart' class='chart large'></div>     -->                 
+            </div>
 
         </div>
     </section>

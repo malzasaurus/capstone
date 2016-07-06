@@ -47,7 +47,6 @@
         }
         .charts-container {
             width: 75%;
-            display: flex;
             flex-wrap: wrap;
             justify-content: center;
             flex-direction: row;
@@ -55,7 +54,6 @@
            .inner-container {
                 height: auto;
                 width: 100%;
-                margin-bottom: 0 !important;
            }
         }
 
