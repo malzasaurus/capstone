@@ -22,154 +22,154 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
     };
 
 ////dynamic charts functionality
-    $scope.applyChartFilter = function(){
-        $scope.colFilter = $scope.colFilter;
-        filteredDynamicList = $scope.dynamicFilter(allBugs, 'status', $scope.colFilter);
-        console.log('the filter is: ', $scope.colFilter);
-        console.log('the filtered list is: ', filteredDynamicList);    
-    };
+    // $scope.applyChartFilter = function(){
+    //     $scope.colFilter = $scope.colFilter;
+    //     filteredDynamicList = $scope.dynamicFilter(allBugs, 'status', $scope.colFilter);
+    //     console.log('the filter is: ', $scope.colFilter);
+    //     console.log('the filtered list is: ', filteredDynamicList);    
+    // };
 
-    $scope.createColChart = function(){
-        $scope.dynamicColStatus = true;
-            var colChartTitle = 'default col chart';
-            var xTitle;
-            var colCategories;
-            var colData = [];
-            var filteredDynamicList = allBugs;
-            function dynamicColumn(title, property, data){
-                colChartTitle = title;
-                xTitle = 'Count of ' + property;
-                var propertyObj = {};
-                for (var i = 0; i < data.length; i++) {
-                    if (!propertyObj[data[i][property]]) {
-                        propertyObj[data[i][property]] = 1;
-                    } else {
-                        propertyObj[data[i][property]]++;
-                    }
-                }
-                colCategories = Object.keys(propertyObj);
-                for(var key in propertyObj){
-                    colData.push(propertyObj[key]);
-                }
-            }
-            //calls dynamic column chart to populate necessary data
-            dynamicColumn('dynamic column title', 'cookieEnabled', filteredDynamicList);
+    // $scope.createColChart = function(){
+    //     $scope.dynamicColStatus = true;
+    //         var colChartTitle = 'default col chart';
+    //         var xTitle;
+    //         var colCategories;
+    //         var colData = [];
+    //         var filteredDynamicList = allBugs;
+    //         function dynamicColumn(title, property, data){
+    //             colChartTitle = title;
+    //             xTitle = 'Count of ' + property;
+    //             var propertyObj = {};
+    //             for (var i = 0; i < data.length; i++) {
+    //                 if (!propertyObj[data[i][property]]) {
+    //                     propertyObj[data[i][property]] = 1;
+    //                 } else {
+    //                     propertyObj[data[i][property]]++;
+    //                 }
+    //             }
+    //             colCategories = Object.keys(propertyObj);
+    //             for(var key in propertyObj){
+    //                 colData.push(propertyObj[key]);
+    //             }
+    //         }
+    //         //calls dynamic column chart to populate necessary data
+    //         dynamicColumn('dynamic column title', 'cookieEnabled', filteredDynamicList);
 
-            $('#dynamic-col-chart').highcharts({
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: colChartTitle
-                },
-                xAxis: {
-                    categories: colCategories,
-                    crosshair: true
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: "Number of Bugs"
-                    }
-                },
-                tooltip: {
-                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                        '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-                    footerFormat: '</table>',
-                    shared: true,
-                    useHTML: true
-                },
-                plotOptions: {
-                    column: {
-                        pointPadding: 0.2,
-                        borderWidth: 0
-                    }
-                },
-                series: [{
-                    name: xTitle,
-                    data: colData
+    //         $('#dynamic-col-chart').highcharts({
+    //             chart: {
+    //                 type: 'column'
+    //             },
+    //             title: {
+    //                 text: colChartTitle
+    //             },
+    //             xAxis: {
+    //                 categories: colCategories,
+    //                 crosshair: true
+    //             },
+    //             yAxis: {
+    //                 min: 0,
+    //                 title: {
+    //                     text: "Number of Bugs"
+    //                 }
+    //             },
+    //             tooltip: {
+    //                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+    //                 pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+    //                     '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+    //                 footerFormat: '</table>',
+    //                 shared: true,
+    //                 useHTML: true
+    //             },
+    //             plotOptions: {
+    //                 column: {
+    //                     pointPadding: 0.2,
+    //                     borderWidth: 0
+    //                 }
+    //             },
+    //             series: [{
+    //                 name: xTitle,
+    //                 data: colData
 
-                }]
+    //             }]
 
-            });
-    };
+    //         });
+    // };
 
-    $scope.createPieChart = function(){
-            $scope.dynamicPieStatus = true;
-            var pieChartTitle = 'default pie chart';
-            var chartData = [];
-            var filteredDynamicList = allBugs;
-            function dynamicPie(title, property, data){
-                pieChartTitle = title;
-                var propertyCount = {};
-                for (var i = 0; i < data.length; i++) {
-                    if (!propertyCount[data[i][property]]) {
-                        propertyCount[data[i][property]] = 1;
-                    } else {
-                        propertyCount[data[i][property]]++;
-                    }
-                }
-                for (var key in propertyCount) {
-                    if (propertyCount.hasOwnProperty(key)) {
-                        var tempArray = [key, propertyCount[key]];
-                        chartData.push(tempArray);
-                    }
-                }
-                return chartData;
-            }
+    // $scope.createPieChart = function(){
+    //         $scope.dynamicPieStatus = true;
+    //         var pieChartTitle = 'default pie chart';
+    //         var chartData = [];
+    //         var filteredDynamicList = allBugs;
+    //         function dynamicPie(title, property, data){
+    //             pieChartTitle = title;
+    //             var propertyCount = {};
+    //             for (var i = 0; i < data.length; i++) {
+    //                 if (!propertyCount[data[i][property]]) {
+    //                     propertyCount[data[i][property]] = 1;
+    //                 } else {
+    //                     propertyCount[data[i][property]]++;
+    //                 }
+    //             }
+    //             for (var key in propertyCount) {
+    //                 if (propertyCount.hasOwnProperty(key)) {
+    //                     var tempArray = [key, propertyCount[key]];
+    //                     chartData.push(tempArray);
+    //                 }
+    //             }
+    //             return chartData;
+    //         }
 
-            dynamicPie('dynamic title', 'browserVer', filteredDynamicList);  //call pie chart function to populate necessary data
-            $('#dynamic-pie-chart').highcharts({
-                chart: {
-                    type: 'pie'
-                },
-                title: {
-                    text: pieChartTitle
-                },
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        dataLabels: {
-                            enabled: true,
-                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                            style: {
-                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                            }
-                        }
-                    }
-                },
-                series: [{
-                    type: 'pie',
-                    data: chartData
-                }] 
-            });
-    };
+    //         dynamicPie('dynamic title', 'browserVer', filteredDynamicList);  //call pie chart function to populate necessary data
+    //         $('#dynamic-pie-chart').highcharts({
+    //             chart: {
+    //                 type: 'pie'
+    //             },
+    //             title: {
+    //                 text: pieChartTitle
+    //             },
+    //             plotOptions: {
+    //                 pie: {
+    //                     allowPointSelect: true,
+    //                     cursor: 'pointer',
+    //                     dataLabels: {
+    //                         enabled: true,
+    //                         format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+    //                         style: {
+    //                             color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+    //                         }
+    //                     }
+    //                 }
+    //             },
+    //             series: [{
+    //                 type: 'pie',
+    //                 data: chartData
+    //             }] 
+    //         });
+    // };
 
-            $scope.dynamicFilter = function(bugsObj, property, value, not) {
-                if(!property) { //if no filter just return original dataset
-                    return bugsObj;
-                }
-                var filteredList = [];
-                if(not){
-                    for(var i = 0; i<bugsObj.length; i++){
-                        if (bugsObj[i][property] !== value) {
-                            filteredList.push(bugsObj[i]);
-                        } 
-                    }
-                } else {
-                    for(var j = 0; j<bugsObj.length; j++){
-                        if (bugsObj[j][property] === value) {
-                            filteredList.push(bugsObj[j]);
-                        } 
-                    }
-                }
-                return filteredList;
-            };
+    //         $scope.dynamicFilter = function(bugsObj, property, value, not) {
+    //             if(!property) { //if no filter just return original dataset
+    //                 return bugsObj;
+    //             }
+    //             var filteredList = [];
+    //             if(not){
+    //                 for(var i = 0; i<bugsObj.length; i++){
+    //                     if (bugsObj[i][property] !== value) {
+    //                         filteredList.push(bugsObj[i]);
+    //                     } 
+    //                 }
+    //             } else {
+    //                 for(var j = 0; j<bugsObj.length; j++){
+    //                     if (bugsObj[j][property] === value) {
+    //                         filteredList.push(bugsObj[j]);
+    //                     } 
+    //                 }
+    //             }
+    //             return filteredList;
+    //         };
 
-            var filteredDynamicList = $scope.dynamicFilter(allBugs, 'status', 'resolved');
-            console.log('the filtered bug list is: ', filteredDynamicList);
+    //         var filteredDynamicList = $scope.dynamicFilter(allBugs, 'status', 'resolved');
+    //         console.log('the filtered bug list is: ', filteredDynamicList);
 
 
 //end of dynamic chart data
@@ -208,6 +208,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                     return 0;
                 }
                 arr = arr.sort(Comparator);
+                console.log('this is the data for the time chart: ', arr);
                 return arr;
             }
 
@@ -226,7 +227,11 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                     return false;
                 }
             }
+
             var filteredBugList = bugsData.filter(filterBugs);
+
+            // var filteredBugList = filterBugs(bugsData);
+            console.log('the filtered bug list is: ', filteredBugList);
 
             function getPriorityBreakdown(filteredBugList) {
                 var priorityObj = {};

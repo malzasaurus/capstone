@@ -1,5 +1,5 @@
 
-<ul class="nav nav-tabs ">
+<ul class="nav nav-tabs" id="subnav">
         <li ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})' class="active">{{app.name}}</a></li>
         <button class="btn btn-primary-outline waves-effect move-button" ng-show='currentAdmin()' ui-sref='appUsers({appID: appData.id})'>User Management</button>
     </ul>
@@ -23,7 +23,7 @@
             <div id="path-pie-chart" class="chart small"></div>
             <div id="pie-bug-stats" class="chart small"></div>
             <div id="col-chart-age" class="chart large"></div> 
-            <button>Create Custom Chart</button>
+           <!--  <button>Create Custom Chart</button>
             <div id="myModal" class="modal">
               <div class="modal-content">
                 <span class="close">x</span>
@@ -46,11 +46,11 @@
                 <input type="text" name="title">
                 <button ng-click>Create Chart</button>
               </div>
-            </div>
+            </div> -->
 <!--             <button ng-click='createPieChart()'>Turn on Pie Chart</button> -->
-            <div id='dynamic-pie-chart' class='chart large' ng-show='dynamicPieStatus'></div>  
+            <!-- <div id='dynamic-pie-chart' class='chart large' ng-show='dynamicPieStatus'></div>   -->
 <!--             <button ng-click='createColChart()'>Turn on Column Chart</button> -->
-            <div ng-show='dynamicColStatus'>
+<!--             <div ng-show='dynamicColStatus'> -->
 <!--                 <select ng-model='colFilter'>
                     <option value='not resolved'>Not Resolved</option>
                     <option value='in-progress'>In Progress</option>
@@ -58,7 +58,7 @@
                     <option value='resolved'>Resolved</option>                
                 </select>
                 <button ng-click='applyChartFilter()'>Filter</button> -->
-                <div id='dynamic-col-chart' class='chart large'></div>                     
+                <!-- <div id='dynamic-col-chart' class='chart large'></div>     -->                 
             </div>
 
         </div>

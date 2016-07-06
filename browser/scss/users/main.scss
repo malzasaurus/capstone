@@ -1,25 +1,38 @@
+#subnav {
+    position: absolute;
+    left: 0;
+    top: 80px;
+    height: 56px;
+    border-top: 1px solid white;
+    li {
+        margin-left: 1%;
+        a {
+            font-size: 15px;
+        }
+    }
+}
+
 #user-management {
     width: 90%;
-    margin: 0 auto 6% auto;
-    
+    margin: 6% auto;
+    h4,
+    h6 {
+        margin-left: 2%;
+    }
     table {
-    	background-color: white;
-    	.table-top {
-    		background-color: #009688;
-    	}
+        background-color: white;
+        .table-top {
+            background-color: #009688;
+        }
     }
     th {
-    	text-align: center;
-    	color: white;
-    	font-weight: normal;
+        text-align: center;
+        color: white;
+        font-weight: normal;
     }
     td {
-    	text-align: center;
+        text-align: center;
     }
-    li:hover {
-        background-color: #80cbc4;
-    }
-    
     .success-alert {
         width: 20%;
         height: 50px;
@@ -37,6 +50,7 @@
         width: 40%;
         margin: 0 auto;
         background-color: white;
+        padding: 0 2%;
         h4 {
             text-align: center;
         }
