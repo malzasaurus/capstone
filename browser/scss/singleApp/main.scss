@@ -1,12 +1,13 @@
-li {
-    margin-top: 5px;
-    a {
-        font-size: 16px;
-        &:hover {
-            background-color: #80cbc4;
-        }
-        &.active {
-            background-color: #4db6ac;
+#subnav {
+    position: absolute;
+    left: 0;
+    top: 80px;
+    height: 56px;
+    border-top: 1px solid white;
+    li {
+        margin-left: 1%;
+        a {
+            font-size: 15px;
         }
     }
 }
