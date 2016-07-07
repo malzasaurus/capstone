@@ -9,7 +9,6 @@ var User = require('../../../db').model('user');
 var InvitedUser = require('../../../db').model('invitedUser');
 
 var nodemailer = require('nodemailer');
-// var transporter = nodemailer.createTransport('smtps://grasshopperreportergmail.com:grasshopperreporter@smtp.gmail.com');
 var smtpTransport = require('nodemailer-smtp-transport');
 var transporter = nodemailer.createTransport(smtpTransport({
    service: "Gmail",
@@ -30,16 +29,11 @@ var transporter = nodemailer.createTransport(smtpTransport({
 
 //get all applications by userId
 router.get('/', function(req, res, next) {
-		var id = req.user.id;
-		User.findById(id)
-		.then(function(foundUser){
-			return foundUser.getApplications();
-		})
-		.then(function(allApplications) {
-			res.json(allApplications);
-		})
-		.catch(next);
-	// }
+	req.user.getApplications()
+	.then(function(allApplications) {
+		res.json(allApplications);
+	})
+	.catch(next);
 });
 
 //get one application

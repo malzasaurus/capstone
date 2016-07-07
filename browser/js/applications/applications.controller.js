@@ -836,9 +836,6 @@ app.controller('AllAppsCtrl', function($scope, allApps, AppFactory) {
     // // })
     // };
 
-
-
-
 });
 
 app.controller('UsersCtrl', function($scope, allUsers, appData, AppFactory, allApps) {
