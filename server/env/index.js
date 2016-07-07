@@ -3,8 +3,8 @@ var devConfigPath = path.join(__dirname, './development.js');
 var productionConfigPath = path.join(__dirname, './production.js');
 // var pg = require('pg');
 
-//if (process.env.NODE_ENV === 'production') {
-  if(process.env.HEROKU_POSTGRESQL_JADE_URL){
+if (process.env.NODE_ENV === 'production') {
+  //if(process.env.HEROKU_POSTGRESQL_JADE_URL){
     module.exports = require(productionConfigPath);
 } else {
     module.exports = require(devConfigPath);
