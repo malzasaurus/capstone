@@ -78,5 +78,21 @@ module.exports = function(db) {
         img_val: {
             type: Sequelize.TEXT
         }
-    });
+    },
+    {
+        instanceMethods: {
+            toString: function () {
+                var string="";
+                for(var key in this.dataValues){
+                    if(this.dataValues[key] !== null){
+                        string += key + ": " + this.dataValues[key] + "\n"
+                    }
+                }
+                return string
+            }
+        }
+    }
+
+
+    );
 };

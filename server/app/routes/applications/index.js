@@ -7,9 +7,15 @@ var Application = require('../../../db').model('application');
 var User = require('../../../db').model('user');
 // var AppAccess = require('../../../db').model('appAccess');
 var InvitedUser = require('../../../db').model('invitedUser');
-
+var localStorage = require('localStorage');
+var Client = require('github/lib/index');
+var github = new Client({
+	 debug: true,
+    headers: {
+        "Accept": "application/vnd.github.the-key-preview"
+    }
+});
 var nodemailer = require('nodemailer');
-// var transporter = nodemailer.createTransport('smtps://grasshopperreportergmail.com:grasshopperreporter@smtp.gmail.com');
 var smtpTransport = require('nodemailer-smtp-transport');
 var transporter = nodemailer.createTransport(smtpTransport({
    service: "Gmail",
@@ -30,16 +36,11 @@ var transporter = nodemailer.createTransport(smtpTransport({
 
 //get all applications by userId
 router.get('/', function(req, res, next) {
-		var id = req.user.id;
-		User.findById(id)
-		.then(function(foundUser){
-			return foundUser.getApplications();
-		})
-		.then(function(allApplications) {
-			res.json(allApplications);
-		})
-		.catch(next);
-	// }
+	req.user.getApplications()
+	.then(function(allApplications) {
+		res.json(allApplications);
+	})
+	.catch(next);
 });
 
 //get one application
@@ -270,4 +271,83 @@ router.delete('/:id', function(req, res, next) {
 		res.sendStatus(204)
 	})
 	.catch(next)
-})
+});
+
+router.get('/:id/github', function(req, res, next) {
+    github.authenticate({
+    type: "oauth",
+    token: localStorage.getItem('accessToken')
+    });
+    github.repos.getAll({
+    	visibility: "public"
+    }, function(err, response) {
+        console.log(response)
+        res.send(response)
+    })
+});
+
+router.post('/:id/bugs/add_issue', function(req, res, next) {
+	var repoName;
+	var bugId = req.body.bugId
+
+	Promise.all([Bug.findById(bugId), Application.findById(req.params.id)])
+	.then(function(values){
+		var bug = values[0]
+		var app = values[1]
+		var description = bug.toString();
+		repoName = app.repoId
+		console.log("THIS IS DES", description)
+		github.authenticate({
+		    type: "oauth",
+		    token: localStorage.getItem('accessToken')
+		});
+		github.issues.create({
+	    	user: req.user.name,
+	    	repo: repoName,
+	    	title: "new issue",
+	    	body: description
+	    }, function(err, response) {
+	        console.log(response)
+	        res.send(response);
+	    })
+	})
+	Bug.findById(bugId)
+
+	// Application.findById(req.params.id)
+	// .then(function(foundApplication){
+	// 	repoName = foundApplication.repoId
+	// 	console.log("REPO", repoName)
+	// 	github.authenticate({
+	// 	    type: "oauth",
+	// 	    token: localStorage.getItem('accessToken')
+	// 	});
+	// 	github.issues.create({
+	//     	user: req.user.name,
+	//     	repo: repoName,
+	//     	title: "new issue",
+	//     	body: req.body.info
+	//     }, function(err, response) {
+	//         console.log(response)
+	//         res.send(response);
+	//     })
+	// })
+	
+	
+	// Application.findById(req.params.id)
+	// .then(function(foundApplication) {
+	// 	github.authenticate({
+	// 	    type: "oauth",
+	// 	    token: localStorage.getItem('accessToken')
+	// 	});
+	//     github.issues.create({
+	//     	user: 'nbates88',
+	//     	repo: 'synethsize',
+	//     	title: "new issue",
+	//     	body: req.body
+	//     }, function(err, response) {
+	//         console.log(response)
+	//         res.send(response);
+	//     })
+	// })
+    
+});
