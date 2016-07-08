@@ -62,8 +62,12 @@ textarea {
 #detail-page {
     margin: 6% auto;
     width: 90%;
-    h3 {
-      margin-left: 4%;
+    h4 {
+        font-weight: bold;
+        margin-left: 10px;
+    }
+    #bug-sidebar {
+        margin-top: 0 !important;
     }
 }
 

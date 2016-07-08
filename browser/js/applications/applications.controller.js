@@ -6,22 +6,22 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
     $scope.colFilter;
     $scope.dynamicPieStatus = false;
     $scope.dynamicColStatus = false;
-    
+
     // $scope.dynamicPieToggle = function(){
     //     $scope.dynamicPieStatus = true;
     // };
     // $scope.dynamicColToggle = function(){
     //     $scope.dynamicColStatus = true;
     // };
-    
-    $scope.currentAdmin = function(){
+
+    $scope.currentAdmin = function() {
         return $scope.userData[0].appAccess.accessLevel === 'admin';
     };
     $scope.currentApp = function(app) {
         return app.id === $scope.appData.id;
     };
 
-////dynamic charts functionality
+    ////dynamic charts functionality
     // $scope.applyChartFilter = function(){
     //     $scope.colFilter = $scope.colFilter;
     //     filteredDynamicList = $scope.dynamicFilter(allBugs, 'status', $scope.colFilter);
@@ -172,7 +172,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
     //         console.log('the filtered bug list is: ', filteredDynamicList);
 
 
-//end of dynamic chart data
+    //end of dynamic chart data
 
 
 
@@ -202,6 +202,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                         arr.push(tempArray);
                     }
                 }
+
                 function Comparator(a, b) {
                     if (a[0] < b[0]) return -1;
                     if (a[0] > b[0]) return 1;
