@@ -115,6 +115,7 @@ app.controller('DetailsCtrl', function($scope, $log, bugDetails, allUsers, Detai
     // function to toggle classes on individual bug report screenshot
     $scope.class = "reported-bug-screenshot";
     $scope.enlargeImage = function() {
+        $log.info("You look fabulous today.");
         if ($scope.class === "reported-bug-screenshot")
             $scope.class = "reported-bug-screenshot-expanded";
         else {

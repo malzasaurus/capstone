@@ -420,10 +420,12 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
+                            distance: 0,
                             enabled: true,
                             format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                             style: {
-                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+                                fontSize:'6px'
                             }
                         }
                     }
@@ -504,6 +506,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
+                            distance: 2,
                             enabled: true,
                             format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                             style: {
@@ -532,7 +535,8 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
-                            enabled: false,
+                            distance: 2,
+                            enabled: true,
                             format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                             style: {
                                 color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
@@ -560,6 +564,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
+                            distance: 0,
                             enabled: true,
                             format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                             style: {
@@ -723,6 +728,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                     column: {
                         stacking: 'normal',
                         dataLabels: {
+                            distance:0,
                             enabled: false,
                             color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
                             style: {

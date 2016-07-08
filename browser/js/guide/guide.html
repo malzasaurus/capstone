@@ -13,7 +13,8 @@
 	<li><p>Insert the code below into your main html file where you would like the bug reporter button to appear (this code can also be found in the directives.html file in the derpModule).</p>
 		<ul><li><p>
 			<pre>
-&lt;button id="myBtn"&gt;Report a Bug&lt;/button&gt;
+&lt;button id="myBtn" data-html2canvas-ignore&gt;&lt;span&gt;&lt;img src="/derpModule/logogh.png"&gt;&lt;/span&gt;&lt;/button&gt;
+&lt;div id='loading' data-html2canvas-ignore&gt;&lt;img src="/derpModule/spin.svg"&gt;&lt;/div&gt;
 &lt;div id="myModal" class='modal'&gt;
     &lt;div class="modal-content"&gt;
         &lt;div class="modal-header"&gt;
@@ -21,8 +22,9 @@
             &lt;h2&gt;Report a Bug&lt;/h2&gt;
         &lt;/div&gt;
         &lt;div class="modal-body"&gt;
-            &lt;form action="OUR PATH HERE" method="post" id="bug_form"&gt;
-                &lt;input type="text" name="formComments"&gt;
+            &lt;form action="https://gha-capstone-grasshopper.herokuapp.com/api/bugs" method="post" id="bug_form"&gt;
+                &lt;h5&gt;Comments:&lt;/h5&gt;
+                &lt;textarea name='formComments'&gt;&lt;/textarea&gt;
                 &lt;input type="hidden" name="name" id="cookieEnabled" value="" readonly="readonly"&gt;
                 &lt;input type="hidden" name="doNotTrack" id="doNotTrack" value="" readonly="readonly"&gt;
                 &lt;input type="hidden" name="appVersion" id="appVersion" value="" readonly="readonly"&gt;
