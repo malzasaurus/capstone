@@ -5,7 +5,7 @@ var GitHubStrategy = require('passport-github').Strategy;
 
 module.exports = function (app, db) {
 
-    var User = db.define('user');
+    var User = db.model('user');
 
     var githubConfig = app.getValue('env').GITHUB;
 
@@ -27,13 +27,16 @@ module.exports = function (app, db) {
                 if (user) {
                     return user;
                 } else {
+                    console.log("PROFILE", profile)
                      return User.create({
                         name: profile.username,
+                        email: profile.username,
                         github_id: profile.id
-                    });
+                    })
                 }
             })
             .then(function (userToLogin) {
+                console.log("userToLogin", userToLogin);
                 done(null, userToLogin);
             })
             .catch(function (err) {
