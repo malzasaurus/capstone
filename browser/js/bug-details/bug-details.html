@@ -64,6 +64,7 @@
                                 <select name="difficulty" id="difficulty" ng-options="difficulty for difficulty in difficulties" ng-model="selectedDifficulty"></select>
                             </div>
                             <button class="btn btn-primary" type="submit" ng-click="update(selectedPriority, selectedAssignment, selectedStatus, selectedDifficulty, devComments)">Update</button>
+                            <button class="btn btn-primary" type="submit" ng-click="addIssue()">Add Issue to GitHub</button>
                         </div>
                     </div>
                 </div>

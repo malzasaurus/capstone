@@ -51,6 +51,13 @@ app.factory('DetailsFactory', function($http, $stateParams) {
                 .then(function(response) {
                     return response.data;
                 });
+        },
+        addGitIssue: function(appID, issueBody){
+            var appId = $stateParams.appId;
+            return $http.post('/api/applications/'  + appId + '/bugs/add_issue',  issueBody)
+                .then(function(response) {
+                    return response.data;
+                });
         }
     };
 });
@@ -91,6 +98,16 @@ app.controller('DetailsCtrl', function($scope, $log, bugDetails, allUsers, Detai
         };
         DetailsFactory.updateBug(null, null, updates)
             .then(function(updatedBug) {
+                window.location.reload();
+            });
+    };
+
+      $scope.addIssue = function() {
+        var issueBody = {
+           bugId: $scope.bugDetails.id
+        };
+        DetailsFactory.addGitIssue(null, issueBody)
+            .then(function(createdIssue) {
                 window.location.reload();
             });
     };

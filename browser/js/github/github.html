@@ -1,0 +1,10 @@
+<section id="github">
+<h1>My GitHub Repos</h1>
+    <select name="repo" id="repo" ng-options="repo.name for repo in allRepos" ng-model="selectedRepo"></select>
+  <button class="btn btn-primary" type="submit" ng-click="addRepo(selectedRepo)">Connect to Repo</button>
+  <div class="success-alert" ng-show='repoStatus'>
+            <p class="success-message">Repo Added</p>
+        </div>
+</section>
+
+ 

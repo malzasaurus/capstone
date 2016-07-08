@@ -21,6 +21,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
         return app.id === $scope.appData.id;
     };
 
+
 ////dynamic charts functionality
     // $scope.applyChartFilter = function(){
     //     $scope.colFilter = $scope.colFilter;
@@ -841,9 +842,6 @@ app.controller('AllAppsCtrl', function($scope, allApps, AppFactory) {
     // //     // return foundBugs.length
     // // })
     // };
-
-
-
 
 });
 
