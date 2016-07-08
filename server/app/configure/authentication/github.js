@@ -16,6 +16,7 @@ module.exports = function (app, db) {
     };
 
     var verifyCallback = function (accessToken, refreshToken, profile, done) {
+        console.log(profile)
        localStorage.setItem('accessToken', accessToken);
         User.findOne({
                 where: {

@@ -2,6 +2,7 @@
 <ul class="nav nav-tabs" id="subnav">
         <li ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})' class="active">{{app.name}}</a></li>
         <button class="btn btn-primary-outline waves-effect move-button" ng-show='currentAdmin()' ui-sref='appUsers({appID: appData.id})'>User Management</button>
+        <button class="btn btn-primary-outline waves-effect move-button" ui-sref='github({appID: appData.id})'>Connect to Repo</button>
     </ul>
 <div id="app-page">    
 <section id="application">
