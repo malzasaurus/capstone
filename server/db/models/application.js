@@ -16,6 +16,9 @@ module.exports = function(db) {
         },
         appId: {
             type: Sequelize.STRING
+        },
+        repoId: {
+            type: Sequelize.STRING
         }
     },{
         hooks: {

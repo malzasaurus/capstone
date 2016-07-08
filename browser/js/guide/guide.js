@@ -8,4 +8,4 @@ app.config(function($stateProvider) {
 
 app.controller('GuideCtrl', function($scope, $window) {
     $window.scrollTo(0, 0);
-})
+});

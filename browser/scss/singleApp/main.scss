@@ -48,16 +48,11 @@
             flex-wrap: wrap;
             justify-content: center;
             flex-direction: row;
-            .small {
-                flex-grow: 1;
-                width: 45%;
-                min-height: 400px;
-            }
-            .large {
-                flex-grow: 2;
+
+           .inner-container {
+                height: auto;
                 width: 100%;
-                min-height: 400px;
-            }
+           }
         }
     }
 }

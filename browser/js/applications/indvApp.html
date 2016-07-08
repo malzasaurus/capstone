@@ -1,35 +1,59 @@
 <ul class="nav nav-tabs" id="subnav">
-    <li ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})' class="active">{{app.name}}</a></li>
-    <button class="btn btn-primary-outline waves-effect move-button" ng-show='currentAdmin()' ui-sref='appUsers({appID: appData.id})'>User Management</button>
-</ul>
-<div id="app-page">
-    <div class="row">
-        <div class="col-lg-12">
-        </div>
-    </div>
-    <div id="application">
-        <!-- <ul class="nav nav-tabs ">
+        <li ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})' class="active">{{app.name}}</a></li>
+        <button class="btn btn-primary-outline waves-effect move-button" ng-show='currentAdmin()' ui-sref='appUsers({appID: appData.id})'>User Management</button>
+        <button class="btn btn-primary-outline waves-effect move-button" ui-sref='github({appID: appData.id})'>Connect to Repo</button>
+    </ul>
+<div id="app-page">    
+<section id="application">
+    <!-- <ul class="nav nav-tabs ">
         <li ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})' class="active">{{app.name}}</a></li>
         <button ng-show='currentAdmin()' ui-sref='appUsers({appID: appData.id})'>User Management</button>
     </ul> -->
-        <h4>{{appData.name}}</h4>
-        <div class="container">
+    <h4>{{appData.name}}</h4>
+    <section id="appBody">
+        <bug-list bugList='bugList'></bug-list>
+
+        <div class='charts-container'>
+        <div class='inner-container'>
             <div class="row">
-                <div class="col-lg-3">
-                    <div>
-                        <bug-list bugList='bugList'></bug-list>
-                    </div>
+                <div class='col-lg-6'>
+                    <div id="priority-pie-chart" class="chart"></div>
                 </div>
-                <div id="appBody">
-                    <div class='charts-container'>
-                        <div id="priority-pie-chart" class="chart small"></div>
-                        <div id="pie-chart" class="chart small"></div>
-                        <div id="spline-chart-time" class="chart large"></div>
-                        <div id="workload-chart" class="chart large"></div>
-                        <div id="path-pie-chart" class="chart small"></div>
-                        <div id="pie-bug-stats" class="chart small"></div>
-                        <div id="col-chart-age" class="chart large"></div>
-                        <!--  <button>Create Custom Chart</button>
+                <div class='col-lg-6'>
+                    <div id="pie-chart" class="chart"></div> 
+                </div> 
+            </div>
+            </div>
+            <div class='inner-container'>
+                <div id="spline-chart-time" class="chart large"></div>
+            </div>
+            <div class='inner-container'>
+                <div id="workload-chart" class="chart large"></div>
+            </div>
+            <div class='inner-container'>
+                <div class="row">
+                    <div class='col-lg-6'>
+                        <div id="path-pie-chart" class="chart"></div>
+                    </div>
+                    <div class='col-lg-6'>
+                       <div id="pie-bug-stats" class="chart"></div>
+                    </div> 
+                </div>
+            </div>
+            <div class='inner-container'>
+                <div id="col-chart-age" class="chart large"></div>
+            </div> 
+           <!--  <div id='dynamic-pie-chart' class='chart large'></div>   -->
+<!--             <div>
+                <select ng-model='colFilter'>
+            <div id="priority-pie-chart" class="chart small"></div>
+            <div id="pie-chart" class="chart small"></div>
+            <div id="spline-chart-time" class="chart large"></div>
+            <div id="workload-chart" class="chart large"></div>
+            <div id="path-pie-chart" class="chart small"></div>
+            <div id="pie-bug-stats" class="chart small"></div>
+            <div id="col-chart-age" class="chart large"></div> 
+            <button>Create Custom Chart</button>
             <div id="myModal" class="modal">
               <div class="modal-content">
                 <span class="close">x</span>
@@ -47,36 +71,35 @@
                 <input type="radio" name="property" value="pathName"> Path Name<br>
                 <input type="radio" name="property" value="priority"> Priority<br>
                 <input type="radio" name="property" value="status"> Status<br>
-
                 <h6>Input a title for your chart:  </h6>
                 <input type="text" name="title">
                 <button ng-click>Create Chart</button>
               </div>
             </div> -->
-                        <!--             <button ng-click='createPieChart()'>Turn on Pie Chart</button> -->
-                        <!-- <div id='dynamic-pie-chart' class='chart large' ng-show='dynamicPieStatus'></div>   -->
-                        <!--             <button ng-click='createColChart()'>Turn on Column Chart</button> -->
-                        <!--             <div ng-show='dynamicColStatus'> -->
-                        <!--                 <select ng-model='colFilter'>
+<!--             <button ng-click='createPieChart()'>Turn on Pie Chart</button> -->
+            <!-- <div id='dynamic-pie-chart' class='chart large' ng-show='dynamicPieStatus'></div>   -->
+<!--             <button ng-click='createColChart()'>Turn on Column Chart</button> -->
+<!--             <div ng-show='dynamicColStatus'> -->
+<!--                 <select ng-model='colFilter'>
                     <option value='not resolved'>Not Resolved</option>
                     <option value='in-progress'>In Progress</option>
                     <option value='new'>New</option>
                     <option value='resolved'>Resolved</option>                
                 </select>
                 <button ng-click='applyChartFilter()'>Filter</button> -->
-                        <!-- <div id='dynamic-col-chart' class='chart large'></div>     -->
-                    </div>
-                </div>
+                <!-- <div id='dynamic-col-chart' class='chart large'></div>     -->                 
             </div>
+
         </div>
-    </div>
-</div>
-<!-- <div ng-model='appSelection' ng-repeat="app in allApps" value={{app.id}}>{{app.name}}
+    </section>
+</section>
+        <!-- <div ng-model='appSelection' ng-repeat="app in allApps" value={{app.id}}>{{app.name}}
         </div> -->
-<!--    <select ng-model='appSelection'>
+        <!--    <select ng-model='appSelection'>
             <option ng-repeat="app in allApps" value={{app.id}}>{{app.name}}</option>
         </select> -->
-<!--     <div class="chart-grouping"> -->
+
+        <!--     <div class="chart-grouping"> -->
 <!--     </div> -->
 <!--     <div class="chart-grouping"> -->
 <!--         <div id="bar-chart" class="chart"></div> -->
@@ -85,9 +108,10 @@
 <!--     <div class="chart-grouping"> -->
 <!--     </div> -->
 <!--     <div>{{bugList}}</div> -->
-<!-- <div ng-model='appSelection' ng-repeat="app in allApps" value={{app.id}}>{{app.name}}
+
+    <!-- <div ng-model='appSelection' ng-repeat="app in allApps" value={{app.id}}>{{app.name}}
     </div> -->
-<!--    <select ng-model='appSelection'>
+    <!--    <select ng-model='appSelection'>
         <option ng-repeat="app in allApps" value={{app.id}}>{{app.name}}</option>
     </select> -->
 <!--     <div class="chart-grouping">
@@ -102,7 +126,7 @@
         <div id="pie-bug-stats" class="chart"></div>
     </div>
     <div id="col-chart-age" class="chart"></div> -->
-<!-- <div>{{bugList}}</div> -->
+    <!-- <div>{{bugList}}</div> -->
 <!-- </section>
 <bug-list bugList='bugList'></bug-list>
 </div> -->

@@ -6,6 +6,7 @@ module.exports = router;
 router.use('/users', require('./users'));
 router.use('/applications', require('./applications'));
 router.use('/bugs', require('./bugs'));
+router.use('/github', require('./github'));
 
 // Make sure this is after all of
 // the registered routes!

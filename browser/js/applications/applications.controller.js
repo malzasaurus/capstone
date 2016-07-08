@@ -6,22 +6,23 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
     $scope.colFilter;
     $scope.dynamicPieStatus = false;
     $scope.dynamicColStatus = false;
-
+    
     // $scope.dynamicPieToggle = function(){
     //     $scope.dynamicPieStatus = true;
     // };
     // $scope.dynamicColToggle = function(){
     //     $scope.dynamicColStatus = true;
     // };
-
-    $scope.currentAdmin = function() {
+    
+    $scope.currentAdmin = function(){
         return $scope.userData[0].appAccess.accessLevel === 'admin';
     };
     $scope.currentApp = function(app) {
         return app.id === $scope.appData.id;
     };
 
-    ////dynamic charts functionality
+
+////dynamic charts functionality
     // $scope.applyChartFilter = function(){
     //     $scope.colFilter = $scope.colFilter;
     //     filteredDynamicList = $scope.dynamicFilter(allBugs, 'status', $scope.colFilter);
@@ -172,7 +173,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
     //         console.log('the filtered bug list is: ', filteredDynamicList);
 
 
-    //end of dynamic chart data
+//end of dynamic chart data
 
 
 
@@ -202,7 +203,6 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                         arr.push(tempArray);
                     }
                 }
-
                 function Comparator(a, b) {
                     if (a[0] < b[0]) return -1;
                     if (a[0] > b[0]) return 1;
@@ -371,7 +371,8 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
 
             $('#line-chart').highcharts({
                 chart: {
-                    type: 'line'
+                    type: 'line',
+                    height: 400
                 },
                 title: {
                     text: 'Line Chart'
@@ -407,19 +408,24 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
             $('#pie-chart').highcharts({
                 chart: {
                     type: 'pie'
+                    // height: 400,
+                    // width: 400
                 },
                 title: {
                     text: 'Assignment Breakdown'
                 },
                 plotOptions: {
                     pie: {
+                        size: 150,
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
+                            distance: 0,
                             enabled: true,
                             format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                             style: {
-                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+                                fontSize:'6px'
                             }
                         }
                     }
@@ -486,16 +492,21 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
             }); //end of area chart
             $('#priority-pie-chart').highcharts({
                 chart: {
-                    type: 'pie'
+                    type: 'pie',
+
+                    // height: 400,
+                    // width: 400
                 },
                 title: {
                     text: 'Priority Breakdown'
                 },
                 plotOptions: {
                     pie: {
+                        size: 150,
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
+                            distance: 2,
                             enabled: true,
                             format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                             style: {
@@ -520,9 +531,11 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 },
                 plotOptions: {
                     pie: {
+                        size: 150,
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
+                            distance: 2,
                             enabled: true,
                             format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                             style: {
@@ -547,9 +560,11 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 },
                 plotOptions: {
                     pie: {
+                        size: 150,
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
+                            distance: 0,
                             enabled: true,
                             format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                             style: {
@@ -713,6 +728,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                     column: {
                         stacking: 'normal',
                         dataLabels: {
+                            distance:0,
                             enabled: false,
                             color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
                             style: {
@@ -738,6 +754,73 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                     data: bugAgeCategories(filteredBugList, 'trivial')
                 }]
             });
+
+
+            // $('#dynamic-col-chart').highcharts({
+            //     chart: {
+            //         type: 'column'
+            //     },
+            //     title: {
+            //         text: colChartTitle
+            //     },
+            //     xAxis: {
+            //         categories: colCategories,
+            //         crosshair: true
+            //     },
+            //     yAxis: {
+            //         min: 0,
+            //         title: {
+            //             text: "Number of Bugs"
+            //         }
+            //     },
+            //     tooltip: {
+            //         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            //         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            //             '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            //         footerFormat: '</table>',
+            //         shared: true,
+            //         useHTML: true
+            //     },
+            //     plotOptions: {
+            //         column: {
+            //             pointPadding: 0.2,
+            //             borderWidth: 0
+            //         }
+            //     },
+            //     series: [{
+            //         name: xTitle,
+            //         data: colData
+
+            //     }]
+
+            // });
+
+            // $('#dynamic-pie-chart').highcharts({
+            //     chart: {
+            //         type: 'pie'
+            //     },
+            //     title: {
+            //         text: pieChartTitle
+            //     },
+            //     plotOptions: {
+            //         pie: {
+            //             size: 150,
+            //             allowPointSelect: true,
+            //             cursor: 'pointer',
+            //             dataLabels: {
+            //                 enabled: true,
+            //                 format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+            //                 style: {
+            //                     color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+            //                 }
+            //             }
+            //         }
+            //     },
+            //     series: [{
+            //         type: 'pie',
+            //         data: chartData
+            //     }] 
+            // });
         })
         .catch(function(err) {
             console.error(err);
@@ -759,9 +842,6 @@ app.controller('AllAppsCtrl', function($scope, allApps, AppFactory) {
     // //     // return foundBugs.length
     // // })
     // };
-
-
-
 
 });
 

@@ -12,6 +12,9 @@ module.exports = function(db) {
             email: {
                 type: Sequelize.STRING
             },
+            github_id: {
+                type: Sequelize.STRING
+            },
             password: {
                 type: Sequelize.STRING
             },
