@@ -31,10 +31,14 @@ app.factory('GithubFactory', function($http) {
     };
 });
 
-app.controller('GithubCtrl', function($scope, allRepos, GithubFactory, appData) {
+app.controller('GithubCtrl', function($scope, allRepos, GithubFactory, appData, $state) {
    $scope.allRepos = allRepos;
    $scope.addRepo =  function(repoIdObj) {
-        GithubFactory.addRepoId(appData.id, repoIdObj);
-        window.alert("You've connected!")
+        var repoObj = {repoId: repoIdObj.name }
+        GithubFactory.addRepoId(appData.id, repoObj)
+        .then(function(response){
+            $scope.repoStatus = true;
+        })
    }
 });
+
