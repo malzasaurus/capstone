@@ -370,7 +370,8 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
 
             $('#line-chart').highcharts({
                 chart: {
-                    type: 'line'
+                    type: 'line',
+                    height: 400
                 },
                 title: {
                     text: 'Line Chart'
@@ -406,19 +407,24 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
             $('#pie-chart').highcharts({
                 chart: {
                     type: 'pie'
+                    // height: 400,
+                    // width: 400
                 },
                 title: {
                     text: 'Assignment Breakdown'
                 },
                 plotOptions: {
                     pie: {
+                        size: 150,
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
+                            distance: 0,
                             enabled: true,
                             format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                             style: {
-                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+                                fontSize:'6px'
                             }
                         }
                     }
@@ -485,16 +491,21 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
             }); //end of area chart
             $('#priority-pie-chart').highcharts({
                 chart: {
-                    type: 'pie'
+                    type: 'pie',
+
+                    // height: 400,
+                    // width: 400
                 },
                 title: {
                     text: 'Priority Breakdown'
                 },
                 plotOptions: {
                     pie: {
+                        size: 150,
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
+                            distance: 2,
                             enabled: true,
                             format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                             style: {
@@ -519,9 +530,11 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 },
                 plotOptions: {
                     pie: {
+                        size: 150,
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
+                            distance: 2,
                             enabled: true,
                             format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                             style: {
@@ -546,9 +559,11 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                 },
                 plotOptions: {
                     pie: {
+                        size: 150,
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
+                            distance: 0,
                             enabled: true,
                             format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                             style: {
@@ -712,6 +727,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                     column: {
                         stacking: 'normal',
                         dataLabels: {
+                            distance:0,
                             enabled: false,
                             color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
                             style: {
@@ -737,6 +753,73 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
                     data: bugAgeCategories(filteredBugList, 'trivial')
                 }]
             });
+
+
+            // $('#dynamic-col-chart').highcharts({
+            //     chart: {
+            //         type: 'column'
+            //     },
+            //     title: {
+            //         text: colChartTitle
+            //     },
+            //     xAxis: {
+            //         categories: colCategories,
+            //         crosshair: true
+            //     },
+            //     yAxis: {
+            //         min: 0,
+            //         title: {
+            //             text: "Number of Bugs"
+            //         }
+            //     },
+            //     tooltip: {
+            //         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            //         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            //             '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            //         footerFormat: '</table>',
+            //         shared: true,
+            //         useHTML: true
+            //     },
+            //     plotOptions: {
+            //         column: {
+            //             pointPadding: 0.2,
+            //             borderWidth: 0
+            //         }
+            //     },
+            //     series: [{
+            //         name: xTitle,
+            //         data: colData
+
+            //     }]
+
+            // });
+
+            // $('#dynamic-pie-chart').highcharts({
+            //     chart: {
+            //         type: 'pie'
+            //     },
+            //     title: {
+            //         text: pieChartTitle
+            //     },
+            //     plotOptions: {
+            //         pie: {
+            //             size: 150,
+            //             allowPointSelect: true,
+            //             cursor: 'pointer',
+            //             dataLabels: {
+            //                 enabled: true,
+            //                 format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+            //                 style: {
+            //                     color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+            //                 }
+            //             }
+            //         }
+            //     },
+            //     series: [{
+            //         type: 'pie',
+            //         data: chartData
+            //     }] 
+            // });
         })
         .catch(function(err) {
             console.error(err);
