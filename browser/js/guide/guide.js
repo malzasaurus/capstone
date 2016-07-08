@@ -1,18 +1,11 @@
 app.config(function ($stateProvider) {
     $stateProvider.state('guide', {
         url: '/guide',
-        templateUrl: 'js/guide/guide.html'
+        templateUrl: 'js/guide/guide.html',
+        controller: 'GuideCtrl'
     });
 });
 
-app.controller('ScrollController', ['$scope', '$location', '$anchorScroll',
-  function ($scope, $location, $anchorScroll) {
-    $scope.gotoBottom = function() {
-      // set the location.hash to the id of
-      // the element you wish to scroll to.
-      $location.hash('top');
-
-      // call $anchorScroll()
-      $anchorScroll();
-    };
-  }]);
+app.controller('GuideCtrl', function($scope, $window){
+  $window.scrollTo(0,0);
+});
