@@ -68,6 +68,8 @@ app.controller('DetailsCtrl', function($scope, $log, bugDetails, allUsers, Detai
     $scope.appData = appData;
     $scope.bugDetails = bugDetails;
     $scope.userData = userData;
+
+    // $scope.logs = (bugDetails.consoles).split("}}}");
     $scope.currentAdmin = function() {
         return $scope.userData[0].appAccess.accessLevel === 'admin';
     };
