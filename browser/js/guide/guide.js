@@ -1,4 +1,4 @@
-app.config(function ($stateProvider) {
+app.config(function($stateProvider) {
     $stateProvider.state('guide', {
         url: '/guide',
         templateUrl: 'js/guide/guide.html',
@@ -6,6 +6,6 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('GuideCtrl', function($scope, $window){
-  $window.scrollTo(0,0);
+app.controller('GuideCtrl', function($scope, $window) {
+    $window.scrollTo(0, 0);
 });

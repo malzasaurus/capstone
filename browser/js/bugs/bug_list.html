@@ -9,9 +9,11 @@
             <option value='resolved'>Resolved</option>
         </select>
     </div>
-
-    <div id='bug-list'>
-        <bug-detail ng-repeat="bug in bugList | filter: bug.status =filterVal" class="list-group-item"></bug-detail>
+<div>
+    <div id='bug-list' class="scrollable">
+        <bug-detail ng-repeat="bug in bugList | filter: bug.status =filterVal | orderBy:'-id'" class="list-group-item"></bug-detail>
     </div>
+</div>
+
 </div>
 <!-- need to add ability to show all after filter applied -->
