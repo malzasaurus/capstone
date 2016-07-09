@@ -23,5 +23,10 @@ module.exports = {
         "clientID": process.env.GOOGLE_CLIENT_ID,
         "clientSecret": process.env.GOOGLE_CLIENT_SECRET,
         "callbackURL": process.env.GOOGLE_CALLBACK_URL
-    }
+    },
+    "GITHUB": {
+    "clientID": "73ae3d75962b493faf22",
+    "clientSecret": process.env.github,
+    "callbackURL": "https://gha-capstone-grasshopper.herokuapp.com/auth/github/callback"
+  }
 };
