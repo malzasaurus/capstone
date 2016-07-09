@@ -15,7 +15,7 @@ var github = new Client({
         "Accept": "application/vnd.github.the-key-preview"
     }
 });
-var gmailConfig = app.getValue('env').GMAIL;
+//var gmailConfig = app.getValue('env').GMAIL;
 
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
@@ -23,7 +23,7 @@ var transporter = nodemailer.createTransport(smtpTransport({
     service: "Gmail",
     auth: {
         user: "grasshopperreporter@gmail.com",
-        pass: gmailConfig.password,
+        pass: "vEzu8_cHAbraxaz",
     }
 }));
 

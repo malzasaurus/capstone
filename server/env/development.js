@@ -20,8 +20,5 @@ module.exports = {
     "clientID": "73ae3d75962b493faf22",
     "clientSecret": require('../../secrets').github,
     "callbackURL": "http://127.0.0.1:1337/auth/github/callback"
-  },
-  "GMAIL": {
-    "password": require('../../secrets').gmail
   }
 };

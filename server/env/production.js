@@ -28,8 +28,5 @@ module.exports = {
     "clientID": "73ae3d75962b493faf22",
     "clientSecret": process.env.github,
     "callbackURL": "https://gha-capstone-grasshopper.herokuapp.com/auth/github/callback"
-  },
-  "GMAIL": {
-    "password": process.env.gmail
   }
 };
