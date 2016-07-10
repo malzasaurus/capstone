@@ -1,8 +1,6 @@
 <ul class="nav nav-tabs" id="subnav">
     <li ng-class="{active: currentApp(app)}" ng-repeat='app in allApps'><a ui-sref='indvApp({appID: app.id})'>{{app.name}}</a></li>
-    <div class="row">
-        <button class="btn btn-primary-outline waves-effect move-button" ng-show='currentAdmin()' ui-sref='appUsers({appID: appData.id})'>User Management</button>
-    </div>
+    <button class="btn btn-primary-outline waves-effect move-button" ng-show='currentAdmin()' ui-sref='appUsers({appID: appData.id})'>User Management</button>
 </ul>
 <div id="detail-page">
     <div class="row">
@@ -10,7 +8,7 @@
         </div>
     </div>
     <div>
-        <h3>Bug #{{ bugDetails.id }}</h3>
+        <h4>Bug #{{ bugDetails.id }}</h4>
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">

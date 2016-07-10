@@ -62,7 +62,8 @@ app.factory('DetailsFactory', function($http, $stateParams) {
     };
 });
 
-app.controller('DetailsCtrl', function($scope, $log, bugDetails, allUsers, DetailsFactory, allBugs, allApps, appData, userData) {
+app.controller('DetailsCtrl', function($scope, $log, bugDetails, allUsers, DetailsFactory, allBugs, allApps, appData, userData, $window) {
+    $window.scrollTo(0,0)
     $scope.allApps = allApps;
     $scope.bugList = allBugs;
     $scope.appData = appData;

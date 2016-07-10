@@ -18,6 +18,8 @@
         }
     }
     #bug-list {
+        max-height: 1100px;
+        overflow-y: scroll;
         bug-detail {
             text-align: center;
             border-top: 1px solid lightgrey;

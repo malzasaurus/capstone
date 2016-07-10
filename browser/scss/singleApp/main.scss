@@ -42,11 +42,9 @@
         .chart {
             margin: 5px;
         }
-        bug-list {
-            width: 24%;
-        }
         .charts-container {
             width: 75%;
+            display: flex;
             flex-wrap: wrap;
             justify-content: center;
             flex-direction: row;
@@ -56,6 +54,5 @@
                 width: 100%;
            }
         }
-
     }
 }
