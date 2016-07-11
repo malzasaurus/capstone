@@ -6,7 +6,7 @@ app.controller('AppCtrl', function($scope, $log, allBugs, allApps, appData, AppF
     $scope.colFilter;
     $scope.dynamicPieStatus = false;
     $scope.dynamicColStatus = false;
-    
+
     // $scope.dynamicPieToggle = function(){
     //     $scope.dynamicPieStatus = true;
     // };
