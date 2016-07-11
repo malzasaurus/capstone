@@ -43,6 +43,9 @@
             margin: 5px;
         }
         .charts-container {
+            max-height: 1178px;
+            
+            overflow-y: scroll;
             width: 75%;
             display: flex;
             flex-wrap: wrap;

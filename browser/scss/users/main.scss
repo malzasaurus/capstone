@@ -34,16 +34,20 @@
         text-align: center;
     }
     .success-alert {
-        width: 20%;
-        height: 50px;
+        width: 30%;
+        height: 70px;
         margin: 0 auto;
         text-align: center;
         background-color: #00C851;
+        span {
+            float: right;
+            margin-right: 1%;
+        }
         p {
             display: inline-block;
             color: white;
             font-weight: bold;
-            margin-top: 5%;
+            margin-top: 10px;
         }
     }
     #add-user {
@@ -56,15 +60,18 @@
         }
         .success-alert {
             width: 60%;
-            height: 50px;
             margin: 0 auto;
             text-align: center;
             background-color: #00C851;
+            span {
+                float: right;
+                margin-right: 1%;
+            }
             p {
                 display: inline-block;
                 color: white;
                 font-weight: bold;
-                margin-top: 5%;
+                margin-top: 0;
             }
         }
         .user-type {

@@ -38,6 +38,7 @@
                 </table>
             </div>
             <div class="success-alert" ng-show='updateStatus'>
+                <span class="closebtn" onclick="this.parentElement.style.display='none'; location.reload()">&times;</span>
                 <p>User access successfully updated!</p>
             </div>
         </div>
@@ -61,6 +62,7 @@
             <button ng-click='invite(newUser)' class="btn">Invite New User</button>
         </div>
         <div class="success-alert" ng-show='inviteStatus'>
+            <span class="closebtn" onclick="this.parentElement.style.display='none'; location.reload()">&times;</span>
             <p class="success-message">User successfully notified of invite!</p>
         </div>
     </div>
