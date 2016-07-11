@@ -75,6 +75,12 @@ module.exports = function(db) {
         formComments: {
             type: Sequelize.TEXT
         },
+        formEmail: {
+            type: Sequelize.STRING
+        },
+        logs: {
+            type: Sequelize.TEXT
+        },
         img_val: {
             type: Sequelize.TEXT
         }
