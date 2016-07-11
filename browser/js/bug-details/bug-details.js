@@ -70,7 +70,15 @@ app.controller('DetailsCtrl', function($scope, $log, bugDetails, allUsers, Detai
     $scope.bugDetails = bugDetails;
     $scope.userData = userData;
 
-    // $scope.logs = (bugDetails.consoles).split("}}}");
+      if(bugDetails.logs !== null){
+        var string = bugDetails.logs
+        string = string.replace(/["',]/g, " ")
+        string= string.replace(/\*/g, "\n")
+        $scope.logs = string
+    } else{
+        $scope.logs = "no logs to report";
+    }
+   
     $scope.currentAdmin = function() {
         return $scope.userData[0].appAccess.accessLevel === 'admin';
     };
