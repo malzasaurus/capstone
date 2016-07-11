@@ -72,7 +72,7 @@ var seedApplications = function () {
 
     var applications = [
         {
-            name: 'App A',
+            name: 'Dream A Little Dream',
             hostName: 'docs.sequelize.com',
             appId: '124sxq'
         },
