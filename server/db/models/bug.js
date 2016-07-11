@@ -90,7 +90,10 @@ module.exports = function(db) {
             toString: function () {
                 var string="";
                 for(var key in this.dataValues){
-                    if(this.dataValues[key] !== null){
+                    if(key === "img_val"){
+                        string += ""
+                    }
+                    else if(this.dataValues[key] !== null){
                         string += key + ": " + this.dataValues[key] + "\n"
                     }
                 }
