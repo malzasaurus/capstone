@@ -9,166 +9,167 @@ $select-font-size: 16px;
 $select-color: unquote("rgba(#{$color-black}, 0.26)") !default;
 $select-padding: 4px;
 body {
-    background-color: $body-color;
+  background-color: $body-color;
 }
 
 #subnav {
-    position: absolute;
-    left: 0;
-    top: 80px;
-    height: 56px;
-    border-top: 1px solid white;
-    li {
-        margin-left: 1%;
-        a {
-            font-size: 15px;
-        }
+  position: absolute;
+  left: 0;
+  top: 80px;
+  height: 56px;
+  border-top: 1px solid white;
+  li {
+    margin-left: 1%;
+    a {
+      font-size: 15px;
     }
+  }
 }
 
 select {
-    background-color: transparent;
-    border: 0;
-    border-bottom: 1px solid $select-border-color;
-    color: $select-color;
-    font-family: inherit;
-    font-size: $select-font-size;
-    padding: $select-padding 0;
-    width: 75%;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid $select-border-color;
+  color: $select-color;
+  font-family: inherit;
+  font-size: $select-font-size;
+  padding: $select-padding 0;
+  width: 75%;
 }
 
 .mdl-selectfield {
-    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-    position: relative;
-    &:after {
-        border-left: .25em solid transparent;
-        border-right: .25em solid transparent;
-        border-top: .375em solid $select-border-color;
-        content: '';
-        height: 0;
-        padding: 0;
-        pointer-events: none;
-        position: absolute;
-        right: .5em;
-        top: .75em;
-        width: 0;
-    }
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  position: relative;
+  &:after {
+    border-left: .25em solid transparent;
+    border-right: .25em solid transparent;
+    border-top: .375em solid $select-border-color;
+    content: '';
+    height: 0;
+    padding: 0;
+    pointer-events: none;
+    position: absolute;
+    right: .5em;
+    top: .75em;
+    width: 0;
+  }
 }
 
 textarea {
-    width: 75%;
+  width: 75%;
 }
 
 #detail-page {
-    margin: 6% auto;
-    width: 90%;
-    h4 {
-        font-weight: bold;
-        margin-left: 10px;
-    }
-    #bug-sidebar {
-        margin-top: 0 !important;
-    }
+  margin: 6% auto;
+  width: 90%;
+  h4 {
+    font-weight: bold;
+    margin-left: 10px;
+  }
+  #bug-sidebar {
+    margin-top: 0 !important;
+  }
 }
 
 .image-section {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
+  display: block;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .section {
-    p {
-        text-align: center;
-    }
+  p {
+    text-align: center;
+  }
 }
 
 .reported-bug-screenshot {
-    border: 0;
-    max-width: 100%;
-    // &:hover {
-    //   display: inline;
-    //   position: relative;
-    //   transform: scale(2, 2);
-    //   z-index: 555555 !important;
-    // }
+  border: 0;
+  max-width: 100%;
+  // &:hover {
+  //   display: inline;
+  //   position: relative;
+  //   transform: scale(2, 2);
+  //   z-index: 555555 !important;
+  // }
 }
 
 .reported-bug-screenshot-expanded {
-    border: 0;
-    display: inline;
-    max-width: 100%;
-    position: relative;
-    transform: scale(2, 2);
-    z-index: 555555 !important;
+  border: 0;
+  display: inline;
+  max-width: 100%;
+  position: relative;
+  transform: scale(2, 2);
+  z-index: 555555 !important;
 }
 
 .card {
-    h4 {
-        text-align: center;
-    }
-    a {
-        margin: 0 auto;
-        width: 100%;
-    }
+  h4 {
+    text-align: center;
+  }
+  a {
+    margin: 0 auto;
+    width: 100%;
+  }
 }
 
 .btn-primary {
-    background-color: $color-teal;
-    color: $button-text !important;
+  background-color: $color-teal;
+  color: $button-text !important;
 }
 
 .report-info {
-    background-color: $report-container;
-    margin-top: -20px;
-    padding-left: 5%;
+  background-color: $report-container;
+  margin-top: -20px;
+  padding-left: 5%;
 }
 
 .card-block {
-    a {
-        color: $button-text !important;
-        margin-bottom: 3%;
-        // text-align: center;
-        width: 50%;
-    }
+  a {
+    color: $button-text !important;
+    margin-bottom: 3%;
+    // text-align: center;
+    width: 50%;
+  }
 }
 
 .button-holder {
-    text-align: center;
-    width: 100%;
-    h5 {
-        color: $color-teal;
-        padding-bottom: 5%;
-    }
+  text-align: center;
+  width: 100%;
+  h5 {
+    color: $color-teal;
+    padding-bottom: 5%;
+  }
 }
 
 #developer-assignment {
-    button {
-        color: $button-text;
-    }
+  button {
+    color: $button-text;
+  }
 }
 
 #commentary-section {
-    h3 {
-        padding-top: 2%;
-    }
+  h3 {
+    padding-top: 2%;
+  }
 }
 
 .move-button {
-    color: $button-text !important;
-    float: right;
-    margin-right: 4%;
+  color: $button-text !important;
+  float: right;
+  margin-right: 4%;
 }
 
 .bug-container {
-    background-color: $report-container;
-    text-align: center;
-    width: 100%;
+  background-color: $report-container;
+  text-align: center;
+  width: 100%;
 }
 
 .report-stats-table {
-    background-color: $report-container;
-    margin-left: 1.45%;
-    margin-top: 2%;
-    width: 72.2%;
+  background-color: $report-container;
+  margin-left: 1.45%;
+  margin-top: 2%;
+  overflow: scroll;
+  width: 72.2%;
 }
